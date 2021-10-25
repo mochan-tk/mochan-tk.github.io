@@ -1,0 +1,318 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="happy-4-hack-2021-handson-line-bot"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="5">
+        <h2 is-upgraded>概要</h2>
+<p>LINE Botを作りつつ、Messaging API(および周辺の技術)の基本的な使い方を学んでいただければと思います！</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>LINEがインストール済みのスマホ</li>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使っていただければと！）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://github.com/join?source=header" target="_blank">GitHubアカウント</a>作成</li>
+<li><a href="https://azure.microsoft.com/ja-jp/free/" target="_blank">Azureアカウント</a>作成</li>
+<li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
+</ul>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Microsoft Azure</li>
+<li>Azure Functions, Azure Storage</li>
+<li>Gitpod(月50時間無料)</li>
+<li>GitHub</li>
+</ul>
+<h2 is-upgraded>構成図</h2>
+<p>（作成中）</p>
+<h2 is-upgraded>注意事項</h2>
+<p>若干、Microsoft Azureの課金が発生する可能性があります。それ以外は課金など発生しません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="15">
+        <h2 is-upgraded>チャネルの作成スタート</h2>
+<p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/2ae4a7ad1ba0dff8.png"></p>
+<p>「LINEアカウントでログイン」を押してください。</p>
+<p class="image-container"><img style="width: 421.15px" src="img/1aed78bc1af53efc.png"></p>
+<p>LINEのログインを求められるのでログインしてください。</p>
+<p class="image-container"><img style="width: 461.50px" src="img/41fa93a06789ae44.png"></p>
+<h2 is-upgraded>チャネルの種類</h2>
+<p>Messaging APIになっているか確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/bd6af000a64a013d.png"></p>
+<h2 is-upgraded>プロバイダ</h2>
+<p>既にプロバイダーを作っている場合 → 利用するプロバイダーを選択しましょう。</p>
+<p><img style="width: 601.70px" src="img/36f1e1bacc34909e.png"><br>初めて → 新規プロバイダー作成を選択しプロバイダー名を入力しましょう。</p>
+<p>（LINEという文字は含められません。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3e2bf46d641ba340.png"></p>
+<h2 is-upgraded>チャネルアイコン</h2>
+<p>チャネルアイコンを登録しましょう。（今回は必須ではありません）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/bfafa61285273a3c.png"></p>
+<h2 is-upgraded>チャネル名、チャネル説明</h2>
+<p>下記を入力しましょう。</p>
+<p>チャネル名：「HappyHackBot」</p>
+<p>チャネル説明：「HappyHackBotです」</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a3d0a50d26f27756.png"></p>
+<h2 is-upgraded>大業種、小業種</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/abd48831b11f812b.png"></p>
+<h2 is-upgraded>メールアドレス、プライバシーポリシーURL、サービス利用規約URL</h2>
+<p>メールアドレスを確認しましょう。</p>
+<p>プライバシーポリシーURLとサービス利用規約URLは入力しないで大丈夫です。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8202ed989a56eefe.png"></p>
+<h2 is-upgraded>作成ボタン</h2>
+<p>下記２点の利用規約にチェックをして「作成」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b2725a8c2156f415.png"></p>
+<p>「OK」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/76947f363de6e939.png"></p>
+<p>「同意する」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4fb5ad01d3a09219.png"></p>
+<h2 is-upgraded>LINE公式アカウント(LINE Bot)と友だちになる</h2>
+<p>QRコードで友だち追加</p>
+<p>「Messaging API設定」タブに移動し、QRコードを読み取って、友だち追加をしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/201997dcbf58a8d2.png"></p>
+<h2 is-upgraded>チャネルシークレット、アクセストークンの取得</h2>
+<p>「チャネル基本設定」タブからチャネルシークレットを、「Messaging API設定」タブからアクセスキーをそれぞれ取得します。</p>
+<ul>
+<li>チャネルシークレット</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/d3f3947e236e5338.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/67512d40930aff6c.png"></p>
+<ul>
+<li>アクセストークン</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/f2eb378f7de6fb30.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/769e055ac49ab457.png"></p>
+<aside class="special"><p><strong>Note:</strong></p>
+<p>・チャネルシークレット：Botサーバで受信したリクエストが不正なものでないかのチェックで使用される(LINE以外のサーバーからリクエストが送られていないかの確認)</p>
+<p>・ アクセストークン：LINEのAPI(機能)を実行する際に、認可が通り利用権限があることを証明するトークン</p>
+</aside>
+<h2 is-upgraded>応答モードをOFFにする</h2>
+<p>LINE Official Account Manager 画面にアクセスして、Botの「応答モード」設定をOFFにします。（デフォルトの設定はONになっており、メッセージを送るたびにデフォルトのメッセージが返ってきてしまうため）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/429eecdc1a1760.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/24dfe305142dad62.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Webhookの設定作業" duration="15">
+        <h2 is-upgraded>GitHubリポジトリのFork</h2>
+<p><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template</a> にアクセス。</p>
+<p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6ddab9549105e51a.png"></p>
+<h2 is-upgraded>Gitpod起動</h2>
+<p>下記のURLで赤字の部分を自分のGitHubアカウント名に変更してアクセスしてください。するとGitpodの環境が立ち上がります。</p>
+<ul>
+<li><a href="https://gitpod.io#https://github.com/" target="_blank">https://<strong>gitpod</strong>.io#https://github.com/</a><strong>&lt;ご自分のアカウント名&gt;</strong>/Happy4Hack2021-LINE-Bot-template</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/678d95baff67048b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/11a0b7c34ec2dcc8.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 起動には10分ほどかかります。</p>
+</aside>
+<h2 is-upgraded>Botサーバーの用意</h2>
+<p>Gitpodのターミナル上で下記のコマンドを実行していってください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/5762a325cb7451e.png"></p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>az upgrade
+
+az bicep install
+
+## 下記を実行し表示されたURLにアクセス、さらにコードも表示されているのでURL先に設定してログインを実施する
+az login
+
+## 下記を実行でAzureのサブスクリプションIDを取得
+az account list \
+  --refresh \
+  --query &#34;[].id&#34; \
+  --output table
+
+## &lt;your subscription id&gt;の部分を、上記で取得したAzureのサブスクリプションIDに置き換える
+az account set --subscription &lt;your subscription id&gt;
+
+group_name=20211027HappyHackLineBot
+
+az group create --name ${group_name} --location japaneast
+
+az configure --defaults group=${group_name}
+
+## ココでramdomな値を取得 &gt; https://1password.com/jp/password-generator/
+## secretとaccessはLINE Developersのチャネル設定でメモした値を入れる
+az deployment group create --name deployPrj01 --template-file main.bicep \
+ --parameters ramdom=&lt;ramdom&gt; \
+ --parameters secret=&lt;secret&gt; \
+ --parameters access=&lt;access&gt;
+</code></pre>
+<p>実行後のAzureリソースは下記のような構成。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/784571178dff4948.png"></p>
+<aside class="special"><p><strong>Note: </strong>ここまでのコマンド実行で今回必要なAzureの構成が作成されます。構成はmain.bicepファイルで管理しています。</p>
+</aside>
+<h2 is-upgraded>アプリケーションコードのデプロイ</h2>
+<p>Gitpodのターミナル上で下記のコマンドを実行していってください。ここまでの手順で作成されているAzure Functionsにアプリケーションのコードがデプロイされます。</p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>cd /workspace/Happy4Hack2021-LINE-Bot-template/deployPrj01/
+
+## 下記実行で、作成したAzure Functionsの名前を取得
+az deployment group show \
+ -g ${group_name} \
+ -n deployPrj01 \
+ --query properties.outputs.functionAppName.value
+
+## &lt;functionAppName&gt;の部分を、上記で取得したAzure Functionsの名前に置き換える
+func azure functionapp publish &lt;functionAppName&gt; --build remote
+</code></pre>
+<p>上記、実行後は下記のようにURLが払い出されるのでメモしておきます。（Webhookの設定で使います）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/48e1b78943bd7d6b.png"></p>
+<h2 is-upgraded>Webhookの設定</h2>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したAzure FunctionsのURLを設定します。これでLINEのBotを動かす準備は全て整いました！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f2eb378f7de6fb30.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/1a16f5b74d6d14d8.png"></p>
+<h2 is-upgraded>動作確認</h2>
+<p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/bfdcf24f0938cf44.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リッチメニューを使う" duration="15">
+        <p>OAMでリッチメニューの設定</p>
+<p><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="URLスキームを使う" duration="15">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="様々なメッセージ形式を扱う" duration="15">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リソースの削除" duration="15">
+        <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
+<pre><code>az group delete --name ${group_name}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="参考" duration="15">
+        <p>よく使いそうな書式をまとめました。</p>
+<h2 is-upgraded>見出し</h2>
+<p>見出しは作業区切りの単位として利用します。特に<strong>「見出し1」はナビゲーション(ページ)の区切り</strong>となる特別な書式です。</p>
+<p class="image-container"><img style="width: 500.00px" src="img/892b4ca8a98fbe02.png"></p>
+<h2 is-upgraded>テキストスタイル</h2>
+<p><strong>太字</strong>、<em>斜体</em>がサポートされていますが、和文に斜体が適用されないので、結局役に立つのは太字のみとなります。下線や文字色は反映されません。</p>
+<p>またフォントに <strong>Courier New</strong> を指定した英文は <code>This is text</code> のように固定幅フォントとして設定されます。</p>
+<p class="image-container"><img style="width: 594.00px" src="img/e173476df086c3e6.png"></p>
+<h3 is-upgraded>やってみよう</h3>
+<p>ここを太字にしたり Fixed text にしてみましょう。</p>
+<h2 is-upgraded>画像</h2>
+<p>画像はインラインに貼り付けることが可能です。方法は2つで<strong>［挿入］&gt;［画像］</strong>と<strong>［挿入］&gt;［描画］</strong>です。画像は貼り付けが容易ですが編集ができません。描画は Google 図形描画の機能を利用するため編集が可能ですが、解像度の高い画像を用意したい場合は別途ファイルを用意する必要があります。</p>
+<p class="image-container"><img style="width: 602.00px" src="img/7c2b155eea69b958.png"></p>
+<h3 is-upgraded>やってみよう</h3>
+<ul>
+<li>画像を挿入してみる。 </li>
+</ul>
+<p>↓ ここにカーソルを合わせて［挿入］&gt;［画像］&gt;［URL］</p>
+<p>URL は <code>https://www.petsworld.in/blog/wp-content/uploads/2014/09/cat.jpg</code> を使ってください。</p>
+<ul>
+<li>「描画」画像を作ってみる。</li>
+</ul>
+<p>↓ ここにカーソルを合わせて［挿入］&gt;［描画］&gt;［新規］</p>
+<ul>
+<li>この画像を［編集］してみる。画像をクリックして［編集］</li>
+</ul>
+<p class="image-container"><img style="width: 262.00px" src="img/53433fa539a2e22b.png"></p>
+<h2 is-upgraded>コード</h2>
+<p>コードは［挿入］&gt;［表］で 1x1 の表を作り、セルの中にコードを書きます。またフォントは Courier New を指定します。ハイライトは自動的に識別されます(というか指定できない)</p>
+<p>また、表の直前にリンク付きの見出し3でファイル名などが書けます。</p>
+<h3 is-upgraded><a href="https://gist.github.com/ma2shita/ce40d5794146dbd147d5cb63eb3eb841" target="_blank">timer_shooting.bash</a></h3>
+<pre><code>#!/bin/bash
+
+echo &#34;$0&#34;
+echo &#34;shooting!&#34; | nc localhost 19000
+echo &#34;$0 END&#34;
+exit 0</code></pre>
+<p class="image-container"><img style="width: 402.00px" src="img/f09c61ccdd540db2.png"></p>
+<h3 is-upgraded>やってみよう</h3>
+<p>↓ ここにカーソルを合わせて［挿入］&gt;［表］</p>
+<p>コードは<a href="https://gist.githubusercontent.com/ma2shita/b9589598e8e2868b544d92093c85a5fe/raw/2ad3f010f6550a3baa84c649219733aa7d8a0cab/callee_soracom_funk.py" target="_blank">この Python コード</a>を使ってください。</p>
+<h2 is-upgraded>情報ボックス</h2>
+<p>［挿入］&gt;［表］で 1x1 の表を作り、表の中の背景色を指定のものに設定すると情報ボックスとして表示されます。</p>
+<p>ポジティブな情報としての「緑」とネガティブ(注意喚起)としての「オレンジ」が設定可能です。</p>
+<aside class="special"><p><strong>Note: 明るい緑3</strong>で表の中を塗りつぶします。テキストスタイルや画像／描画ももちろん機能します。</p>
+<p class="image-container"><img style="width: 306.00px" src="img/527534f7a425ec87.png"></p>
+</aside>
+<p class="image-container"><img style="width: 588.00px" src="img/ad05b9190de79a4.png"></p>
+<aside class="warning"><p><strong>注意:</strong> こちらは注意とかトラブルシューティングなど、確認してもらいたいことを書いておくと良いでしょう。<strong>明るいオレンジ3</strong>です。</p>
+<p class="image-container"><img style="width: 186.00px" src="img/24132e0f679b4946.png"></p>
+</aside>
+<p class="image-container"><img style="width: 602.00px" src="img/6856a4a93b51d27c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="その他の書式" duration="15">
+        <p>必要に応じて利用してください。</p>
+<h2 is-upgraded>外部コンテンツ</h2>
+<p>Youtube Videos</p>
+<p>Youtube Videos can be embedded by doing:</p>
+<p>Add an image in the document. The image can be a screenshot of the video for instance but it doesn&#39;t really matter since it won&#39;t be displayed but replaced by the embedded video.</p>
+<p>Add an &#34;Alt Text&#34; to the image by doing Cmd+Opt+Y or Right click &gt; &#34;Alt Text...&#34;</p>
+<p>Put a Youtube video link in the Description field of the Alt Text. in the format https://www.youtube.com/watch?v=[video_ID]</p>
+<p>Specifying a start time is not supported at this time.</p>
+<p>Embedded Iframes</p>
+<p>Iframes can be embedded by doing:</p>
+<p>Add an image in the document. The image can be a screenshot of the iframe for instance but it doesn&#39;t really matter since it won&#39;t be displayed but replaced by the embedded iframe.</p>
+<p>Add an &#34;Alt Text&#34; to the image by doing Cmd+Opt+Y or Right click &gt; &#34;Alt Text...&#34;</p>
+<p>Put a full URL in the Description field of the Alt Text. in the format https://www.domain.com/watch?foo=bar. Note that for security reasons, iframe embbedding is limited to an enumerated set of allowable iframe source URLs. Feel free to submit a PR if you&#39;d like to augment that list or tweak your own version of the claat command.</p>
+<h2 is-upgraded>ダウンロードボタン</h2>
+<p><a href="https://soracom-files.s3.amazonaws.com/setup_air.sh" target="_blank"><paper-button class="colored" raised>setup_air.sh</paper-button></a></p>
+<p>背景色を <strong>暗い緑1</strong> にして、テキストにリンクを貼ります。</p>
+<p class="image-container"><img style="width: 169.00px" src="img/658adc4a76abf102.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -2,9 +2,9 @@
   "environment": "web",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
-  "updated": "2021-10-23T07:08:24Z",
-  "id": "happy-4-hack-2021-line-handson",
-  "duration": 35,
+  "updated": "2021-10-25T18:44:35Z",
+  "id": "happy-4-hack-2021-handson-line-bot",
+  "duration": 125,
   "title": "タイトル",
   "authors": "Happy 4 Hack 2021.",
   "summary": "LINEハンズオン、Messaging APIを主に扱います。",
@@ -17,5 +17,5 @@
     "line"
   ],
   "tags": [],
-  "url": "happy-4-hack-2021-line-handson"
+  "url": "happy-4-hack-2021-handson-line-bot"
 }
