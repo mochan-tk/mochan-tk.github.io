@@ -45,6 +45,9 @@
 <ul>
 <li>Microsoft Azure</li>
 <li>Azure Functions, Azure Storage</li>
+<li>Azure CLI</li>
+<li>Bicep</li>
+<li>Node.js</li>
 <li>Gitpod(月50時間無料)</li>
 <li>GitHub</li>
 </ul>
@@ -204,104 +207,143 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
       </google-codelab-step>
     
       <google-codelab-step label="リッチメニューを使う" duration="15">
-        <p>OAMでリッチメニューの設定</p>
-<p><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></p>
+        <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
+<p>LINE公式アカウントの管理画面にアクセスし、リッチメニューを作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d2dd02d6f54c87bb.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
+<p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力するテキスト</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左上</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右上</p>
+</td><td colspan="1" rowspan="1"><p>位置情報</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左下</p>
+</td><td colspan="1" rowspan="1"><p>Flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右下</p>
+</td><td colspan="1" rowspan="1"><p>Quick Reply</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/a8cfc65442c1888b.png"></p>
+<p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>タイプ</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力欄</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>ラベル</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>A</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/camera/</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>B</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/location/</p>
+</td><td colspan="1" rowspan="1"><p>location</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>D</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>quick</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/be1bbc3ce048717c.png"></p>
+<p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/41aff66e6d837cad.png"></p>
+<aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
+</aside>
+<h2 is-upgraded>（参考）Messaging APIでのリッチメニューを作成</h2>
+<p>リッチメニューはMessaging APIでも作成でき、さらに柔軟な対応が可能です。今回のハンズオンでは対象外としますが、下記に参考情報を記載いたします。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
+<li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（Youtube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
+</ul>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="URLスキームを使う" duration="15">
-        
+        <p>URLスキームを使うとカメラや位置情報などが起動できたりします、いくつか用意されていますので試していきましょう。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/</a></li>
+</ul>
+<h2 is-upgraded>カメラの起動</h2>
+<p>リッチメニュー左上の「camera」をタップしてください。カメラが起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/2aed422865650128.gif"></p>
+<h2 is-upgraded>位置情報の起動</h2>
+<p>リッチメニュー右上の「位置情報」をタップしてください。位置情報が起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/8898c48c7c54c2f1.gif"></p>
+
 
       </google-codelab-step>
     
       <google-codelab-step label="様々なメッセージ形式を扱う" duration="15">
-        
+        <p>LINEでは様々なメッセージ形式を扱うことができます。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
+</ul>
+<p>今回のコードも見ていただくと理解がグッと進みます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L42" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L42</a></li>
+</ul>
+<h2 is-upgraded>画像メッセージを扱う</h2>
+<p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L100" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L100</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.16px" src="img/a2f2564b46a67f13.png"></p>
+<aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>位置情報メッセージを扱う</h2>
+<p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L125" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L125</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.70px" src="img/807e7453e1e6ea04.png"></p>
+<h2 is-upgraded>音声メッセージを扱う</h2>
+<p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L112" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L112</a></li>
+</ul>
+<p class="image-container"><img style="width: 312.70px" src="img/941ef393759dbc06.png"></p>
+<aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>Flex Messageを扱う</h2>
+<p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L57" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L57</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/1c005358eb26af4e.gif"></p>
+<h2 is-upgraded>Quick Replyを扱う</h2>
+<p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L64" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-LINE-Bot-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L64</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/b7b0e71d93f7b1e0.gif"></p>
+<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
+<p>詳しくは下記を参照ください。</p>
+<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+</aside>
+
 
       </google-codelab-step>
     
-      <google-codelab-step label="リソースの削除" duration="15">
+      <google-codelab-step label="リソースの削除" duration="5">
         <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
 <pre><code>az group delete --name ${group_name}</code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="参考" duration="15">
-        <p>よく使いそうな書式をまとめました。</p>
-<h2 is-upgraded>見出し</h2>
-<p>見出しは作業区切りの単位として利用します。特に<strong>「見出し1」はナビゲーション(ページ)の区切り</strong>となる特別な書式です。</p>
-<p class="image-container"><img style="width: 500.00px" src="img/892b4ca8a98fbe02.png"></p>
-<h2 is-upgraded>テキストスタイル</h2>
-<p><strong>太字</strong>、<em>斜体</em>がサポートされていますが、和文に斜体が適用されないので、結局役に立つのは太字のみとなります。下線や文字色は反映されません。</p>
-<p>またフォントに <strong>Courier New</strong> を指定した英文は <code>This is text</code> のように固定幅フォントとして設定されます。</p>
-<p class="image-container"><img style="width: 594.00px" src="img/e173476df086c3e6.png"></p>
-<h3 is-upgraded>やってみよう</h3>
-<p>ここを太字にしたり Fixed text にしてみましょう。</p>
-<h2 is-upgraded>画像</h2>
-<p>画像はインラインに貼り付けることが可能です。方法は2つで<strong>［挿入］&gt;［画像］</strong>と<strong>［挿入］&gt;［描画］</strong>です。画像は貼り付けが容易ですが編集ができません。描画は Google 図形描画の機能を利用するため編集が可能ですが、解像度の高い画像を用意したい場合は別途ファイルを用意する必要があります。</p>
-<p class="image-container"><img style="width: 602.00px" src="img/7c2b155eea69b958.png"></p>
-<h3 is-upgraded>やってみよう</h3>
-<ul>
-<li>画像を挿入してみる。 </li>
-</ul>
-<p>↓ ここにカーソルを合わせて［挿入］&gt;［画像］&gt;［URL］</p>
-<p>URL は <code>https://www.petsworld.in/blog/wp-content/uploads/2014/09/cat.jpg</code> を使ってください。</p>
-<ul>
-<li>「描画」画像を作ってみる。</li>
-</ul>
-<p>↓ ここにカーソルを合わせて［挿入］&gt;［描画］&gt;［新規］</p>
-<ul>
-<li>この画像を［編集］してみる。画像をクリックして［編集］</li>
-</ul>
-<p class="image-container"><img style="width: 262.00px" src="img/53433fa539a2e22b.png"></p>
-<h2 is-upgraded>コード</h2>
-<p>コードは［挿入］&gt;［表］で 1x1 の表を作り、セルの中にコードを書きます。またフォントは Courier New を指定します。ハイライトは自動的に識別されます(というか指定できない)</p>
-<p>また、表の直前にリンク付きの見出し3でファイル名などが書けます。</p>
-<h3 is-upgraded><a href="https://gist.github.com/ma2shita/ce40d5794146dbd147d5cb63eb3eb841" target="_blank">timer_shooting.bash</a></h3>
-<pre><code>#!/bin/bash
-
-echo &#34;$0&#34;
-echo &#34;shooting!&#34; | nc localhost 19000
-echo &#34;$0 END&#34;
-exit 0</code></pre>
-<p class="image-container"><img style="width: 402.00px" src="img/f09c61ccdd540db2.png"></p>
-<h3 is-upgraded>やってみよう</h3>
-<p>↓ ここにカーソルを合わせて［挿入］&gt;［表］</p>
-<p>コードは<a href="https://gist.githubusercontent.com/ma2shita/b9589598e8e2868b544d92093c85a5fe/raw/2ad3f010f6550a3baa84c649219733aa7d8a0cab/callee_soracom_funk.py" target="_blank">この Python コード</a>を使ってください。</p>
-<h2 is-upgraded>情報ボックス</h2>
-<p>［挿入］&gt;［表］で 1x1 の表を作り、表の中の背景色を指定のものに設定すると情報ボックスとして表示されます。</p>
-<p>ポジティブな情報としての「緑」とネガティブ(注意喚起)としての「オレンジ」が設定可能です。</p>
-<aside class="special"><p><strong>Note: 明るい緑3</strong>で表の中を塗りつぶします。テキストスタイルや画像／描画ももちろん機能します。</p>
-<p class="image-container"><img style="width: 306.00px" src="img/527534f7a425ec87.png"></p>
+<aside class="warning"><p><strong>注意:</strong> ２つ目のハンズオンで、ここで扱った内容を使うのでリソースの削除は２つ目のハンズオン終了後でお願いします！</p>
 </aside>
-<p class="image-container"><img style="width: 588.00px" src="img/ad05b9190de79a4.png"></p>
-<aside class="warning"><p><strong>注意:</strong> こちらは注意とかトラブルシューティングなど、確認してもらいたいことを書いておくと良いでしょう。<strong>明るいオレンジ3</strong>です。</p>
-<p class="image-container"><img style="width: 186.00px" src="img/24132e0f679b4946.png"></p>
-</aside>
-<p class="image-container"><img style="width: 602.00px" src="img/6856a4a93b51d27c.png"></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="その他の書式" duration="15">
-        <p>必要に応じて利用してください。</p>
-<h2 is-upgraded>外部コンテンツ</h2>
-<p>Youtube Videos</p>
-<p>Youtube Videos can be embedded by doing:</p>
-<p>Add an image in the document. The image can be a screenshot of the video for instance but it doesn&#39;t really matter since it won&#39;t be displayed but replaced by the embedded video.</p>
-<p>Add an &#34;Alt Text&#34; to the image by doing Cmd+Opt+Y or Right click &gt; &#34;Alt Text...&#34;</p>
-<p>Put a Youtube video link in the Description field of the Alt Text. in the format https://www.youtube.com/watch?v=[video_ID]</p>
-<p>Specifying a start time is not supported at this time.</p>
-<p>Embedded Iframes</p>
-<p>Iframes can be embedded by doing:</p>
-<p>Add an image in the document. The image can be a screenshot of the iframe for instance but it doesn&#39;t really matter since it won&#39;t be displayed but replaced by the embedded iframe.</p>
-<p>Add an &#34;Alt Text&#34; to the image by doing Cmd+Opt+Y or Right click &gt; &#34;Alt Text...&#34;</p>
-<p>Put a full URL in the Description field of the Alt Text. in the format https://www.domain.com/watch?foo=bar. Note that for security reasons, iframe embbedding is limited to an enumerated set of allowable iframe source URLs. Feel free to submit a PR if you&#39;d like to augment that list or tweak your own version of the claat command.</p>
-<h2 is-upgraded>ダウンロードボタン</h2>
-<p><a href="https://soracom-files.s3.amazonaws.com/setup_air.sh" target="_blank"><paper-button class="colored" raised>setup_air.sh</paper-button></a></p>
-<p>背景色を <strong>暗い緑1</strong> にして、テキストにリンクを貼ります。</p>
-<p class="image-container"><img style="width: 169.00px" src="img/658adc4a76abf102.png"></p>
 
 
       </google-codelab-step>
