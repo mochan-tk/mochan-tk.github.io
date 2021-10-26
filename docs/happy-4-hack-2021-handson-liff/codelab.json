@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2021-10-26T14:58:36Z",
+  "id": "happy-4-hack-2021-handson-liff",
+  "duration": 40,
+  "title": "タイトル",
+  "authors": "Happy 4 Hack 2021.",
+  "summary": "LINEハンズオン、LINE Front end Framework(LIFF)を主に扱います。",
+  "source": "1ddicx1vqYV_-NG6qPzTw-uvytTrpVtKzCnG-UqBMoa8",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "happy-4-hack-2021-handson-liff"
+}

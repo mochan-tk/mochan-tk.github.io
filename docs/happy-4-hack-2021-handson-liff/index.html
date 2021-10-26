@@ -1,0 +1,252 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="happy-4-hack-2021-handson-liff"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="5">
+        <h2 is-upgraded>概要</h2>
+<p>WebアプリをLIFF化しながら色々と活用の仕方を妄想していただければと思います。</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>LINEがインストール済みのスマホ</li>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使っていただければと！）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://github.com/join?source=header" target="_blank">GitHubアカウント</a>作成</li>
+<li><a href="https://azure.microsoft.com/ja-jp/free/" target="_blank">Azureアカウント</a>作成</li>
+<li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
+</ul>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Microsoft Azure</li>
+<li>Azure Static Web Apps</li>
+<li>Azure CLI</li>
+<li>Bicep</li>
+<li>Node.js</li>
+<li>Gitpod</li>
+<li>GitHub</li>
+</ul>
+<h2 is-upgraded>構成図</h2>
+<p>（作成中）</p>
+<h2 is-upgraded>注意事項</h2>
+<p>若干、Microsoft Azureの課金が発生する可能性があります。それ以外は課金など発生しません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LINE DevelopersでLINEログイン チャネルを作成する" duration="15">
+        <h2 is-upgraded>チャネルの作成スタート</h2>
+<p><a href="https://developers.line.biz/ja/services/line-login/" target="_blank">https://developers.line.biz/ja/services/line-login/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/5319ce2a11174be6.png"></p>
+<p>「LINEアカウントでログイン」を押してください。</p>
+<p class="image-container"><img style="width: 421.15px" src="img/1aed78bc1af53efc.png"></p>
+<p>LINEのログインを求められるのでログインしてください。</p>
+<p class="image-container"><img style="width: 461.50px" src="img/41fa93a06789ae44.png"></p>
+<h2 is-upgraded>チャネルの種類</h2>
+<p>Messaging APIになっているか確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/acd44d77dacfe2b6.png"></p>
+<h2 is-upgraded>プロバイダ</h2>
+<p>既にプロバイダーを作っている場合 → 利用するプロバイダーを選択しましょう。</p>
+<p><img style="width: 601.70px" src="img/36f1e1bacc34909e.png"><br>初めて → 新規プロバイダー作成を選択しプロバイダー名を入力しましょう。</p>
+<p>（LINEという文字は含められません。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3e2bf46d641ba340.png"></p>
+<h2 is-upgraded>地域、チャネルアイコン</h2>
+<p>地域は「日本」、チャネルアイコンを登録しましょう。（今回は必須ではありません）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3b0177bb3c5bf577.png"></p>
+<h2 is-upgraded>チャネル名、チャネル説明</h2>
+<p>下記を入力しましょう。</p>
+<p>チャネル名：「HappyHackLogin」</p>
+<p>チャネル説明：「HappyHackLoginです」</p>
+<p class="image-container"><img style="width: 601.70px" src="img/402abeded6885aa3.png"></p>
+<h2 is-upgraded>アプリタイプ</h2>
+<p>アプリタイプは「ウェブアプリ」にチェックをつけましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/32c97f1af1bc1fdd.png"></p>
+<h2 is-upgraded>メールアドレス、プライバシーポリシーURL、サービス利用規約URL</h2>
+<p>メールアドレスを確認しましょう。</p>
+<p>プライバシーポリシーURLとサービス利用規約URLは入力しないで大丈夫です。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8202ed989a56eefe.png"></p>
+<h2 is-upgraded>作成ボタン</h2>
+<p>下記 開発者契約に同意し、チェックをして「作成」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7013365a606c6e23.png"></p>
+<h2 is-upgraded>チャネル基本設定のリンクされたボット</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/ecef97977c694174.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/1e9a12f9e0b28d28.png"></p>
+<h2 is-upgraded>LIFFの作成</h2>
+<p>「LIFF」タブに移動して「追加」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c94649d9e6e348aa.png"></p>
+<p>LIFFアプリ名は「HappyHackLIFF」、サイズは「Full」を選択しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/2188467a68c17efa.png"></p>
+<p>エンドポイントURLは仮で「<a href="https://example.com/" target="_blank">https://example.com</a> 」と入力します。URLが決まったら変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6e28af5467d40d9d.png"></p>
+<p>Scopeは「profile」、「openid」にチェックをつけましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/18ee448560410077.png"></p>
+<p>ボットリンク機能は「On」にチェックをつけて、「追加」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ca1e19743a6f8e0e.png"></p>
+<h2 is-upgraded>シェアターゲットピッカーの有効化</h2>
+<p>今回、Share Target Picker というLIFFの機能を使いますので有効化してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/2988ede55e4750d7.png"></p>
+<h2 is-upgraded>LIFFの公開</h2>
+<p>非公開の状態では自分しかLIFFにアクセスできないので、いったん公開してしまいましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/69850375968b1309.png"></p>
+<aside class="warning"><p><strong>注意:</strong> たまに普段LINEで使っている個人のアカウントと、開発で使用するアカウントを分けてる方がいらっしゃいます。その場合はアカウントが違うので非公開の状態だとLIFFにアクセスできません、公開する必要があります。</p>
+</aside>
+<h2 is-upgraded>LIFF ID と LIFF URLの取得</h2>
+<p>LIFF ID と LIFF URL をメモしてください、後ほど使います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f14c7e75a0d9f03c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="フロントエンドのHosting作業" duration="15">
+        <h2 is-upgraded>GitHubリポジトリのFork</h2>
+<p><a href="https://github.com/mochan-tk/Happy4Hack2021-liff-template" target="_blank">https://github.com/mochan-tk/Happy4Hack2021-liff-template</a> にアクセス。</p>
+<p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/caf7c2a122b2cc90.png"></p>
+<h2 is-upgraded>Gitpod起動</h2>
+<p>下記のURLで赤字の部分を自分のGitHubアカウント名に変更してアクセスしてください。するとGitpodの環境が立ち上がります。</p>
+<ul>
+<li><a href="https://gitpod.io#https://github.com/" target="_blank">https://<strong>gitpod</strong>.io#https://github.com/</a><strong>&lt;ご自分のアカウント名&gt;</strong>/Happy4Hack2021-liff-template</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/678d95baff67048b.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 起動には10分ほどかかります。</p>
+</aside>
+<h2 is-upgraded>Azure Static Web Appsの用意</h2>
+<h2 is-upgraded>アプリケーションコードのデプロイ</h2>
+<p>Gitpodのターミナル上で下記のコマンドを実行していってください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/5762a325cb7451e.png"></p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>az upgrade
+
+az bicep install
+
+## 下記を実行し表示されたURLにアクセス、さらにコードも表示されているのでURL先に設定してログインを実施する
+az login
+
+## 下記を実行でAzureのサブスクリプションIDを取得
+az account list \
+  --refresh \
+  --query &#34;[].id&#34; \
+  --output table
+
+## &lt;your subscription id&gt;の部分を、上記で取得したAzureのサブスクリプションIDに置き換える
+az account set --subscription &lt;your subscription id&gt;
+
+group_name=20211027HappyHackLiff
+
+az group create --name ${group_name} --location japaneast
+
+az configure --defaults group=${group_name}
+
+## ココでramdomな値を取得 &gt; https://1password.com/jp/password-generator/
+## liffidはLINE Developersのチャネル設定でメモした値を入れる
+## tokenとrepositoryUrlはGitHubのページから取得します。
+## tokenの取得はこちらを参考にしてください &gt; https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+az deployment group create --name deployPrj02 --template-file main.bicep \
+ --parameters ramdom=&lt;ramdom&gt; \
+ --parameters liffid=&lt;liffid&gt; \
+ --parameters token=&lt;token&gt; \
+ --parameters repositoryUrl=&#39;&lt;GitHub Reposigory URL [https://~.git]&gt;&#39;
+
+</code></pre>
+<p>実行後のAzureリソースは下記のような構成。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c88089d8bda16123.png"></p>
+<aside class="special"><p><strong>Note:</strong> ここまでのコマンド実行で今回必要なAzureの構成が作成されます。構成はmain.bicepファイルで管理しています。</p>
+</aside>
+<p>そして下記のコマンドでAzure Static Web AppsのURLを取得します。</p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>## 下記実行で、作成したAzure Static Web AppsのURLを取得
+az deployment group show \
+ -g ${group_name} \
+ -n deployPrj02 \
+ --query properties.outputs.siteUrl.value</code></pre>
+<p>上記、実行後は下記のようにURLが払い出されるのでメモしておきます。（LIFFのエンドポイントURLの設定で使います）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/740ea3185f75ffd9.png"></p>
+<h2 is-upgraded>LIFFのエンドポイントURLの設定</h2>
+<p>LINE Developersのコンソール画面に戻って、「LIFFアプリ詳細」&gt; 「エンドポイントURL」に上記で取得したAzure Static Web AppsのURLを設定します。これでLIFFを動かす準備は全て整いました！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6b77620369eb4f50.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/cdef009d6620b98a.png"></p>
+<h2 is-upgraded>リッチメニューにLIFF URLを設定</h2>
+<p>先ほど作成したLINE BotのLINE Offical Account Manager 画面にアクセスし、LIFFのURLをリッチメニューに設定します。（ちょっと雑ですが、カメラ起動してたところにLIFFのURLを入れてしまいます）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d32803d223d86e5a.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 1つ前のハンズオンでLINE Botを作っている前提になります。また、リッチメニューの最新の状態が反映されない場合は一度トーク画面から離れてみてください。</p>
+</aside>
+<h2 is-upgraded>動作確認</h2>
+<p>これでLIFFを動かす準備は全て整いました！リッチメニューの左上「camera」のところをタップしてLIFFを起動してみてください。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/a177aa38ddd551b9.gif"></p>
+<aside class="special"><p><strong>Note:</strong>LIFFの初回アクセス時には許可を求められます。問題ありませんので、許可するボタンを押してください。</p>
+</aside>
+<aside class="warning"><p><strong>注意:</strong> 1つ前のハンズオンでLINE Botを作っている前提になります。また、リッチメニューの最新の状態が反映されない場合は一度トーク画面から一度離れてみてください。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="（おまけ）Push通知を試す" duration="0">
+        <p>PCのブラウザでLIFF URLにアクセスし、ログイン後、Get Profileボタンを押してuserIdを取得してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b3901ce8f258a8b7.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/98d2ad1af8378eb1.png"></p>
+<p>Gitpod上でindex.jsのtokenとuserIdの値を設定してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/30329d4800c825e6.png"></p>
+<p>Gitpodのターミナル上で下記のコマンドを実行していってください。pushメッセージが届きましたね！</p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>cd /workspace/Happy4Hack2021-liff-template/pushMessage/
+
+## モジュールをインストールする
+npm install
+
+## コードを実行する（pushメッセージがLINE公式アカウント(Bot)に送られます！）
+node index.js
+</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/cae94ee5b50f449c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リソースの削除" duration="5">
+        <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
+<pre><code>az group delete --name ${group_name}</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
