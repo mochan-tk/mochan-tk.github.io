@@ -1,6 +1,6 @@
 window.onload = function() {
-    const useNodeJS = true;   // if you are not using a node server, set this value to false
-    const defaultLiffId = "";   // change the default LIFF value if you are not using a node server
+    const useNodeJS = false;   // if you are not using a node server, set this value to false
+    const defaultLiffId = "1656508316-k7jNojXm";   // change the default LIFF value if you are not using a node server
 
     // DO NOT CHANGE THIS
     let myLiffId = "";
@@ -46,7 +46,7 @@ function initializeLiffOrDie(myLiffId) {
 function initializeLiff(myLiffId) {
     liff
         .init({
-            liffId: "1656670722-WbaG2XbP"
+            liffId: myLiffId
         })
         .then(() => {
             // start to use LIFF's api
