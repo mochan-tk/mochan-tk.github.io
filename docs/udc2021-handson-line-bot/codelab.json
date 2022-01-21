@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2022-01-21T18:19:25Z",
+  "id": "udc2021-handson-line-bot",
+  "duration": 85,
+  "title": "タイトル",
+  "authors": "Code for Toyama City.",
+  "summary": "LINEハンズオン、Messaging APIを主に扱います。",
+  "source": "1F7Va3aZan8s25Xuj1ma8eZpgR4czmMZewZtcyfYkfZ8",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "udc2021-handson-line-bot"
+}
