@@ -128,6 +128,14 @@
       <google-codelab-step label="Bot Framework Composerの設定作業" duration="15">
         <p>Bot Framework Composerの公式ドキュメントは下記。</p>
 <p><a href="https://docs.microsoft.com/ja-jp/composer/" target="_blank">https://docs.microsoft.com/ja-jp/composer/</a></p>
+<aside class="warning"><p><strong>注意:</strong> 前提として下記のリソースプロバイダーが登録されている必要があります。</p>
+<p>・Microsoft.CognitiveServices</p>
+<p>・Microsoft.BotService</p>
+<p>・Microsoft.Web</p>
+<p>・microsoft.insights</p>
+<p>設定の方法は下記を参考にしてください。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-portal#solution" target="_blank">https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-portal#solution</a></p>
+</aside>
 <h2 is-upgraded>新規作成の開始</h2>
 <p>「＋Create new」から作ります。</p>
 <p>「C#」、「Empty Bot」を選択し、Nextボタンを押しましょう。</p>
@@ -592,7 +600,7 @@
 <p>https://developers.line.biz/en/docs/messaging-api/sticker-list/</p>
 </aside>
 <h2 is-upgraded>それぞれのダイアログを呼び出す</h2>
-<p>画像や位置情報などにはテキストが含まれないのでUnknown intentで作成します。</p>
+<p>画像や位置情報などUnknown intentで作成します。</p>
 <p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
 <p>Conditionに下記を入力します。</p>
@@ -606,15 +614,21 @@ postback</code></pre>
 <p> Conditionに下記を入力します。</p>
 <pre><code>turn.activity.channelData.message.type</code></pre>
 <p>Casesに下記を入力します。</p>
-<pre><code>location
+<pre><code>image
+location
+audio
 text</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/205a231558d82973.png"></p>
-<p>location配下にBegin a new dialogを追加します。</p>
-<p class="image-container"><img style="width: 557.28px" src="img/937ef3bda5347e68.png"></p>
-<p>ここで「GetLocation」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/4f0d720b5de066f9.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>image配下にBegin a new dialogを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
+<p>ここで「GetImage」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a24f9ac5f5891a66.png"></p>
+<p>locationとaudio配下にもBegin a new dialogを追加し、それぞれ「GetLocation」、「GetAudio」を選択します。</p>
+<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、locationとaudio配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
 <p>text配下にBranch: Switch(multiple options)を追加します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/1bfa5beb89f8377b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/e5c298cde5b3c59.png"></p>
 <p>Conditionに下記を入力します。</p>
 <pre><code>turn.activity.channelData.message.text</code></pre>
 <p>Casesに下記を入力します。</p>
@@ -624,14 +638,10 @@ quick</code></pre>
 <p>flex配下にBegin a new dialogを追加し、「GetFlex」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/d8d97c6ffe9f981.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img/61ed45904054118.png"></p>
-<p>quick配下にも同じくBegin a new dialogを追加し、「GetQuickReply」を選択します。</p>
-<aside class="special"><p><strong>Note:</strong> flex配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、quikc配下の「＋」ボタンから「Paste」することもできます。</p>
-</aside>
-<p class="image-container"><img style="width: 601.70px" src="img/29b2394ad165c795.png"></p>
 <p>postback配下にBranch: if/elseを追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/fe4ee9aa2f47280d.png"></p>
 <p>Conditionに下記を入力します。</p>
-<pre><code>turn.activity.channelData.postback.data==&#39;sticker&#39;</code></pre>
+<pre><code>turn.activity.channelData.postback.data == &#39;sticker&#39;</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/9c9c477e04fbc871.png"></p>
 <p>True側にBegin a new dialogを追加し、「GetSticker」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/730d67966b948a7d.png"></p>
@@ -643,28 +653,20 @@ quick</code></pre>
 <p>Responsesに下記を入力します。</p>
 <pre><code>よく分かりませんでした。</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/7fa67aba3c907918.png"></p>
-<p>Helloに移動し、最初の部分にBranch: Switch(multiple options)を追加します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/7b1772c795c4fab9.png"></p>
-<p> Conditionに下記を入力します。</p>
-<pre><code>turn.activity.channelData.message.type</code></pre>
-<p>Casesに下記を入力します。</p>
-<pre><code>image
-audio
-text</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/bff9269ddb26dd9e.png"></p>
-<p>image配下にBegin a new dialogを追加します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d350e65b1b53f956.png"></p>
-<p>ここで「GetImage」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d396b2581570ff62.png"></p>
-<p>audio配下にもBegin a new dialogを追加し、それぞれ「GetAudio」を選択します。</p>
-<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、locationとaudio配下の「＋」ボタンから「Paste」することもできます。</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
-<p class="image-container"><img style="width: 601.70px" src="img/fc6c41630540458c.png"></p>
-<p>text配下にBegin a new dialogを移動させます。</p>
-<p>Ctrl＋xで切り取ります。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d1fef9c5583ede84.png"></p>
-<p>textの配下に貼り付けます。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/8dae8f9905fef554.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
 
 
       </google-codelab-step>
