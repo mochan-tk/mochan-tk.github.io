@@ -126,10 +126,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="Bot Framework Composerの設定作業" duration="15">
-        <h2 is-upgraded>Install作業（事前準備）</h2>
-<p>node.js インストール</p>
-<p>node.js インストール確認</p>
-<p>npm –versionたたく</p>
+        <p>Bot Framework Composerの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/" target="_blank">https://docs.microsoft.com/ja-jp/composer/</a></p>
 <h2 is-upgraded>新規作成の開始</h2>
 <p>「＋Create new」から作ります。</p>
 <p>「C#」、「Empty Bot」を選択し、Nextボタンを押しましょう。</p>
@@ -154,7 +152,10 @@
       </google-codelab-step>
     
       <google-codelab-step label="挨拶 Botの作成" duration="0">
-        <p>挨拶ダイアログを作成します。<br>①からクリックして、「＋Add a dialog」を選択します。</p>
+        <p>挨拶ダイアログを作成します。</p>
+<p>ダイアログの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/concept-dialog?tabs=v2x" target="_blank">https://docs.microsoft.com/ja-jp/composer/concept-dialog?tabs=v2x</a></p>
+<p><br>①からクリックして、「＋Add a dialog」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/d05721b0fa2ee9d.png"></p>
 <p>ダイアログのNameに下記を入力し、OKを押しましょう。</p>
 <pre><code>GetHello</code></pre>
@@ -166,10 +167,14 @@
 <p>ユーザーと同じ挨拶を返します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/84905da5f3e49b58.png"></p>
 <p>次に挨拶ダイアログを呼び出すトリガーを作成します。</p>
+<p>トリガーの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/concept-events-and-triggers?tabs=v2x" target="_blank">https://docs.microsoft.com/ja-jp/composer/concept-events-and-triggers?tabs=v2x</a></p>
 <p>自然言語処理機能（LUIS）を使って、ユーザーの意図を取得します。</p>
 <p>①をクリックし、「＋Add new trigger」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/11a726e594452d2a.png"></p>
 <p>What is the type of this trigger? に下記を入力します。</p>
+<pre><code>Intent recognized</code></pre>
+<p>What is the name of this trigger? に下記を入力します。</p>
 <pre><code>Hello</code></pre>
 <p>Trigger phrasesに下記を入力し、Submitをクリックします。</p>
 <pre><code>- おはよう
@@ -202,6 +207,8 @@
 <p>使用するサブスクリプションを選択します。</p>
 <p class="image-container"><img style="width: 405.99px" src="img/ef284a820e80a529.png"></p>
 <p>下記のように設定します。</p>
+<p> Azure resource group</p>
+<pre><code>Create new</code></pre>
 <p>Resource group name</p>
 <pre><code>udc2021Bot</code></pre>
 <p>Region</p>
@@ -211,7 +218,7 @@
 <p class="image-container"><img style="width: 467.08px" src="img/1763a46254dede1b.png"></p>
 <p class="image-container"><img style="width: 432.93px" src="img/656222c82a2e6956.png"></p>
 <h2 is-upgraded>テスト</h2>
-<p>作ったものを確認しましょう。</p>
+<p>作ったものを確認しましょう。「Start bot」を押します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/27f278cc29522aa3.png"></p>
 <p>「Open Web Chat」を押しましょう。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4bf57ea1b0b08fa9.png"></p>
@@ -226,14 +233,17 @@
 <p> Publishing target</p>
 <pre><code>Publish bot to Azure</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/7e1ae5f0fd4d9096.png"></p>
-<p>Nextを押しましょう。</p>
+<p>Create new resource にチェックを入れて、Nextを押しましょう。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/cff532a0b7967e45.png"></p>
 <p>下記のように設定し、Nextを押しましょう。</p>
 <p> Resource group（LUISで使用したものと同じ）</p>
 <pre><code>udc2021Bot</code></pre>
 <p> Name（xxxはLUISで入力したものと同じ）</p>
 <pre><code>udc2021Bot-xxx</code></pre>
-<p>下記のように設定をしてNextを押しましょう。</p>
+<p>Region</p>
+<pre><code>東日本</code></pre>
+<p>LUIS region</p>
+<pre><code>米国西武</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/2140c76514c148b0.png"></p>
 <p>画面下の方にある、使用しないオプションを外します。Nextを押しましょう。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/1c09532dd6cae0ed.png"></p>
@@ -262,6 +272,7 @@
 <p class="image-container"><img style="width: 601.70px" src="img/738393e66ca2f4eb.png"></p>
 <p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブのWebhook URLに上記で取得したURLを設定し、Webhookの利用をオンにします。これでLINEのBotを動かす準備は全て整いました！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/c31d74cf48458125.png"></p>
+<p>さらに、LINE Official Manager で応答オフ</p>
 <h2 is-upgraded>動作確認</h2>
 <p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとメッセージが送られてきたと思います！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/338d18f44fad0b7f.png"></p>
@@ -281,8 +292,8 @@
 <pre><code>コーヒーをいくつ注文しますか？</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/5b4f34df54d1cd4d.png"></p>
 <p>User inputに移動し、Propertyに下記を入力します。</p>
-<pre><code>user.ordernum</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/96fdbd452b064f3b.png"></p>
+<pre><code>dialog.ordernum</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/83367c36adf42b4d.png"></p>
 <p>0が入力された際のチェックと返すメッセージを設定します。</p>
 <p>Otherに移動し、Validation RulesはWrite an expressionを選択します。</p>
 <h3 is-upgraded><img style="width: 601.70px" src="img/9c50e316be597086.png"></h3>
@@ -294,41 +305,37 @@
 <p class="image-container"><img style="width: 407.50px" src="img/21bd0eab388cb6b0.png"></p>
 <p>注文した数によって、在庫なしということを応答します。</p>
 <p>「Create  a condition -&gt; Branch: if/else」を追加しましょう。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/a6a0c56aa051a1ac.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/658c68153f65f0de.png"></p>
 <p>Write an expressionを選択しましょう。</p>
 <p class="image-container"><img style="width: 400.69px" src="img/5c499f17901bf2f4.png"></p>
 <p>Conditionに下記を入力します。</p>
-<pre><code>user.ordernum&lt;3</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/d4fefdb1ba7dcf7a.png"></p>
+<pre><code>dialog.ordernum &lt; 3</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/f9c5936accc68e6f.png"></p>
 <p>False側にSend a responseを追加し、下記を入力します。</p>
 <pre><code>申し訳ありませんが、在庫がありません。</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/ba6455d564f77921.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/1da92f9045faf2ce.png"></p>
 <p>True側に「Ask a question -&gt; Multi-choice」を追加します。</p>
 <p>ユーザーに選択肢から回答してもらえます。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/a5f2042d32a835e7.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/e38e5e102a56586a.png"></p>
 <p>Bot responseに下記を入力しましょう。</p>
 <pre><code>ホットかアイスのどちらにしますか？</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/42df288bad7f72f8.png"></p>
+<p class="image-container"><img style="width: 602.00px" src="img/42df288bad7f72f8.png"></p>
 <p>User inputに移動し、Propertyに下記を入力します。</p>
-<pre><code>user.orderhotice</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/e31d7836232529b8.png"></p>
+<pre><code>dialog.orderhotice</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/55e0915bf29f0b7c.png"></p>
 <p>Array of choicesでAdd newをクリックし、下記を入力します。</p>
 <pre><code>ホット
 アイス</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/7f5073f62bcaf0d6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/51dc6c2adc26706a.png"></p>
 <p>Send a responseを追加し、下記を入力します。</p>
-<pre><code>${user.orderhotice}コーヒを${user.ordernum}つですね。ご注文ありがとうございました。</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/d7fae3d8e6720d92.png"></p>
-<p>最初の箇所に変数を初期化します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d70f0cd1af3ea328.png"></p>
-<p>Add newをクリックして、Property に下記、 Valueには何も入れません。</p>
-<pre><code>user.ordernum
-user.orderhotice</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/55582dcb7cf7d603.png"></p>
+<pre><code>${dialog.orderhotice}コーヒを${dialog.ordernum}つですね。ご注文ありがとうございました。</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/82a17202c119a410.png"></p>
 <p>次にコーヒーオーダーダイアログを呼び出すトリガーを作成します。</p>
 <p>①をクリックし、「＋Add new trigger」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/ebbeb0552db0015e.png"></p>
 <p>What is the type of this trigger? に下記を入力します。</p>
+<pre><code>Intent recognized</code></pre>
+<p>What is the name of this trigger? に下記を入力します。</p>
 <pre><code>Order</code></pre>
 <p>Trigger phrasesに下記を入力し、Submitをクリックします。</p>
 <pre><code>- コーヒーください
@@ -344,11 +351,12 @@ user.orderhotice</code></pre>
 <p>ここで「GetOrder」を選択し、コーヒーオーダーダイアログを呼び出します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/bd8e36a73feb7a88.png"></p>
 <p>テストを行います。</p>
+<p class="image-container"><img style="width: 602.00px" src="img/27f278cc29522aa3.png"></p>
 <p class="image-container"><img style="width: 436.27px" src="img/579985c228d3c8d0.png"></p>
 <p class="image-container"><img style="width: 437.76px" src="img/db10483fead95435.png"></p>
 <p class="image-container"><img style="width: 403.97px" src="img/e8507e91cd9f54bb.png"></p>
 <p>再度、Azureへ展開します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/cf4bed8dd641b959.png"></p>
+<p class="image-container"><img style="width: 602.00px" src="img/cf4bed8dd641b959.png"></p>
 <p class="image-container"><img style="width: 481.00px" src="img/5b0c84b26e9d9bfb.png"></p>
 <p class="image-container"><img style="width: 459.35px" src="img/af45dc78cc839cdf.png"></p>
 
@@ -617,6 +625,8 @@ quick</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/d8d97c6ffe9f981.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img/61ed45904054118.png"></p>
 <p>quick配下にも同じくBegin a new dialogを追加し、「GetQuickReply」を選択します。</p>
+<aside class="special"><p><strong>Note:</strong> flex配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、quikc配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
 <p class="image-container"><img style="width: 601.70px" src="img/29b2394ad165c795.png"></p>
 <p>postback配下にBranch: if/elseを追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/fe4ee9aa2f47280d.png"></p>
@@ -649,14 +659,21 @@ text</code></pre>
 <p>audio配下にもBegin a new dialogを追加し、それぞれ「GetAudio」を選択します。</p>
 <aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、locationとaudio配下の「＋」ボタンから「Paste」することもできます。</p>
 </aside>
-<p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/fc6c41630540458c.png"></p>
+<p>text配下にBegin a new dialogを移動させます。</p>
+<p>Ctrl＋xで切り取ります。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d1fef9c5583ede84.png"></p>
+<p>textの配下に貼り付けます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8dae8f9905fef554.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="リソースの削除" duration="5">
-        <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
-<pre><code>az group delete --name ${group_name}</code></pre>
+        <p>Bot Framework Comporserは下記の手順で削除できます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ebfaf3c73b2323c3.png"></p>
+<p>課金が気になる方は、Azureポータルサイト(<a href="https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups" target="_blank">https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups</a>)へ移動し、リソースグループごと削除してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/dff920816ab894a7.png"></p>
 
 
       </google-codelab-step>
