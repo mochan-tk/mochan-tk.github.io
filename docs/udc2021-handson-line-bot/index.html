@@ -483,6 +483,44 @@
 <aside class="warning"><p><strong>注意:</strong> 右上にある「Show code」をクリックしてエディターにしてください。</p>
 </aside>
 <p class="image-container"><img style="width: 601.70px" src="img/35b5ade5cdb08b40.png"></p>
+<p>画像や位置情報を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>image配下にBegin a new dialogを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
+<p>ここで「GetImage」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a24f9ac5f5891a66.png"></p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿すると送った画像をそのまま返すことができます。</p>
 <p class="image-container"><img style="width: 314.16px" src="img/a2f2564b46a67f13.png"></p>
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
@@ -498,6 +536,12 @@
 <p>Bot  Reaponseに下記コードを追加します。</p>
 <pre><code># Location (address, latitude, longitude)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;location&#34;, &#34;title&#34;: &#34;my location&#34;, &#34;address&#34;: &#34;&#39;,address,&#39;&#34;,&#34;latitude&#34;: &#39;,latitude,&#39;, &#34;longitude&#34;: &#39;,longitude,&#39;}&#39;))}</code></pre>
+<p>Unknown intentに移動します。</p>
+<p>location配下にもBegin a new dialogを追加し、「GetLocation」を選択します。</p>
+<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、location配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
+<p>テストをするので、Azureへ展開します。</p>
 <p>位置情報をトーク画面に投稿すると、同じ位置情報メッセージを返すことができます。</p>
 <p class="image-container"><img style="width: 314.70px" src="img/807e7453e1e6ea04.png"></p>
 <h2 is-upgraded>音声メッセージを扱う</h2>
@@ -513,6 +557,12 @@
 <p>Bot responseに下記コードを追加します。</p>
 <pre><code># Audio (originalContentUrl)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;audio&#34;, &#34;originalContentUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;,&#34;duration&#34;: &#34;60000&#34;}&#39;))}</code></pre>
+<p>Unknown intentに移動します。</p>
+<p>audio配下にもBegin a new dialogを追加し、「GetAudio」を選択します。</p>
+<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、audio配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
+<p>テストをするので、Azureへ展開します。</p>
 <p>マイクから音声を投稿すると音声メッセージを返すことができます。</p>
 <p class="image-container"><img style="width: 312.70px" src="img/941ef393759dbc06.png"></p>
 <h2 is-upgraded>Flex Messageを扱う</h2>
