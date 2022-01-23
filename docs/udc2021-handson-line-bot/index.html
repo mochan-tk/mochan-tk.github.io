@@ -483,7 +483,21 @@
 <aside class="warning"><p><strong>注意:</strong> 右上にある「Show code」をクリックしてエディターにしてください。</p>
 </aside>
 <p class="image-container"><img style="width: 601.70px" src="img/35b5ade5cdb08b40.png"></p>
-<p>画像や位置情報を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>画像を呼び出すトリガーはUnknown intentで作成します。</p>
 <p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
 <p>Conditionに下記を入力します。</p>
@@ -506,20 +520,6 @@ text</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
 <p>ここで「GetImage」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/a24f9ac5f5891a66.png"></p>
-<p>ユーザーの意図がHelloに入る条件を設定します。</p>
-<p>下記をConditionに入力しましょう。</p>
-<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
-<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
-<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
-</aside>
-<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
-<p>ユーザーの意図がOrderに入る条件を設定します。</p>
-<p>下記をConditionに入力しましょう。</p>
-<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
-<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
-<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
-</aside>
-<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
 <p>Azureへの展開もお忘れなく。</p>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿すると送った画像をそのまま返すことができます。</p>
 <p class="image-container"><img style="width: 314.16px" src="img/a2f2564b46a67f13.png"></p>
@@ -536,12 +536,49 @@ text</code></pre>
 <p>Bot  Reaponseに下記コードを追加します。</p>
 <pre><code># Location (address, latitude, longitude)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;location&#34;, &#34;title&#34;: &#34;my location&#34;, &#34;address&#34;: &#34;&#39;,address,&#39;&#34;,&#34;latitude&#34;: &#39;,latitude,&#39;, &#34;longitude&#34;: &#39;,longitude,&#39;}&#39;))}</code></pre>
-<p>Unknown intentに移動します。</p>
-<p>location配下にもBegin a new dialogを追加し、「GetLocation」を選択します。</p>
-<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、location配下の「＋」ボタンから「Paste」することもできます。</p>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>位置情報を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>location配下にBegin a new dialogを追加します。</p>
+<aside class="special"><p><strong>Note:</strong> 他でBegin a new dialogを作成していたら、Ctrl＋Cでコピーし、location配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
+<p>「GetLocation」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
-<p>テストをするので、Azureへ展開します。</p>
+<p>Azureへの展開もお忘れなく。</p>
 <p>位置情報をトーク画面に投稿すると、同じ位置情報メッセージを返すことができます。</p>
 <p class="image-container"><img style="width: 314.70px" src="img/807e7453e1e6ea04.png"></p>
 <h2 is-upgraded>音声メッセージを扱う</h2>
@@ -557,12 +594,49 @@ text</code></pre>
 <p>Bot responseに下記コードを追加します。</p>
 <pre><code># Audio (originalContentUrl)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;audio&#34;, &#34;originalContentUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;,&#34;duration&#34;: &#34;60000&#34;}&#39;))}</code></pre>
-<p>Unknown intentに移動します。</p>
-<p>audio配下にもBegin a new dialogを追加し、「GetAudio」を選択します。</p>
-<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、audio配下の「＋」ボタンから「Paste」することもできます。</p>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>音声を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>audio配下にBegin a new dialogを追加します。</p>
+<aside class="special"><p><strong>Note:</strong> 他でBegin a new dialogを作成していたら、Ctrl＋Cでコピーし、audio配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
+<p>「GetAudio」を選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
-<p>テストをするので、Azureへ展開します。</p>
+<p>Azureへの展開もお忘れなく。</p>
 <p>マイクから音声を投稿すると音声メッセージを返すことができます。</p>
 <p class="image-container"><img style="width: 312.70px" src="img/941ef393759dbc06.png"></p>
 <h2 is-upgraded>Flex Messageを扱う</h2>
@@ -577,6 +651,54 @@ text</code></pre>
 ]</code></pre>
 <p>Bot responseに下記URLの中身のコードを追加します。</p>
 <pre><code>https://gist.github.com/mochan-tk/c4a405ee9f0b73dc971afa2da7e15c69</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Flexを呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>text配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e5c298cde5b3c59.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.text</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>flex
+quick</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/5a9009e16cc04adb.png"></p>
+<p>flex配下にBegin a new dialogを追加し、「GetFlex」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d8d97c6ffe9f981.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/61ed45904054118.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIを返すことができます。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <p class="image-container"><img style="width: 305.00px" src="img/1c005358eb26af4e.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
@@ -626,31 +748,23 @@ text</code></pre>
         ]
     }
 }```</code></pre>
-<p>リッチメニューの右下をタップして、「quick」というテキストメッセージを投稿します。クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
-<p class="image-container"><img style="width: 305.00px" src="img/b7b0e71d93f7b1e0.gif"></p>
-<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
-<p>詳しくは下記を参照ください。</p>
-<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
-<h2 is-upgraded>Stickerを扱う</h2>
-<p>画像メッセージと同じ手順で作成します。</p>
-<p>Stickerを送信するダイアログを作成します。</p>
-<p>Nameに下記を入力します。</p>
-<pre><code>GetSticker</code></pre>
-<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
-<pre><code>[Activity
-    Text=&#39;sticker&#39;,
-    ChannelData=${Sticker(11537,52002735)}
-]</code></pre>
-<p>Bot responseに下記コードを追加します。</p>
-<pre><code># Sticker (packageId, stickerId)
-- ${json(concat(&#39;{&#34;type&#34;: &#34;sticker&#34;, &#34;packageId&#34;: &#39;,packageId,&#39;, &#34;stickerId&#34;: &#39;,stickerId,&#39;}&#39;))}</code></pre>
-<p>先ほどのクイックリプライで「Yes」をタップすると、スタンプを送信することができます。</p>
-<aside class="special"><p><strong>Note:</strong> 下記にStickerの一覧がありますので、参照してください。</p>
-<p>https://developers.line.biz/en/docs/messaging-api/sticker-list/</p>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
-<h2 is-upgraded>それぞれのダイアログを呼び出す</h2>
-<p>画像や位置情報などUnknown intentで作成します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Quick Replyを呼び出すトリガーはUnknown intentで作成します。</p>
 <p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
 <p>Conditionに下記を入力します。</p>
@@ -669,14 +783,7 @@ location
 audio
 text</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
-<p>image配下にBegin a new dialogを追加します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
-<p>ここで「GetImage」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/a24f9ac5f5891a66.png"></p>
-<p>locationとaudio配下にもBegin a new dialogを追加し、それぞれ「GetLocation」、「GetAudio」を選択します。</p>
-<aside class="special"><p><strong>Note:</strong> image配下のBegin a new dialogをクリックして、Ctrl＋Cでコピーし、locationとaudio配下の「＋」ボタンから「Paste」することもできます。</p>
-</aside>
-<p class="image-container"><img style="width: 601.70px" src="img/591026076c27d7c1.png"></p>
+<p>◆◆◆ここから</p>
 <p>text配下にBranch: Switch(multiple options)を追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/e5c298cde5b3c59.png"></p>
 <p>Conditionに下記を入力します。</p>
@@ -685,24 +792,32 @@ text</code></pre>
 <pre><code>flex
 quick</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/5a9009e16cc04adb.png"></p>
-<p>flex配下にBegin a new dialogを追加し、「GetFlex」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d8d97c6ffe9f981.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/61ed45904054118.png"></p>
-<p>postback配下にBranch: if/elseを追加します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/fe4ee9aa2f47280d.png"></p>
-<p>Conditionに下記を入力します。</p>
-<pre><code>turn.activity.channelData.postback.data == &#39;sticker&#39;</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/9c9c477e04fbc871.png"></p>
-<p>True側にBegin a new dialogを追加し、「GetSticker」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/730d67966b948a7d.png"></p>
-<p>最下部にある「Send a response」を移動させます。</p>
-<p>クリックし、Edit -&gt; Cut をクリックします。Ctrl+xでもできます。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/8303866c3467b66e.png"></p>
-<p>text -&gt; default 配下に貼り付けます。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/93ccb5a1eddba840.png"></p>
-<p>Responsesに下記を入力します。</p>
-<pre><code>よく分かりませんでした。</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/7fa67aba3c907918.png"></p>
+<p>quick配下にBegin a new dialogを追加し、「GetQuickReply」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/dd7e8bb9f9c4e47b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/814e35a310cb4a74.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>リッチメニューの右下をタップして、「quick」というテキストメッセージを投稿します。クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
+<aside class="warning"><p><strong>注意:</strong> この時点でまだ、Stickerを追加していないので、QuickReplyで「Yes」を選択しても送られてきません。</p>
+</aside>
+<p class="image-container"><img style="width: 305.00px" src="img/b7b0e71d93f7b1e0.gif"></p>
+<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
+<p>詳しくは下記を参照ください。</p>
+<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+</aside>
+<h2 is-upgraded>Stickerを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>Stickerを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetSticker</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<pre><code>[Activity
+    Text=&#39;sticker&#39;,
+    ChannelData=${Sticker(11537,52002735)}
+]</code></pre>
+<p>Bot responseに下記コードを追加します。</p>
+<pre><code># Sticker (packageId, stickerId)
+- ${json(concat(&#39;{&#34;type&#34;: &#34;sticker&#34;, &#34;packageId&#34;: &#39;,packageId,&#39;, &#34;stickerId&#34;: &#39;,stickerId,&#39;}&#39;))}</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
 <p>ユーザーの意図がHelloに入る条件を設定します。</p>
 <p>下記をConditionに入力しましょう。</p>
 <pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
@@ -717,6 +832,57 @@ quick</code></pre>
 <p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
 </aside>
 <p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Stickerを呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>◆◆◆ここから</p>
+<p>postback配下にBranch: if/elseを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/fe4ee9aa2f47280d.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.postback.data == &#39;sticker&#39;</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9c9c477e04fbc871.png"></p>
+<p>True側にBegin a new dialogを追加し、「GetSticker」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/730d67966b948a7d.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>先ほどのクイックリプライで「Yes」をタップすると、スタンプを送信することができます。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/b7b0e71d93f7b1e0.gif"></p>
+<p>Stickerを送った場合の処理は下記になります。</p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text
+sticker</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/f0db2b089b2da63a.png"></p>
+<p>sticker配下にBegin a new dialogを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3b179ed4739cf54.png"></p>
+<p>ここで「GetSticker」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3d4609c2b877d42e.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>スタンプを投稿すると、先ほどのクイックリプライで「Yes」をタップしたものと同じスタンプを送信することができます。</p>
+<p class="image-container"><img style="width: 287.50px" src="img/8f265598357ba45a.png"></p>
+<p>送信したものと同じスタンプを送信する場合は下記を修正します。</p>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<pre><code>[Activity
+    Text=&#39;sticker&#39;,
+    ChannelData=${Sticker(turn.activity.channelData.message.packageId,turn.activity.channelData.message.stickerId)}
+]</code></pre>
+<p class="image-container"><img style="width: 306.27px" src="img/1d3e386bac751e5c.png"></p>
+<aside class="special"><p><strong>Note:</strong> packageIdとstickerIdを変更すればお好みのスタンプを送れます。</p>
+<p>下記にStickerの一覧がありますので、参照してください。</p>
+<p>https://developers.line.biz/en/docs/messaging-api/sticker-list/</p>
+</aside>
 
 
       </google-codelab-step>
