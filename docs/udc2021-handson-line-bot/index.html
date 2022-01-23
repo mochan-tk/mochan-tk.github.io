@@ -266,6 +266,13 @@
 <p class="image-container"><img style="width: 601.70px" src="img/3dc0967caa53eb5f.png"></p>
 <p>価格レベルを「F1」に変更し、適用をクリックしましょう。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/f9a5081d419faa61.png"></p>
+<p>次に下記のLUISの価格レベルを無料に変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/df88d5ffaf027e5d.png"></p>
+<p>価格レベルを選んで「F0」に変更し、適用をクリックしましょう。</p>
+<aside class="warning"><p><strong>注意:</strong>１サブスクリプションにつき、１つまでしかF0に変更できない可能性があります。</p>
+<p>都度、公式ドキュメント、公式の情報をご確認ください。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/6d5fd2948b7d94e4.png"></p>
 <p>次に作成したリソースグループのAzure ボットを選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/1b0fcea91c2c195f.png"></p>
 <p>Webチャットのテストで確認します。</p>
@@ -469,7 +476,7 @@
 <p class="image-container"><img style="width: 601.70px" src="img/734bafe5552a2116.png"></p>
 <p>Show codeをクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/7b97457a1862e8d9.png"></p>
-<p>下記コードを貼り付けます。</p>
+<p>下記コードを貼り付けます。（下記ではImageという関数を呼び出して実行しています。このImage関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;image&#39;,
     ChannelData=${Image(first(turn.activity.attachments).contentUrl)}
@@ -477,7 +484,8 @@
 <aside class="warning"><p><strong>注意:</strong> Show codeをクリックしてから貼り付けないと、文字列として扱われてしまいます。</p>
 </aside>
 <p class="image-container"><img style="width: 601.70px" src="img/f07b9758bfd710b7.png"></p>
-<p>Bot responseのGetImageに下記コードを追加します。</p>
+<p>Image関数を追加するために、メニューより「Bot Responses」を選択し、</p>
+<p>GetImageに下記コードを追加します。</p>
 <pre><code># Image (originalContentUrl)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;image&#34;, &#34;originalContentUrl&#34;:&#34;&#39;,originalContentUrl,&#39;&#34;, &#34;previewImageUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;}&#39;))}</code></pre>
 <aside class="warning"><p><strong>注意:</strong> 右上にある「Show code」をクリックしてエディターにしてください。</p>
@@ -529,11 +537,12 @@ text</code></pre>
 <p>Nameに下記を入力します。</p>
 <pre><code>GetLocation</code></pre>
 <p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>（下記ではLocationという関数を呼び出して実行しています。このLocation関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;location&#39;,
     ChannelData=${Location(turn.activity.channelData.message.address,turn.activity.channelData.message.latitude,turn.activity.channelData.message.longitude)}
 ]</code></pre>
-<p>Bot  Reaponseに下記コードを追加します。</p>
+<p>Location関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
 <pre><code># Location (address, latitude, longitude)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;location&#34;, &#34;title&#34;: &#34;my location&#34;, &#34;address&#34;: &#34;&#39;,address,&#39;&#34;,&#34;latitude&#34;: &#39;,latitude,&#39;, &#34;longitude&#34;: &#39;,longitude,&#39;}&#39;))}</code></pre>
 <p>＜すでに作成している場合は◆◆◆マークから＞</p>
@@ -587,11 +596,12 @@ text</code></pre>
 <p>Nameに下記を入力します。</p>
 <pre><code>GetAudio</code></pre>
 <p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではAudioという関数を呼び出して実行しています。このAudio関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;audio&#39;,
     ChannelData=${Audio(first(turn.activity.attachments).contentUrl)}
 ]</code></pre>
-<p>Bot responseに下記コードを追加します。</p>
+<p>Audio関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
 <pre><code># Audio (originalContentUrl)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;audio&#34;, &#34;originalContentUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;,&#34;duration&#34;: &#34;60000&#34;}&#39;))}</code></pre>
 <p>＜すでに作成している場合は◆◆◆マークから＞</p>
@@ -645,11 +655,12 @@ text</code></pre>
 <p>Nameに下記を入力します。</p>
 <pre><code>GetFlex</code></pre>
 <p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではFlexという関数を呼び出して実行しています。このFlex関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;flex&#39;,
     ChannelData=${Flex()}
 ]</code></pre>
-<p>Bot responseに下記URLの中身のコードを追加します。</p>
+<p>Flex関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
 <pre><code>https://gist.github.com/mochan-tk/c4a405ee9f0b73dc971afa2da7e15c69</code></pre>
 <p>＜すでに作成している場合は◆◆◆マークから＞</p>
 <p>ユーザーの意図がHelloに入る条件を設定します。</p>
@@ -707,11 +718,12 @@ quick</code></pre>
 <p>Nameに下記を入力します。</p>
 <pre><code>GetQuickReply</code></pre>
 <p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではQuickReplyという関数を呼び出して実行しています。このQuickReply関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;quickReply&#39;,
     ChannelData=${QuickReply()}
 ]</code></pre>
-<p>Bot responseに下記コードを追加します。</p>
+<p>QuickReply関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
 <pre><code># QuickReply
 - ${json(QuickReplySrc())}
 
@@ -810,11 +822,12 @@ quick</code></pre>
 <p>Nameに下記を入力します。</p>
 <pre><code>GetSticker</code></pre>
 <p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではStickerという関数を呼び出して実行しています。このSticker関数はこの後自分で作成していきます。）</p>
 <pre><code>[Activity
     Text=&#39;sticker&#39;,
     ChannelData=${Sticker(11537,52002735)}
 ]</code></pre>
-<p>Bot responseに下記コードを追加します。</p>
+<p>Sticker関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
 <pre><code># Sticker (packageId, stickerId)
 - ${json(concat(&#39;{&#34;type&#34;: &#34;sticker&#34;, &#34;packageId&#34;: &#39;,packageId,&#39;, &#34;stickerId&#34;: &#39;,stickerId,&#39;}&#39;))}</code></pre>
 <p>＜すでに作成している場合は◆◆◆マークから＞</p>
