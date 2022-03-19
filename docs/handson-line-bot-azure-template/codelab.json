@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2022-03-19T05:28:26Z",
+  "id": "handson-line-bot-azure-template",
+  "duration": 85,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "LINEハンズオン、Messaging APIを主に扱います。",
+  "source": "1jkIcnMqZ4JBNisryEM8g1a9Q86LniYTAxnMD8QV4Ndk",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-azure-template"
+}
