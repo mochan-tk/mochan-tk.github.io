@@ -162,7 +162,7 @@ az account list \
 ## &lt;your subscription id&gt;の部分を、上記で取得したAzureのサブスクリプションIDに置き換える
 az account set --subscription &lt;your subscription id&gt;
 
-group_name=20211027HappyHackLineBot
+group_name=20220327LineBot
 
 az group create --name ${group_name} --location japaneast
 
@@ -185,7 +185,7 @@ az deployment group create --name deployPrj01 --template-file main.bicep \
 <ul>
 <li>実行するコマンド</li>
 </ul>
-<pre><code>cd /workspace/Happy4Hack2021-LINE-Bot-template/deployPrj01/
+<pre><code>cd /workspace/Handson-LINE-Bot-Azure-template/deployPrj01/
 
 ## 下記実行で、作成したAzure Functionsの名前を取得
 az deployment group show \
@@ -344,7 +344,40 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
       </google-codelab-step>
     
       <google-codelab-step label="リッチメニュー応用" duration="20">
-        
+        <h2 is-upgraded>Messaging APIでリッチメニューを作成する</h2>
+<p>リッチメニューはMessaging APIで作成することもでき、自由なレイアウトの画像を使ったりユーザーごとに異なるリッチメニューを適用させたりできます。</p>
+<h2 is-upgraded>リッチメニューで会員証を実装する</h2>
+<p>まずはリッチメニュー応用のコードの取得とデプロイを実施してください。</p>
+<pre><code>cd /workspace/Handson-LINE-Bot-Azure-template/
+
+## リッチメニュー応用のブランチに切り替え
+git checkout durable-and-cosmostrigger
+
+## 下記実行で、作成したAzure Functionsの名前を取得
+az deployment group show \
+ -g ${group_name} \
+ -n deployPrj01 \
+ --query properties.outputs.functionAppName.value
+
+## &lt;functionAppName&gt;の部分を、上記で取得したAzure Functionsの名前に置き換える
+func azure functionapp publish &lt;functionAppName&gt; --build remote
+</code></pre>
+<p>Messaging APIによるリッチメニュー切り替えを活用した会員登録フローを体験してみましょう。まずは、テキストメッセージで「会員登録」と送信してみてください。</p>
+<p>すると「会員登録を行います。よろしいですか？」というメッセージが、「Yes」「No」のクイックリプライとともに返ってくると思います。</p>
+<p>（画像）</p>
+<p>「Yes」をタップすると、続けて「会員名を送信してください。」と送られてきます。</p>
+<p>任意の名前をテキストで入力し送信すると、会員登録が完了し、会員専用の新たなリッチメニューが設定されます。</p>
+<p>（画像）</p>
+<p>設定されたリッチメニューは、会員証です。</p>
+<p>このQRコードを読み込むと、さきほど設定した会員名が確認できます。</p>
+<aside class="special"><p><strong>Note:</strong> ここまでのBotとのやりとりは1往復で完結するものでしたが、会員登録フローはそうではありません。ユーザーとBotの間でメッセージを何度かやりとりしてフローが完結する動きのため、Botサーバー側では会員登録フローがどこまで進んでいるかを覚えておく必要があります（ステートフルな処理）。</p>
+<p>サーバーレスなAzure Functionsはステートレスな処理（前回実行時の情報は覚えていない）が基本ですが、ステートフルな処理を実行できる拡張機能「Durable Functions」を使うことで、複数往復のフローを実現できます。</p>
+<p>オーケストレーター・アクティビティという複数の関数を組み合わせて実現しているので、ぜひコードも確認してみてください。</p>
+</aside>
+<aside class="special"><p><strong>Note:</strong> リッチメニューの作成・切替は、会員名の登録処理とは別の関数で動いています。</p>
+<p>会員名のデータはCosmos DBに格納されますが、データが登録されたタイミングで動くChange Feedと呼ばれる仕組みで、Cosmos DBトリガーの関数が起動し、その中で画像の生成やリッチメニュー作成・切替が行われています。</p>
+</aside>
+
 
       </google-codelab-step>
     
