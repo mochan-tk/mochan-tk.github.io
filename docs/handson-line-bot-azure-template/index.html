@@ -271,7 +271,7 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 <p>下記に参考情報も記載いたします。</p>
 <ul>
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
-<li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（Youtube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
+<li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（YouTube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
 </ul>
 
 
@@ -351,7 +351,7 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 <pre><code>cd /workspace/Handson-LINE-Bot-Azure-template/
 
 ## リッチメニュー応用のブランチに切り替え
-git checkout durable-and-cosmostrigger
+git checkout advanced-richmenu
 
 ## 下記実行で、作成したAzure Functionsの名前を取得
 az deployment group show \
@@ -362,21 +362,25 @@ az deployment group show \
 ## &lt;functionAppName&gt;の部分を、上記で取得したAzure Functionsの名前に置き換える
 func azure functionapp publish &lt;functionAppName&gt; --build remote
 </code></pre>
-<p>Messaging APIによるリッチメニュー切り替えを活用した会員登録フローを体験してみましょう。まずは、テキストメッセージで「会員登録」と送信してみてください。</p>
+<p>デプロイが完了したら、Messaging APIによるリッチメニュー切り替えを活用した会員登録フローを体験してみましょう。テキストメッセージで「会員登録」と送信してみてください。</p>
 <p>すると「会員登録を行います。よろしいですか？」というメッセージが、「Yes」「No」のクイックリプライとともに返ってくると思います。</p>
-<p>（画像）</p>
+<p class="image-container"><img style="width: 314.50px" src="img/220de43aafdcc2c3.jpeg"></p>
 <p>「Yes」をタップすると、続けて「会員名を送信してください。」と送られてきます。</p>
 <p>任意の名前をテキストで入力し送信すると、会員登録が完了し、会員専用の新たなリッチメニューが設定されます。</p>
-<p>（画像）</p>
+<p class="image-container"><img style="width: 391.50px" src="img/827f81e7fcc62ad4.jpeg"></p>
 <p>設定されたリッチメニューは、会員証です。</p>
 <p>このQRコードを読み込むと、さきほど設定した会員名が確認できます。</p>
-<aside class="special"><p><strong>Note:</strong> ここまでのBotとのやりとりは1往復で完結するものでしたが、会員登録フローはそうではありません。ユーザーとBotの間でメッセージを何度かやりとりしてフローが完結する動きのため、Botサーバー側では会員登録フローがどこまで進んでいるかを覚えておく必要があります（ステートフルな処理）。</p>
-<p>サーバーレスなAzure Functionsはステートレスな処理（前回実行時の情報は覚えていない）が基本ですが、ステートフルな処理を実行できる拡張機能「Durable Functions」を使うことで、複数往復のフローを実現できます。</p>
-<p>オーケストレーター・アクティビティという複数の関数を組み合わせて実現しているので、ぜひコードも確認してみてください。</p>
+<p class="image-container"><img style="width: 388.90px" src="img/96a35b2b7526b7cc.jpeg"></p>
+<aside class="special"><p><strong>Note:</strong> ここまでのBotとのやりとりは1往復で完結するものでしたが、会員登録フローはそうではありません。ユーザーとBotの間でメッセージを何度かやりとりしてフローが完結する動きのため、Botサーバー側では会員登録フローがどこまで進んでいるかを覚えておく必要があります。</p>
+<p>今回はAzure Functionsの拡張機能「Durable Functions」を使い、複数の関数の組み合わせでこれを実現しています。ぜひコードも確認してみてください。</p>
+<p>またリッチメニューの作成・切替も、さらに別の関数で動いています。</p>
+<p>会員名のデータはCosmos DBに格納されますが、そのデータが登録・変更されたタイミングで呼び出される関数（Change Feed・Cosmos DBトリガー）が、画像の生成やリッチメニュー作成・切替を担当しています。</p>
+<p>Durable FunctionsやChange Feedの仕組み・LINEとの組み合わせ方については以下の動画でも解説していますので、参考にしてみてください。</p>
+<p><a href="https://www.youtube.com/watch?v=901joW1MCbU" target="_blank">（YouTube）あなたならどう使う？最新Azureレシピ for LINE Platform / 平林 拓将 | REV UP2020</a></p>
 </aside>
-<aside class="special"><p><strong>Note:</strong> リッチメニューの作成・切替は、会員名の登録処理とは別の関数で動いています。</p>
-<p>会員名のデータはCosmos DBに格納されますが、データが登録されたタイミングで動くChange Feedと呼ばれる仕組みで、Cosmos DBトリガーの関数が起動し、その中で画像の生成やリッチメニュー作成・切替が行われています。</p>
-</aside>
+<h2 is-upgraded>退会処理</h2>
+<p>テキストメッセージで「退会」と送信すると、退会処理が実行され会員証のリッチメニューが解除されるようになってます。</p>
+<p>元のリッチメニューを使いたいときやもう一度会員登録処理を試してみたいときは、「退会」と送ってみてください。</p>
 
 
       </google-codelab-step>
