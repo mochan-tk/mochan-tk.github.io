@@ -27,7 +27,7 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="1">
+      <google-codelab-step label="はじめに" duration="5">
         <h2 is-upgraded>概要</h2>
 <p>LINE Botを作りつつ、Messaging API(および周辺の技術)の基本的な使い方を学んでいただければと思います！</p>
 <h2 is-upgraded>当日の持ち物</h2>
@@ -56,7 +56,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="9">
+      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="10">
         <h2 is-upgraded>チャネルの作成スタート</h2>
 <p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/389235956c37eff6.png"></p>
@@ -127,15 +127,17 @@
         <h2 is-upgraded>GitHubリポジトリのFork</h2>
 <p><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template</a> にアクセス。</p>
 <p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/6ddab9549105e51a.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/9bc2fa4c69031653.png"></p>
 <h2 is-upgraded>Gitpod起動</h2>
 <p>下記のいずれかの方法でGitpodを起動してください。</p>
 <ul>
 <li><a href="https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki" target="_blank">Chromeの拡張機能</a>を入れてGitHubリポジトリ上のGitpodボタンを押してGitpodを起動する</li>
-<li><img style="width: 507.50px" src="img/be72201178f1db02.png"></li>
-<li>GitpodのURLを先頭につけてGitpodを起動する</li>
-<li><a href="https://gitpod.io#https://github.com/" target="_blank">https://<strong>gitpod</strong>.io#https://github.com/</a><strong>&lt;ご自分のアカウント名&gt;</strong>/Handson-LINE-Bot-Azure-template</li>
 </ul>
+<p class="image-container"><img style="width: 586.50px" src="img/aa1966c691c5e015.png"></p>
+<ul>
+<li>GitpodのURLを先頭につけてGitpodを起動する</li>
+</ul>
+<p><a href="https://gitpod.io#https://github.com/" target="_blank">https://<strong>gitpod</strong>.io#https://github.com/</a><strong>&lt;ご自分のアカウント名&gt;</strong>/Handson-LINE-Bot-Azure-template</p>
 <p class="image-container"><img style="width: 601.70px" src="img/678d95baff67048b.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img/11a0b7c34ec2dcc8.png"></p>
 <aside class="warning"><p><strong>注意:</strong> 起動には10分ほどかかります。</p>
@@ -197,11 +199,11 @@ az deployment group show \
 func azure functionapp publish &lt;functionAppName&gt; --build remote
 </code></pre>
 <p>上記、実行後は下記のようにURLが払い出されるのでメモしておきます。（Webhookの設定で使います）</p>
-<p class="image-container"><img style="width: 601.70px" src="img/478dea6b80ff5d8a.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/6aacfa13ee1662d1.png"></p>
 <h2 is-upgraded>Webhookの設定</h2>
 <p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したAzure FunctionsのURLを設定します。これでLINEのBotを動かす準備は全て整いました！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/1a16f5b74d6d14d8.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/4e58c63dac8d364f.png"></p>
 <h2 is-upgraded>動作確認</h2>
 <p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4fc05c2c8f632668.png"></p>
@@ -211,7 +213,7 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
     
       <google-codelab-step label="リッチメニューを使う" duration="10">
         <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
-<p>LINE公式アカウントの管理画面にアクセスし、リッチメニューを作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
+<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
 <p class="image-container"><img style="width: 601.70px" src="img/d2dd02d6f54c87bb.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
 <p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
@@ -271,6 +273,7 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 <p>下記に参考情報も記載いたします。</p>
 <ul>
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/try-rich-menu/" target="_blank">リッチメニュープレイグラウンドでリッチメニューを試す</a></li>
 <li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（YouTube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
 </ul>
 
@@ -292,7 +295,7 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 
       </google-codelab-step>
     
-      <google-codelab-step label="様々なメッセージ形式を扱う" duration="5">
+      <google-codelab-step label="様々なメッセージ形式を扱う" duration="10">
         <p>LINEでは様々なメッセージ形式を扱うことができます。</p>
 <ul>
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
@@ -352,6 +355,8 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 
 ## リッチメニュー応用のブランチに切り替え
 git checkout advanced-richmenu
+
+cd /workspace/Handson-LINE-Bot-Azure-template/deployPrj01/
 
 ## 下記実行で、作成したAzure Functionsの名前を取得
 az deployment group show \
