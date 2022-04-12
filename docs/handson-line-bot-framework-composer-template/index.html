@@ -1,0 +1,921 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="handson-line-bot-framework-composer-template"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="5">
+        <h2 is-upgraded>概要</h2>
+<p>LINE Botを作りつつ、Messaging API(および周辺の技術)の基本的な使い方を学んでいただければと思います！</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>LINEがインストール済みのスマホ</li>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使っていただければと！）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://azure.microsoft.com/ja-jp/free/" target="_blank">Azureアカウント</a>作成</li>
+<li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
+<li>Bot Framework Comporserインストール</li>
+<li>.NET Core SDK ( 現時点の安定板、推奨版を使用 )</li>
+<li>Node.js ( 現時点の安定板、推奨版を使用 )</li>
+</ul>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Bot Framework Comporser</li>
+<li>Microsoft Azure Bot Service(Bot Framework Composer)</li>
+<li>他、Bot Service利用に関連するMicrosoft Azureのサービス</li>
+<li>LINE</li>
+</ul>
+<h2 is-upgraded>構成図</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/76a3a84e840e2888.png"></p>
+<h2 is-upgraded>注意事項</h2>
+<p>若干、Microsoft Azureの課金が発生する可能性があります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="15">
+        <h2 is-upgraded>チャネルの作成スタート</h2>
+<p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/389235956c37eff6.png"></p>
+<p>「LINEアカウントでログイン」を押してください。</p>
+<p class="image-container"><img style="width: 362.15px" src="img/d5d421a6b299e62b.png"></p>
+<p>LINEのログインを求められるのでログインしてください。</p>
+<p class="image-container"><img style="width: 379.46px" src="img/53764d1928b87a53.png"></p>
+<h2 is-upgraded>チャネルの種類</h2>
+<p>Messaging APIになっているか確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/df3af770985c3f97.png"></p>
+<h2 is-upgraded>プロバイダ</h2>
+<p>既にプロバイダーを作っている場合 → 利用するプロバイダーを選択しましょう。</p>
+<p><img style="width: 576.50px" src="img/25c7df1aa6e50850.png"><br>初めて → 新規プロバイダー作成を選択しプロバイダー名を入力しましょう。</p>
+<p>（LINEという文字は含められません。）</p>
+<p class="image-container"><img style="width: 561.50px" src="img/ed9832698ea66cc2.png"></p>
+<h2 is-upgraded>チャネルアイコン</h2>
+<p>チャネルアイコンを登録しましょう。（今回は必須ではありません）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b25e887321903ca7.png"></p>
+<h2 is-upgraded>チャネル名、チャネル説明</h2>
+<p>下記を入力しましょう。</p>
+<p>チャネル名</p>
+<pre><code>udc2021Bot</code></pre>
+<p>チャネル説明</p>
+<pre><code>udc2021Botです。</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/ebcb7dd712fae64.png"></p>
+<h2 is-upgraded>大業種、小業種</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/ed9b424f40f943e3.png"></p>
+<h2 is-upgraded>メールアドレス、プライバシーポリシーURL、サービス利用規約URL</h2>
+<p>メールアドレスを確認しましょう。</p>
+<p>プライバシーポリシーURLとサービス利用規約URLは入力しないで大丈夫です。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1b112e894430dc9f.png"><img style="width: 601.70px" src="img/4912ddf28b5920c5.png"></p>
+<h2 is-upgraded>作成ボタン</h2>
+<p>下記２点の利用規約にチェックをして「作成」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/5712aa2f41ee601c.png"></p>
+<p>「OK」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/29ed79a3926f5bb5.png"></p>
+<p>「同意する」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e87adc9a93775ef.png"></p>
+<h2 is-upgraded>LINE公式アカウント(LINE Bot)と友だちになる</h2>
+<p>QRコードで友だち追加</p>
+<p>「Messaging API設定」タブに移動し、QRコードを読み取って、友だち追加をしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1868e4298aafce8.png"></p>
+<h2 is-upgraded>チャネルシークレット、アクセストークンの取得</h2>
+<p>「チャネル基本設定」タブからチャネルシークレットを、「Messaging API設定」タブからアクセスキーをそれぞれ取得しメモします。_φ(･_･</p>
+<ul>
+<li>チャネルシークレット</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/f3eb6548a6c5e0c6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/aeece43ae5e06e73.png"></p>
+<ul>
+<li>アクセストークン</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/3ea1abd939970269.png"></p>
+<aside class="special"><p><strong>Note:</strong></p>
+<p>・チャネルシークレット：Botサーバで受信したリクエストが不正なものでないかのチェックで使用される(LINE以外のサーバーからリクエストが送られていないかの確認)</p>
+<p>・ アクセストークン：LINEのAPI(機能)を実行する際に、認可が通り利用権限があることを証明するトークン</p>
+</aside>
+<h2 is-upgraded>応答モードをOFFにする</h2>
+<p>LINE Official Account Manager 画面にアクセスして、Botの「応答モード」設定をOFFにします。（デフォルトの設定はONになっており、メッセージを送るたびにデフォルトのメッセージが返ってきてしまうため）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/eaa773a4f9e436e6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/24dfe305142dad62.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Bot Framework Composerの設定作業" duration="15">
+        <p>Bot Framework Composerの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/" target="_blank">https://docs.microsoft.com/ja-jp/composer/</a></p>
+<aside class="warning"><p><strong>注意:</strong> 前提として下記のリソースプロバイダーが登録されている必要があります。</p>
+<p>・Microsoft.CognitiveServices</p>
+<p>・Microsoft.BotService</p>
+<p>・Microsoft.Web</p>
+<p>・microsoft.insights</p>
+<p>設定の方法は下記を参考にしてください。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-portal#solution" target="_blank">https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-portal#solution</a></p>
+</aside>
+<h2 is-upgraded>新規作成の開始</h2>
+<p>「＋Create new」から作ります。</p>
+<p>「C#」、「Empty Bot」を選択し、Nextボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1bf45eb75b28f1bc.png"></p>
+<p>Nameに下記を入力し、「Create」ボタンを押しましょう。</p>
+<pre><code>udc2021Bot</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9853317ad1a282f1.png"></p>
+<h2 is-upgraded>言語の設定</h2>
+<p>日本語を処理できるように言語を日本語に変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f3ce82c106eed511.png"></p>
+<p>japaneseと検索し、Japanese(Japan)を選択、When...にもチェックをつけDoneをクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f3725344dbb08570.png"></p>
+<p>Japanese(Japan)にカーソルを持っていき、Set it as default languageをクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9c3b40727021d984.png"></p>
+<p>日本語専用のbotの場合Englishを残すと不具合が生じる場合があるので削除します</p>
+<p class="image-container"><img style="width: 601.70px" src="img/428ea5eaff4b87e2.png"></p>
+<p>Advanced Settings View (json) をオンにして、「defaultLocale」を「ja-jp」に書き換えます。</p>
+<p>書き換えたらAdvanced Settings View (json) をオフにしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/412e89ca676adaae.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="挨拶 Botの作成" duration="0">
+        <p>挨拶ダイアログを作成します。</p>
+<p>ダイアログの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/concept-dialog?tabs=v2x" target="_blank">https://docs.microsoft.com/ja-jp/composer/concept-dialog?tabs=v2x</a></p>
+<p><br>①からクリックして、「＋Add a dialog」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d05721b0fa2ee9d.png"></p>
+<p>ダイアログのNameに下記を入力し、OKを押しましょう。</p>
+<pre><code>GetHello</code></pre>
+<p class="image-container"><img style="width: 488.50px" src="img/a18e440fcb7cc60a.png"></p>
+<p>①に移動し、「Send a response」を追加します。</p>
+<p class="image-container"><img style="width: 533.50px" src="img/759581e4e2795abd.png"></p>
+<p>Responsesに下記を入力します。</p>
+<pre><code>オウム返し「${turn.activity.text}」</code></pre>
+<p>ユーザーと同じ挨拶を返します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/77781929c3279452.png"></p>
+<p>次に挨拶ダイアログを呼び出すトリガーを作成します。</p>
+<p>トリガーの公式ドキュメントは下記。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/composer/concept-events-and-triggers?tabs=v2x" target="_blank">https://docs.microsoft.com/ja-jp/composer/concept-events-and-triggers?tabs=v2x</a></p>
+<p>自然言語処理機能（LUIS）を使って、ユーザーの意図を取得します。</p>
+<p>①をクリックし、「＋Add new trigger」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1954ee4c578c916b.png"></p>
+<p>What is the type of this trigger? に下記を入力します。</p>
+<pre><code>Intent recognized</code></pre>
+<p>What is the name of this trigger? に下記を入力します。</p>
+<pre><code>Hello</code></pre>
+<p>Trigger phrasesに下記を入力し、Submitをクリックします。</p>
+<pre><code>- おはよう
+- おはようございます
+- こんにちは
+- こんばんは
+- さようなら</code></pre>
+<p class="image-container"><img style="width: 415.41px" src="img/c7ce049e4d4a2856.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 赤線が引かれますが、問題ありません</p>
+</aside>
+<p>順番通りにクリックし、「Begin a new dialog」を作成します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/18990d4e9e941af0.png"></p>
+<aside class="warning"><p><strong>注意:</strong> エラーが出ていますが、後で修正します。</p>
+</aside>
+<p>ここで「GetHello」を選択し、挨拶ダイアログを呼び出します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a111ebbdfb5bfd2f.png"></p>
+<p>エラーを修正します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b0bf7a93f0bb4487.png"></p>
+<p>LUISの設定をします。</p>
+<p>Set up Language Understandingをクリックし、セットアップをします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/efd8f54f2aef0cb4.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 下記エラーアラートが出た場合は、Bot Framework Composerを一度閉じて再度起動して続きを行ってください。</p>
+</aside>
+<p class="image-container"><img style="width: 331.50px" src="img/7a796fdeeacf6ce2.png"></p>
+<p>Create and configure... を選択し、Nextをクリックします。</p>
+<p class="image-container"><img style="width: 481.87px" src="img/dac7456af20473b4.png"></p>
+<p>Azureへサインインします。</p>
+<p class="image-container"><img style="width: 453.50px" src="img/eb9e8b5b8ecba58c.png"></p>
+<p class="image-container"><img style="width: 529.57px" src="img/cf0a5b80c15cf804.png"></p>
+<p>使用するサブスクリプションを選択します。</p>
+<p class="image-container"><img style="width: 405.99px" src="img/6f383b89613c12a.png"></p>
+<p>下記のように設定します。</p>
+<p> Azure resource group</p>
+<pre><code>Create new</code></pre>
+<p>Resource group name</p>
+<pre><code>udc2021Bot</code></pre>
+<p>Region</p>
+<pre><code>West US</code></pre>
+<p>Language Understanding resource name (xxxには一意になるように名前等)</p>
+<pre><code>udc2021Bot-xxx-luis</code></pre>
+<p class="image-container"><img style="width: 467.08px" src="img/f0f23fef10a192b5.png"></p>
+<p class="image-container"><img style="width: 432.93px" src="img/3661ac8ca3463a20.png"></p>
+<h2 is-upgraded>テスト</h2>
+<p>作ったものを確認しましょう。「Start bot」を押します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/27f278cc29522aa3.png"></p>
+<p>「Open Web Chat」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4bf57ea1b0b08fa9.png"></p>
+<p>Type your messageに作成したtriggerでTrigger phrasesに設定したどれか、または近いものを入力すると、挨拶を確認できます。確認できたら、右上の「×」で閉じます。</p>
+<p class="image-container"><img style="width: 386.03px" src="img/b8b1a5f960c05851.png"></p>
+<h2 is-upgraded>Azureへ展開</h2>
+<p>まず Azure リソースの作成を行います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b3beb418336835a1.png"></p>
+<p>下記のように設定し、Nextを押しましょう。</p>
+<p> Name</p>
+<pre><code>udc2021Bot</code></pre>
+<p> Publishing target</p>
+<pre><code>Publish bot to Azure</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/7e1ae5f0fd4d9096.png"></p>
+<p>Create new resource にチェックを入れて、Nextを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/cff532a0b7967e45.png"></p>
+<p>下記のように設定し、Nextを押しましょう。</p>
+<p> Resource group（LUISで使用したものと同じ）</p>
+<pre><code>udc2021Bot</code></pre>
+<p> Name（xxxはLUISで入力したものと同じ）</p>
+<pre><code>udc2021Bot-xxx</code></pre>
+<p>Region</p>
+<pre><code>東日本</code></pre>
+<p>LUIS region</p>
+<pre><code>米国西武</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/2140c76514c148b0.png"></p>
+<p>画面下の方にある、使用しないオプションを外します。Nextを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1c09532dd6cae0ed.png"></p>
+<p>Createを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3015e8c4a9a4c51e.png"></p>
+<p>リソースが作成されたら、Azureへ展開します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/cf4bed8dd641b959.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/18298213c86070c2.png"></p>
+<p>Azureポータルサイト(<a href="https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups" target="_blank">https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups</a>)へ移動し、作成したリソースグループのApp Serviceを選択します。プランを無料プランに変更しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8788bac8c7b01465.png"></p>
+<p>App Serviceプランをクリックしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3dc0967caa53eb5f.png"></p>
+<p>価格レベルを「F1」に変更し、適用をクリックしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f9a5081d419faa61.png"></p>
+<p>次に下記のLUISの価格レベルを無料に変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c47013f9da4a1d65.png"></p>
+<p>価格レベルを選んで「F0」に変更し、適用をクリックしましょう。</p>
+<aside class="warning"><p><strong>注意:</strong>１サブスクリプションにつき、１つまでしかF0に変更できない可能性があります。</p>
+<p>都度、公式ドキュメント、公式の情報をご確認ください。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/6d5fd2948b7d94e4.png"></p>
+<p>次に作成したリソースグループのAzure ボットを選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/5603e5f22c986e6.png"></p>
+<p>Webチャットのテストで確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c5314b50e664b369.png"></p>
+<p>何も出てこない場合は、やり直すをクリックか、少し時間を置くか、もう一度Azureへ展開をしてみてください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f8ce41a5e06bcfb7.png"></p>
+<h2 is-upgraded>LINEと接続</h2>
+<p>チャンネルに移動し、「LINE」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4e2e0a561bc332d0.png"></p>
+<p>Messaging API チャネルでメモしたチャンネルシークレットとチャンネルアクセストークンを入力します。</p>
+<p>WebhookのURLをコピーし、保存をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/738393e66ca2f4eb.png"></p>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブのWebhook URLに上記で取得したURLを設定し、Webhookの利用をオンにします。これでLINEのBotを動かす準備は全て整いました！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/3daa9f502829dbf1.png"></p>
+<p>さらに、LINE Official Manager で応答オフ</p>
+<h2 is-upgraded>動作確認</h2>
+<p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとメッセージが送られてきたと思います！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/338d18f44fad0b7f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コーヒーオーダー Botの作成" duration="0">
+        <p>挨拶Botと同じようにダイアログを作成していきます。</p>
+<p class="image-container"><img style="width: 576.02px" src="img/c7e1f89cc214a6d9.png"></p>
+<p>ダイアログのNameに下記を入力し、OKを押しましょう。</p>
+<pre><code>GetOrder</code></pre>
+<p class="image-container"><img style="width: 526.50px" src="img/2763931d271c517e.png"></p>
+<p>①に移動し、「Ask a question -&gt; Number」を追加しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c8f760c15d278432.png"></p>
+<p>Responsesに下記を入力します。</p>
+<pre><code>コーヒーをいくつ注文しますか？</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/5b4f34df54d1cd4d.png"></p>
+<p>User inputに移動し、Propertyに下記を入力します。</p>
+<pre><code>dialog.ordernum</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/83367c36adf42b4d.png"></p>
+<p>0が入力された際のチェックと返すメッセージを設定します。</p>
+<p>Otherに移動し、Validation RulesはWrite an expressionを選択します。</p>
+<h3 is-upgraded><img style="width: 601.70px" src="img/6669b8ac4957ed89.png"></h3>
+<p>下記を入力します。</p>
+<p>Validation Rules</p>
+<pre><code>this.value &gt;= 1</code></pre>
+<p>Responses</p>
+<pre><code>0以外を入力してください。</code></pre>
+<p class="image-container"><img style="width: 407.50px" src="img/b9598c4d892e4b3f.png"></p>
+<p>注文した数によって、在庫なしということを応答します。</p>
+<p>「Create  a condition -&gt; Branch: if/else」を追加しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8206ae15b2af0f60.png"></p>
+<p>Write an expressionを選択しましょう。</p>
+<p class="image-container"><img style="width: 400.69px" src="img/e1671c17fa259495.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>dialog.ordernum &lt; 3</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/f9c5936accc68e6f.png"></p>
+<p>False側にSend a responseを追加し、下記を入力します。</p>
+<pre><code>申し訳ありませんが、在庫がありません。</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/1da92f9045faf2ce.png"></p>
+<p>True側に「Ask a question -&gt; Multi-choice」を追加します。</p>
+<p>ユーザーに選択肢から回答してもらえます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ffede2bac01c0d4b.png"></p>
+<p>Bot responseに下記を入力しましょう。</p>
+<pre><code>ホットかアイスのどちらにしますか？</code></pre>
+<p class="image-container"><img style="width: 602.00px" src="img/42df288bad7f72f8.png"></p>
+<p>User inputに移動し、Propertyに下記を入力します。</p>
+<pre><code>dialog.orderhotice</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/55e0915bf29f0b7c.png"></p>
+<p>Array of choicesでAdd newをクリックし、下記を入力します。</p>
+<pre><code>ホット
+アイス</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/51dc6c2adc26706a.png"></p>
+<p>Send a responseを追加し、下記を入力します。</p>
+<pre><code>${dialog.orderhotice}コーヒを${dialog.ordernum}つですね。ご注文ありがとうございました。</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/82a17202c119a410.png"></p>
+<p>次にコーヒーオーダーダイアログを呼び出すトリガーを作成します。</p>
+<p>①をクリックし、「＋Add new trigger」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a6235717ef137646.png"></p>
+<p>What is the type of this trigger? に下記を入力します。</p>
+<pre><code>Intent recognized</code></pre>
+<p>What is the name of this trigger? に下記を入力します。</p>
+<pre><code>Order</code></pre>
+<p>Trigger phrasesに下記を入力し、Submitをクリックします。</p>
+<pre><code>- コーヒーください
+- コーヒーにします
+- コーヒーです
+- コーヒーが飲みたい
+- コーヒーをお願いします</code></pre>
+<p class="image-container"><img style="width: 478.04px" src="img/b8570dae7098a41f.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 赤線が引かれますが、問題ありません</p>
+</aside>
+<p>順番通りにクリックし、「Begin a new dialog」を作成します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a64b267e538d8d02.png"></p>
+<p>ここで「GetOrder」を選択し、コーヒーオーダーダイアログを呼び出します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/40680149a599f67d.png"></p>
+<p>テストを行います。</p>
+<p class="image-container"><img style="width: 602.00px" src="img/27f278cc29522aa3.png"></p>
+<p class="image-container"><img style="width: 436.27px" src="img/f44c64c9e9d22d09.png"></p>
+<p class="image-container"><img style="width: 437.76px" src="img/54cd8f048353f0c7.png"></p>
+<p class="image-container"><img style="width: 403.97px" src="img/7e0e340ac29546f4.png"></p>
+<p>再度、Azureへ展開します。</p>
+<p class="image-container"><img style="width: 602.00px" src="img/cf4bed8dd641b959.png"></p>
+<p class="image-container"><img style="width: 481.00px" src="img/5b0c84b26e9d9bfb.png"></p>
+<p class="image-container"><img style="width: 459.35px" src="img/af45dc78cc839cdf.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リッチメニューを使う" duration="15">
+        <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
+<p>LINE公式アカウントの管理画面にアクセスし、リッチメニューを作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/40ddc838d6682c33.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/113e0869a302d73b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
+<p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力するテキスト</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左上</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右上</p>
+</td><td colspan="1" rowspan="1"><p>位置情報</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左下</p>
+</td><td colspan="1" rowspan="1"><p>Flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右下</p>
+</td><td colspan="1" rowspan="1"><p>Quick Reply</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/a8cfc65442c1888b.png"></p>
+<p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>タイプ</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力欄</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>ラベル</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>A</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/camera/</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>B</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/location/</p>
+</td><td colspan="1" rowspan="1"><p>location</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>D</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>quick</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/be1bbc3ce048717c.png"></p>
+<p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
+<p class="image-container"><img style="width: 602.00px" src="img/48b9095ee7cd3893.png"></p>
+<aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
+</aside>
+<h2 is-upgraded>（参考）Messaging APIでのリッチメニューを作成</h2>
+<p>リッチメニューはMessaging APIでも作成でき、さらに柔軟な対応が可能です。今回のハンズオンでは対象外としますが、下記に参考情報を記載いたします。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
+<li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（Youtube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="URLスキームを使う" duration="15">
+        <p>URLスキームを使うとカメラや位置情報などが起動できたりします、いくつか用意されていますので試していきましょう。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/</a></li>
+</ul>
+<h2 is-upgraded>カメラの起動</h2>
+<p>リッチメニュー左上の「camera」をタップしてください。カメラが起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/f13286f87be6ecd9.gif"></p>
+<h2 is-upgraded>位置情報の起動</h2>
+<p>リッチメニュー右上の「位置情報」をタップしてください。位置情報が起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/c77d3984c67a9dc4.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(Optional) 様々なメッセージ形式を扱う" duration="15">
+        <p>LINEでは様々なメッセージ形式を扱うことができます。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
+</ul>
+<h2 is-upgraded>画像メッセージを扱う</h2>
+<p>まず、画像メッセージを送信するダイアログを作成します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/bb3ac97a2d4f75d4.png"></p>
+<p>Nameに 下記を入力しOKを押しましょう。</p>
+<pre><code>GetImage</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/e03ee661abecda0a.png"></p>
+<p>BeginDialogからSend a reaponseを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/734bafe5552a2116.png"></p>
+<p>Show codeをクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7b97457a1862e8d9.png"></p>
+<p>下記コードを貼り付けます。（下記ではImageという関数を呼び出して実行しています。このImage関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;image&#39;,
+    ChannelData=${Image(first(turn.activity.attachments).contentUrl)}
+]</code></pre>
+<aside class="warning"><p><strong>注意:</strong> Show codeをクリックしてから貼り付けないと、文字列として扱われてしまいます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/f07b9758bfd710b7.png"></p>
+<p>Image関数を追加するために、メニューより「Bot Responses」を選択し、</p>
+<p>GetImageに下記コードを追加します。</p>
+<pre><code># Image (originalContentUrl)
+- ${json(concat(&#39;{&#34;type&#34;: &#34;image&#34;, &#34;originalContentUrl&#34;:&#34;&#39;,originalContentUrl,&#39;&#34;, &#34;previewImageUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;}&#39;))}</code></pre>
+<aside class="warning"><p><strong>注意:</strong> 右上にある「Show code」をクリックしてエディターにしてください。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/35b5ade5cdb08b40.png"></p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>画像を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>image配下にBegin a new dialogを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d17c2ff9a19b00e5.png"></p>
+<p>ここで「GetImage」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a24f9ac5f5891a66.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿すると送った画像をそのまま返すことができます。</p>
+<p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
+<h2 is-upgraded>位置情報メッセージを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>位置情報メッセージを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetLocation</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>（下記ではLocationという関数を呼び出して実行しています。このLocation関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;location&#39;,
+    ChannelData=${Location(turn.activity.channelData.message.address,turn.activity.channelData.message.latitude,turn.activity.channelData.message.longitude)}
+]</code></pre>
+<p>Location関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
+<pre><code># Location (address, latitude, longitude)
+- ${json(concat(&#39;{&#34;type&#34;: &#34;location&#34;, &#34;title&#34;: &#34;my location&#34;, &#34;address&#34;: &#34;&#39;,address,&#39;&#34;,&#34;latitude&#34;: &#39;,latitude,&#39;, &#34;longitude&#34;: &#39;,longitude,&#39;}&#39;))}</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>位置情報を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>location配下にBegin a new dialogを追加します。</p>
+<aside class="special"><p><strong>Note:</strong> 他でBegin a new dialogを作成していたら、Ctrl＋Cでコピーし、location配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/d17c2ff9a19b00e5.png"></p>
+<p>「GetLocation」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9941b39b28da5849.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>位置情報をトーク画面に投稿すると、同じ位置情報メッセージを返すことができます。</p>
+<p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
+<h2 is-upgraded>音声メッセージを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>音声メッセージを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetAudio</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではAudioという関数を呼び出して実行しています。このAudio関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;audio&#39;,
+    ChannelData=${Audio(first(turn.activity.attachments).contentUrl)}
+]</code></pre>
+<p>Audio関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
+<pre><code># Audio (originalContentUrl)
+- ${json(concat(&#39;{&#34;type&#34;: &#34;audio&#34;, &#34;originalContentUrl&#34;: &#34;&#39;,originalContentUrl,&#39;&#34;,&#34;duration&#34;: &#34;60000&#34;}&#39;))}</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>音声を呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>audio配下にBegin a new dialogを追加します。</p>
+<aside class="special"><p><strong>Note:</strong> 他でBegin a new dialogを作成していたら、Ctrl＋Cでコピーし、audio配下の「＋」ボタンから「Paste」することもできます。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/d17c2ff9a19b00e5.png"></p>
+<p>「GetAudio」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9941b39b28da5849.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>マイクから音声を投稿すると音声メッセージを返すことができます。</p>
+<p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
+<h2 is-upgraded>Flex Messageを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>Flex Messageを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetFlex</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではFlexという関数を呼び出して実行しています。このFlex関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;flex&#39;,
+    ChannelData=${Flex()}
+]</code></pre>
+<p>Flex関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
+<pre><code>https://gist.github.com/mochan-tk/c4a405ee9f0b73dc971afa2da7e15c69</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Flexを呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>text配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e5c298cde5b3c59.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.text</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>flex
+quick</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/5a9009e16cc04adb.png"></p>
+<p>flex配下にBegin a new dialogを追加し、「GetFlex」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/868bf5d1109deb1b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/61ed45904054118.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIを返すことができます。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
+<p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
+<h2 is-upgraded>Quick Replyを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>Quick Replyを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetQuickReply</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではQuickReplyという関数を呼び出して実行しています。このQuickReply関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;quickReply&#39;,
+    ChannelData=${QuickReply()}
+]</code></pre>
+<p>QuickReply関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
+<pre><code># QuickReply
+- ${json(QuickReplySrc())}
+
+# QuickReplySrc
+- ```{
+    &#34;type&#34;: &#34;text&#34;,
+    &#34;text&#34;: &#34;ステッカー欲しいですか❓YesかNoで答えてください, もしくは素敵な写真送って❗️&#34;,
+    &#34;quickReply&#34;: {
+        &#34;items&#34;: [
+        {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+            &#34;type&#34;:&#34;postback&#34;,
+            &#34;label&#34;:&#34;Yes&#34;,
+            &#34;data&#34;: &#34;sticker&#34;,
+            &#34;displayText&#34;:&#34;ステッカーください❗️&#34;
+            }
+        },
+        {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+            &#34;type&#34;:&#34;message&#34;,
+            &#34;label&#34;:&#34;No&#34;,
+            &#34;text&#34;:&#34;不要。&#34;
+            }
+        },
+        {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+            &#34;type&#34;: &#34;camera&#34;,
+            &#34;label&#34;: &#34;camera&#34;
+            }
+        }
+        ]
+    }
+}```</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Quick Replyを呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/a375480b2f73a1da.png"></p>
+<p>◆◆◆ここから</p>
+<p>text配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e5c298cde5b3c59.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.text</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>flex
+quick</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/5a9009e16cc04adb.png"></p>
+<p>quick配下にBegin a new dialogを追加し、「GetQuickReply」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/62d4bd07f966ba34.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/51a1fe26e7603c93.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>リッチメニューの右下をタップして、「quick」というテキストメッセージを投稿します。クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
+<aside class="warning"><p><strong>注意:</strong> この時点でまだ、Stickerを追加していないので、QuickReplyで「Yes」を選択しても送られてきません。</p>
+</aside>
+<p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
+<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
+<p>詳しくは下記を参照ください。</p>
+<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+</aside>
+<h2 is-upgraded>Stickerを扱う</h2>
+<p>画像メッセージと同じ手順で作成します。</p>
+<p>Stickerを送信するダイアログを作成します。</p>
+<p>Nameに下記を入力します。</p>
+<pre><code>GetSticker</code></pre>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<p>下記コードを貼り付けます。（下記ではStickerという関数を呼び出して実行しています。このSticker関数はこの後自分で作成していきます。）</p>
+<pre><code>[Activity
+    Text=&#39;sticker&#39;,
+    ChannelData=${Sticker(11537,52002735)}
+]</code></pre>
+<p>Sticker関数を追加するために、メニューより「Bot Responses」を選択し、下記コードを追加します。</p>
+<pre><code># Sticker (packageId, stickerId)
+- ${json(concat(&#39;{&#34;type&#34;: &#34;sticker&#34;, &#34;packageId&#34;: &#39;,packageId,&#39;, &#34;stickerId&#34;: &#39;,stickerId,&#39;}&#39;))}</code></pre>
+<p>＜すでに作成している場合は◆◆◆マークから＞</p>
+<p>ユーザーの意図がHelloに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Hello.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Hello.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/785ade3af394b276.png"></p>
+<p>ユーザーの意図がOrderに入る条件を設定します。</p>
+<p>下記をConditionに入力しましょう。</p>
+<pre><code>=#Order.Score &gt;= 0.8 &amp;&amp; turn.activity.channelData.message.type == &#39;text&#39;</code></pre>
+<aside class="special"><p><strong>Note:</strong> #Order.Score &gt;= 0.8 はLUISによって返される信頼スコアが80％未満は回避と</p>
+<p>turn.activity.channelData.message.type == &#39;text&#39; はLINEから送られてくるメッセージタイプがテキスト以外は回避するという意味です。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/7df6ea4e3085492e.png"></p>
+<p>Unknown intentに移動します。</p>
+<p>Stickerを呼び出すトリガーはUnknown intentで作成します。</p>
+<p>手順通りにクリックし、Branch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e222667ed1903da8.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>message
+postback</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9ca6a167cfa3cd89.png"></p>
+<p>◆◆◆ここから</p>
+<p>postback配下にBranch: if/elseを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/fe4ee9aa2f47280d.png"></p>
+<p>Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.postback.data == &#39;sticker&#39;</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/9c9c477e04fbc871.png"></p>
+<p>True側にBegin a new dialogを追加し、「GetSticker」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/730d67966b948a7d.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>先ほどのクイックリプライで「Yes」をタップすると、スタンプを送信することができます。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
+<p>Stickerを送った場合の処理は下記になります。</p>
+<p>message配下にBranch: Switch(multiple options)を追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/abe906092ca47403.png"></p>
+<p> Conditionに下記を入力します。</p>
+<pre><code>turn.activity.channelData.message.type</code></pre>
+<p>Casesに下記を入力します。</p>
+<pre><code>image
+location
+audio
+text
+sticker</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/f0db2b089b2da63a.png"></p>
+<p>sticker配下にBegin a new dialogを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d17c2ff9a19b00e5.png"></p>
+<p>ここで「GetSticker」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c0655d6e7fa872eb.png"></p>
+<p>Azureへの展開もお忘れなく。</p>
+<p>スタンプを投稿すると、先ほどのクイックリプライで「Yes」をタップしたものと同じスタンプを送信することができます。</p>
+<p class="image-container"><img style="width: 287.50px" src="img/8f265598357ba45a.png"></p>
+<p>送信したものと同じスタンプを送信する場合は下記を修正します。</p>
+<p>BeginDialogから追加した「Send a reaponse」に下記を入力します。</p>
+<pre><code>[Activity
+    Text=&#39;sticker&#39;,
+    ChannelData=${Sticker(turn.activity.channelData.message.packageId,turn.activity.channelData.message.stickerId)}
+]</code></pre>
+<p class="image-container"><img style="width: 306.27px" src="img/1d3e386bac751e5c.png"></p>
+<aside class="special"><p><strong>Note:</strong> packageIdとstickerIdを変更すればお好みのスタンプを送れます。</p>
+<p>下記にStickerの一覧がありますので、参照してください。</p>
+<p>https://developers.line.biz/en/docs/messaging-api/sticker-list/</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リソースの削除" duration="5">
+        <p>Bot Framework Comporserは下記の手順で削除できます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ebfaf3c73b2323c3.png"></p>
+<p>課金が気になる方は、Azureポータルサイト(<a href="https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups" target="_blank">https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups</a>)へ移動し、リソースグループごと削除してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/dff920816ab894a7.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
