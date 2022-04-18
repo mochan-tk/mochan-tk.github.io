@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2022-04-18T03:51:19Z",
+  "id": "handson-liff-azure-template",
+  "duration": 40,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "LINEハンズオン、LINE Front end Framework(LIFF)を主に扱います。",
+  "source": "1raAWn5w23BwsD7AwhGznkqyv3iDyzLtcKVfqsCC1r_0",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-liff-azure-template"
+}
