@@ -12,3 +12,4 @@ claat export -ga "" <code>
 - https://mochan-tk.github.io/handson-line-bot-azure-template/#0  
 - https://mochan-tk.github.io/azure-bot-framework-composer-QnA/
 - https://mochan-tk.github.io/handson-liff-azure-template/
+- https://mochan-tk.github.io/handson-line-bot-framework-composer-template/

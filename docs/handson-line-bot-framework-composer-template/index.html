@@ -254,9 +254,9 @@
 <pre><code>米国西武</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/2140c76514c148b0.png"></p>
 <p>画面下の方にある、使用しないオプションを外します。Nextを押しましょう。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/1c09532dd6cae0ed.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/199746c549519801.png"></p>
 <p>Createを押しましょう。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/3015e8c4a9a4c51e.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/7e52920bbff228ec.png"></p>
 <p>リソースが作成されたら、Azureへ展開します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/cf4bed8dd641b959.png"></p>
 <p class="image-container"><img style="width: 601.70px" src="img/18298213c86070c2.png"></p>
@@ -273,6 +273,19 @@
 <p>都度、公式ドキュメント、公式の情報をご確認ください。</p>
 </aside>
 <p class="image-container"><img style="width: 601.70px" src="img/6d5fd2948b7d94e4.png"></p>
+<p>次に下記のQnA Makerの価格レベルを無料に変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/69b38c5ea7f76cb3.png"></p>
+<p>価格レベルを選んで「F0」に変更し、適用をクリックしましょう。</p>
+<aside class="warning"><p><strong>注意:</strong>１サブスクリプションにつき、１つまでしかF0に変更できない可能性があります。</p>
+<p>都度、公式ドキュメント、公式の情報をご確認ください。</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/a450aaeb59574211.png"></p>
+<p>こちらも無料プランに変更します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d682c198c92d106f.png"></p>
+<p>App Serviceプランをクリックしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e695b15a27531824.png"></p>
+<p>価格レベルを「F1」に変更し、適用をクリックしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f9a5081d419faa61.png"></p>
 <p>次に作成したリソースグループのAzure ボットを選択します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/5603e5f22c986e6.png"></p>
 <p>Webチャットのテストで確認します。</p>
@@ -296,37 +309,32 @@
       </google-codelab-step>
     
       <google-codelab-step label="コーヒーオーダー Botの作成" duration="0">
-        <h2 is-upgraded>QnA Makerの設定をします。</h2>
+        <h2 is-upgraded>knowledge Basesの設定</h2>
 <p>まず、knowledge basesを作成します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/39be4f9ed1c6904e.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/5055bda53b64491e.png"></p>
 <p>名前を入力し、「Next」ボタンをクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/44c0e7e8547446fb.png"></p>
-<p>「Skip &amp; Create blank knowledge bases」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/49bcf2165bc928c3.png"></p>
-<p>「Show code」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/6337d47d32e805.png"></p>
-<p>下記コードを入力し、「Hide code」をクリックします。</p>
-<pre><code>### ? トイレはどこにありますか？
-```
-申し訳ございません。トイレはございません。
-```
- 
-### ? ゴミ箱はどこにありますか？
-```
-カウンターの横にあります。
-```
- 
-### ? 定休日はいつですか？
-```
-年中無休でやらさせていただいてます！
-```
-</code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/2fa81f9889bd3487.png"></p>
+<p>Source URLに下記URLを入力し、「Next」をクリックします。</p>
+<pre><code>https://mochan-tk.github.io/azure-bot-framework-composer-QnA/</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/7ae011ecd76325b0.png"></p>
 <p>knowledge basesが作成できました。</p>
 <aside class="special"><p><strong>Note:</strong> knowledge basesについて詳しくはこちら</p>
 <p>https://docs.microsoft.com/en-us/composer/how-to-create-qna-kb?tabs=v2x#create-blank-knowledge-base</p>
 </aside>
-<p class="image-container"><img style="width: 601.70px" src="img/3e97e2d555484e3.png"></p>
+<p>エラーを修正します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/623b418435ae1ede.png"></p>
+<h2 is-upgraded>QnA Makerの設定</h2>
+<p>QnA Maker Subscription keyを設定します。</p>
+<p>Set up QnA Makerをクリックし、セットアップをします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b11c7b1dbf02ef30.png"></p>
+<p class="image-container"><img style="width: 456.61px" src="img/1018377ec04dbbf6.png"></p>
+<p>Azureへサインインします。</p>
+<p class="image-container"><img style="width: 453.50px" src="img/eb9e8b5b8ecba58c.png"></p>
+<p class="image-container"><img style="width: 529.57px" src="img/cf0a5b80c15cf804.png"></p>
+<p>使用するサブスクリプション、先ほど作成したQnA Makerを選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9e10b1582f7eedfb.png"></p>
+<p>エラーも消え、キーが設定されます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ea8c97a0041e8f84.png"></p>
 <p>つぎに、挨拶Botと同じようにダイアログを作成していきます。</p>
 <p class="image-container"><img style="width: 576.02px" src="img/c7e1f89cc214a6d9.png"></p>
 <p>ダイアログのNameに下記を入力し、OKを押しましょう。</p>
