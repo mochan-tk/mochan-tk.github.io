@@ -24,7 +24,11 @@ window.onload = function() {
     } else {
         myLiffId = defaultLiffId;
         initializeLiffOrDie(myLiffId);
-        alert('test2');
+        liff.getProfile().then(function(profile) {
+            window.alert(profile.userId);            
+        }).catch(function(error) {
+            window.alert('Error getting profile: ' + error);
+        });
     }
 };
 
