@@ -52,11 +52,11 @@ function initializeLiff(myLiffId) {
         .then(() => {
             // start to use LIFF's api
             // initializeApp();
-            liff.getProfile().then(function(profile) {
-                window.alert(profile.userId);            
-            }).catch(function(error) {
-                window.alert('Error getting profile: ' + error);
-            });
+            // liff.getProfile().then(function(profile) {
+            //     window.alert(profile.userId);            
+            // }).catch(function(error) {
+            //     window.alert('Error getting profile: ' + error);
+            // });
         })
         .catch((err) => {
             document.getElementById("liffAppContent").classList.add('hidden');
