@@ -25,11 +25,6 @@ window.onload = function() {
         myLiffId = defaultLiffId;
         initializeLiffOrDie(myLiffId);
         alert('liff2');
-        liff.getProfile().then(function(profile) {
-            window.alert(profile.userId);            
-        }).catch(function(error) {
-            window.alert('Error getting profile: ' + error);
-        });
     }
 };
 
@@ -58,7 +53,11 @@ function initializeLiff(myLiffId) {
         .then(() => {
             // start to use LIFF's api
             // initializeApp();
-            alert('liff');
+            liff.getProfile().then(function(profile) {
+                window.alert(profile.userId);            
+            }).catch(function(error) {
+                window.alert('Error getting profile: ' + error);
+            });
         })
         .catch((err) => {
             document.getElementById("liffAppContent").classList.add('hidden');
