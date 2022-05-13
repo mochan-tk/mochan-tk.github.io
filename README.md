@@ -16,7 +16,7 @@ gitbook init
 gitbook serve
 gitbook build . docs
 
-gitbook build ./GitBook docs/test
+gitbook build ./GitBook docs/gitbook-test
 ```
 
 ## URLs
