@@ -6,6 +6,21 @@ https://github.com/googlecodelabs/tools/tree/main/claat
 claat export -ga "" <code>
 
 
+## GitBook
+```
+npm install -g gitbook-cli
+npm init
+cd /home/codespace/.npm-global/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/
+npm install graceful-fs@4.2.0 --save
+gitbook init
+gitbook serve
+gitbook build . docs
+
+gitbook build ./GitBook docs/test
+```
+
+## URLs
+
 - https://mochan-tk.github.io/happy-4-hack-2021-handson-line-bot/#0  
 - https://mochan-tk.github.io/happy-4-hack-2021-handson-liff/#0  
 - https://mochan-tk.github.io/udc2021-handson-line-bot/#0  
