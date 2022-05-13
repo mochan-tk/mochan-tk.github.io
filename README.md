@@ -28,5 +28,5 @@ gitbook build ./GitBook docs/gitbook-test
 - https://mochan-tk.github.io/azure-bot-framework-composer-QnA/
 - https://mochan-tk.github.io/handson-liff-azure-template/
 - https://mochan-tk.github.io/handson-line-bot-framework-composer-template/
-- 
+- https://mochan-tk.github.io/gitbook-test/
 - https://liff.line.me/1656670753-P63Wz9pO (https://mochan-tk.github.io/liff-starter)
