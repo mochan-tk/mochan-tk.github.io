@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2022-09-03T04:04:18Z",
+  "id": "handson-line-bot-power-automate-template",
+  "duration": 40,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "LINEハンズオン、Messaging APIとPower Automateを主に扱います。",
+  "source": "1kIHDGK1-2pu3IewE6V2Ibwi_6wOXWPmglwWBPClh5N0",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-power-automate-template"
+}
