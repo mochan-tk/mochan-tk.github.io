@@ -197,7 +197,6 @@
 <p>名前：access token</p>
 <p>値：{LINE側でメモしたアクセストークン}</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4823bef5b4d2ea4d.png"></p>
-<p>（ここにapply to eachを選択する手順を追加 ＞ @{triggerBody()?[&#39;events&#39;]}）</p>
 <p>「Apply to each」と検索し、「組み込み」タブから「Apply to each」をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4d0d2db70eb61937.png"></p>
 <p>以前の手順から出力を選択に「@{triggerBody()?[&#39;events&#39;]}」を入力します。アクションの追加をクリックします。</p>
@@ -258,6 +257,67 @@
       </google-codelab-step>
     
       <google-codelab-step label="リッチメニューを使う" duration="10">
+        <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
+<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d2dd02d6f54c87bb.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
+<p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力するテキスト</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左上</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右上</p>
+</td><td colspan="1" rowspan="1"><p>位置情報</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左下</p>
+</td><td colspan="1" rowspan="1"><p>Flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右下</p>
+</td><td colspan="1" rowspan="1"><p>Quick Reply</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/a8cfc65442c1888b.png"></p>
+<p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>タイプ</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力欄</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>ラベル</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>A</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/camera/</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>B</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/location/</p>
+</td><td colspan="1" rowspan="1"><p>location</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>D</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>quick</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/be1bbc3ce048717c.png"></p>
+<p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/48b9095ee7cd3893.png"></p>
+<aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="（応用編）リッチメニューを使う" duration="10">
         <h2 is-upgraded>フローのインポート</h2>
 <p>下記のGithubからZipファイルをダウンロードします。</p>
 <p><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Power-Automate-Richmenu-Importfile" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Power-Automate-Richmenu-Importfile</a></p>
@@ -600,7 +660,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="[ 応用 ] 画像メッセージを扱う" duration="0">
+      <google-codelab-step label="（応用編）画像メッセージを扱う" duration="0">
         <aside class="warning"><p><strong>注意:</strong> ここから先の手順はMicrosoft Azureのアカウントが必要になります。</p>
 </aside>
 <p>ケース２「location」のとなりに、ケース３「image」を追加します。</p>
