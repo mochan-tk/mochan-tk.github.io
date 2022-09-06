@@ -142,6 +142,15 @@
                             &#34;text&#34;: {
                                 &#34;type&#34;: &#34;string&#34;
                             },
+                            &#34;address&#34;: {
+                                &#34;type&#34;: &#34;string&#34;
+                            },
+                            &#34;latitude&#34;: {
+                                &#34;type&#34;: &#34;string&#34;
+                            },
+                            &#34;longitude&#34;: {
+                                &#34;type&#34;: &#34;string&#34;
+                            },
                             &#34;type&#34;: {
                                 &#34;type&#34;: &#34;string&#34;
                             }
@@ -184,47 +193,60 @@
 <p class="image-container"><img style="width: 601.70px" src="img/b5d66c832a6fd53b.png"></p>
 <p>同じように、「変数を初期化する」と検索し、変数を初期化するをクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/7db3a498d6af7d5a.png"></p>
-<p>下記のように設定し、新しいステップを入力します。</p>
+<p>下記のように設定し、新しいステップをクリックします。</p>
 <p>名前：access token</p>
-<p>値：Bearer {LINE側でメモしたアクセストークン}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/9a8b7a4412ccecfe.png"></p>
+<p>値：{LINE側でメモしたアクセストークン}</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4823bef5b4d2ea4d.png"></p>
+<p>（ここにapply to eachを選択する手順を追加 ＞ @{triggerBody()?[&#39;events&#39;]}）</p>
+<p>「Apply to each」と検索し、「組み込み」タブから「Apply to each」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4d0d2db70eb61937.png"></p>
+<p>以前の手順から出力を選択に「@{triggerBody()?[&#39;events&#39;]}」を入力します。アクションの追加をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/8aee6e9278850ac6.png"></p>
 <p>「スイッチ」と検索し、スイッチをクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/7ec7d2a3511604b7.png"></p>
-<p>スイッチのオンに、動的なコンテンツ「type」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/ce53dd51fe39364f.png"></p>
-<p>「type」はポップアップで下記のようになるのを確認します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/2cb95f7b006f2211.png"></p>
+<p>スイッチのオンに、「@{items(&#39;Apply_to_each&#39;)?[&#39;type&#39;]}」を入力します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ad1c976c0284d5c1.png"></p>
 <p>ケースに「message」を入力し、「＋」をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/fa321f64d1bc666e.png"></p>
 <p>次に「postback」を入力し、「message」側の「アクションの追加」をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/dd975f63b26c59b1.png"></p>
-<p>同じように、スイッチを追加し、オンに動的なコンテンツから「type」、ケースには「text」を入力します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/e60fad7bc3fbc996.png"></p>
-<p>「type」はポップアップで下記のようになるのを確認します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/5d9b400910113d79.png"></p>
-<p>ケース「text」に「スイッチ」アクションを追加し、オンに動的なコンテンツから「text」、ケースに「flex」を入力し、既定の方に「アクションを追加」をクリックし、「文字列変数に追加」で検索し、文字列変数に追加を選択します。</p>
+<p>同じように、スイッチを追加し、オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;type&#39;]}」、ケースには「text」を入力します。つづいてアクションの追加をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1f467f1fc87c8276.png"></p>
+<p>ケース「text」に「スイッチ」アクションを追加し、オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;text&#39;]}」、ケースに「flex」を入力し、既定の方に「アクションを追加」をクリックし、「変数の設定」で検索し、変数の設定を選択します。</p>
 <p>下記のように設定しましょう。</p>
-<p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
-<p>  &#34;messages&#34;: [</p>
-<p>    {</p>
-<p>      &#34;text&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;text&#39;]},</p>
-<p>      &#34;type&#34;: &#34;text&#34;</p>
-<p>    }</p>
-<p>  ]</p>
-<p>}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/92e39653ffdbc979.png"></p>
-<p>messageとpostbackのスイッチの下のアクションの追加をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/2c627a37d2305a32.png"></p>
+<pre><code>{
+  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
+  &#34;messages&#34;: [
+    {
+      &#34;text&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;text&#39;]}&#34;,
+      &#34;type&#34;: &#34;text&#34;
+    }
+  ]
+}</code></pre>
+<aside class="special"><p><strong>Note:</strong></p>
+<p>下記のjsonスキーマの公式ドキュメント参考</p>
+<p>https://developers.line.biz/ja/reference/messaging-api/#send-reply-message</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/2c4a5f64827192e3.png"></p>
+<p>一番下にある「新しいステップ」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7d60070ed855791b.png"></p>
+<p>「条件」と検索し、条件をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/618f192d4a2fe070.png"></p>
+<p>以下を設定します。</p>
+<p>左側の値の選択に動的コンテンツから「msg」</p>
+<p>真ん中は「次の値に等しくない」</p>
+<p>右側の値の選択は何も入力しません。</p>
+<p>「はい」の方にアクションの追加をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ce307bc592a4c9bd.png"></p>
 <p>HTTPと検索し、「HTTP」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/ad3e3f91916d96ac.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/f648f2055963f971.png"></p>
 <p>下記のように設定します。</p>
 <p>・方法 → POST</p>
 <p>・URI → https://api.line.me/v2/bot/message/reply</p>
 <p>・ヘッダー → Content-Type ： application/json</p>
-<p>                 Authorization ： 動的コンテンツの「access token」</p>
-<p>・本文 → @{variables(&#39;msg&#39;)}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/b1f95a9f88480161.png"></p>
+<p>                 Authorization ： Bearer 動的コンテンツから「access token」</p>
+<p>・本文 → 動的コンテンツから「msg」</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a8316d850bceb1eb.png"></p>
 <p>上部にある保存ボタンをクリックします。</p>
 <p>「HTTP要求の受信時」にあるURLをコピーします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/24ccf54f4cc7bd9c.png"></p>
@@ -237,10 +259,19 @@
     
       <google-codelab-step label="リッチメニューを使う" duration="10">
         <h2 is-upgraded>フローのインポート</h2>
-<p>パッケージのインポートを行います。</p>
+<p>下記のGithubからZipファイルをダウンロードします。</p>
+<p><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Power-Automate-Richmenu-Importfile" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Power-Automate-Richmenu-Importfile</a></p>
+<p class="image-container"><img style="width: 601.70px" src="img/ae3333c64b8ca7ea.png"></p>
+<p>ダウンロードしたzipを解凍します。</p>
+<p>下記にアクセスし、OneDriveにサインインします。</p>
+<p><a href="https://onedrive.live.com/about/ja-jp/signin/" target="_blank">https://onedrive.live.com/about/ja-jp/signin/</a></p>
+<p>「richmenu」フォルダを作成し、ダウンロードした「tabA.png」、「tabB.png」ファイルをアップロードします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/762e914224c03430.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/9832fdef8d29b321.png"></p>
+<p>次にパッケージのインポートを行います。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/46399218c4a9506c.png"></p>
 <p>インポートするパッケージを選択します。</p>
-<h2 is-upgraded><img style="width: 601.70px" src="img/62b450242c698c31.png"></h2>
+<h2 is-upgraded><img style="width: 601.70px" src="img/b5b927628f6688d3.png"></h2>
 <p>関連リソースを作成します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/f91715e80a172e25.png"></p>
 <p>新しい接続をクリックします。</p>
@@ -256,7 +287,7 @@
 <p>フローを「オン」にします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/55f1c4065a4d9f99.png"></p>
 <p>「編集」画面へ移動し、アクセストークンを変更します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/1050f67fb9d550bd.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/50663168fe047695.png"></p>
 <p>「保存」をし、「実行」します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/9c80a571d358a27f.png"></p>
 <p>トーク画面から一旦離れ、確認します。</p>
@@ -293,243 +324,245 @@
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
 </ul>
 <h2 is-upgraded>Flex Messageを扱う</h2>
-<p>おうむ返しのフローに戻り、ケース「flex」に「文字列変数に追加」アクションを追加し、下記を設定します。</p>
+<p>おうむ返しのフローに戻り、Apply_to_each → message → text → ケース「flex」に「変数の設定」アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
-<p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
-<p>  &#34;messages&#34;: [</p>
-<p>    {</p>
-<p>      &#34;type&#34;: &#34;flex&#34;,</p>
-<p>      &#34;altText&#34;: &#34;item list&#34;,</p>
-<p>      &#34;contents&#34;: {</p>
-<p>        &#34;type&#34;: &#34;carousel&#34;,</p>
-<p>        &#34;contents&#34;: [</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;bubble&#34;,</p>
-<p>            &#34;hero&#34;: {</p>
-<p>              &#34;type&#34;: &#34;image&#34;,</p>
-<p>              &#34;size&#34;: &#34;full&#34;,</p>
-<p>              &#34;aspectRatio&#34;: &#34;20:13&#34;,</p>
-<p>              &#34;aspectMode&#34;: &#34;cover&#34;,</p>
-<p>              &#34;url&#34;: &#34;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png&#34;</p>
-<p>            },</p>
-<p>            &#34;body&#34;: {</p>
-<p>              &#34;type&#34;: &#34;box&#34;,</p>
-<p>              &#34;layout&#34;: &#34;vertical&#34;,</p>
-<p>              &#34;spacing&#34;: &#34;sm&#34;,</p>
-<p>              &#34;contents&#34;: [</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;text&#34;,</p>
-<p>                  &#34;text&#34;: &#34;Arm Chair, White&#34;,</p>
-<p>                  &#34;wrap&#34;: true,</p>
-<p>                  &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                  &#34;size&#34;: &#34;xl&#34;</p>
-<p>                },</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;box&#34;,</p>
-<p>                  &#34;layout&#34;: &#34;baseline&#34;,</p>
-<p>                  &#34;contents&#34;: [</p>
-<p>                    {</p>
-<p>                      &#34;type&#34;: &#34;text&#34;,</p>
-<p>                      &#34;text&#34;: &#34;$49&#34;,</p>
-<p>                      &#34;wrap&#34;: true,</p>
-<p>                      &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                      &#34;size&#34;: &#34;xl&#34;,</p>
-<p>                      &#34;flex&#34;: 0</p>
-<p>                    },</p>
-<p>                    {</p>
-<p>                      &#34;type&#34;: &#34;text&#34;,</p>
-<p>                      &#34;text&#34;: &#34;.99&#34;,</p>
-<p>                      &#34;wrap&#34;: true,</p>
-<p>                      &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                      &#34;size&#34;: &#34;sm&#34;,</p>
-<p>                      &#34;flex&#34;: 0</p>
-<p>                    }</p>
-<p>                  ]</p>
-<p>                }</p>
-<p>              ]</p>
-<p>            },</p>
-<p>            &#34;footer&#34;: {</p>
-<p>              &#34;type&#34;: &#34;box&#34;,</p>
-<p>              &#34;layout&#34;: &#34;vertical&#34;,</p>
-<p>              &#34;spacing&#34;: &#34;sm&#34;,</p>
-<p>              &#34;contents&#34;: [</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;button&#34;,</p>
-<p>                  &#34;style&#34;: &#34;primary&#34;,</p>
-<p>                  &#34;action&#34;: {</p>
-<p>                    &#34;type&#34;: &#34;uri&#34;,</p>
-<p>                    &#34;label&#34;: &#34;Add to Cart&#34;,</p>
-<p>                    &#34;uri&#34;: &#34;https://linecorp.com&#34;</p>
-<p>                  }</p>
-<p>                },</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;button&#34;,</p>
-<p>                  &#34;action&#34;: {</p>
-<p>                    &#34;type&#34;: &#34;uri&#34;,</p>
-<p>                    &#34;label&#34;: &#34;Add to wishlist&#34;,</p>
-<p>                    &#34;uri&#34;: &#34;https://linecorp.com&#34;</p>
-<p>                  }</p>
-<p>                }</p>
-<p>              ]</p>
-<p>            }</p>
-<p>          },</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;bubble&#34;,</p>
-<p>            &#34;hero&#34;: {</p>
-<p>              &#34;type&#34;: &#34;image&#34;,</p>
-<p>              &#34;size&#34;: &#34;full&#34;,</p>
-<p>              &#34;aspectRatio&#34;: &#34;20:13&#34;,</p>
-<p>              &#34;aspectMode&#34;: &#34;cover&#34;,</p>
-<p>              &#34;url&#34;: &#34;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png&#34;</p>
-<p>            },</p>
-<p>            &#34;body&#34;: {</p>
-<p>              &#34;type&#34;: &#34;box&#34;,</p>
-<p>              &#34;layout&#34;: &#34;vertical&#34;,</p>
-<p>              &#34;spacing&#34;: &#34;sm&#34;,</p>
-<p>              &#34;contents&#34;: [</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;text&#34;,</p>
-<p>                  &#34;text&#34;: &#34;Metal Desk Lamp&#34;,</p>
-<p>                  &#34;wrap&#34;: true,</p>
-<p>                  &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                  &#34;size&#34;: &#34;xl&#34;</p>
-<p>                },</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;box&#34;,</p>
-<p>                  &#34;layout&#34;: &#34;baseline&#34;,</p>
-<p>                  &#34;flex&#34;: 1,</p>
-<p>                  &#34;contents&#34;: [</p>
-<p>                    {</p>
-<p>                      &#34;type&#34;: &#34;text&#34;,</p>
-<p>                      &#34;text&#34;: &#34;$11&#34;,</p>
-<p>                      &#34;wrap&#34;: true,</p>
-<p>                      &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                      &#34;size&#34;: &#34;xl&#34;,</p>
-<p>                      &#34;flex&#34;: 0</p>
-<p>                    },</p>
-<p>                    {</p>
-<p>                      &#34;type&#34;: &#34;text&#34;,</p>
-<p>                      &#34;text&#34;: &#34;.99&#34;,</p>
-<p>                      &#34;wrap&#34;: true,</p>
-<p>                      &#34;weight&#34;: &#34;bold&#34;,</p>
-<p>                      &#34;size&#34;: &#34;sm&#34;,</p>
-<p>                      &#34;flex&#34;: 0</p>
-<p>                    }</p>
-<p>                  ]</p>
-<p>                },</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;text&#34;,</p>
-<p>                  &#34;text&#34;: &#34;Temporarily out of stock&#34;,</p>
-<p>                  &#34;wrap&#34;: true,</p>
-<p>                  &#34;size&#34;: &#34;xxs&#34;,</p>
-<p>                  &#34;margin&#34;: &#34;md&#34;,</p>
-<p>                  &#34;color&#34;: &#34;#ff5551&#34;,</p>
-<p>                  &#34;flex&#34;: 0</p>
-<p>                }</p>
-<p>              ]</p>
-<p>            },</p>
-<p>            &#34;footer&#34;: {</p>
-<p>              &#34;type&#34;: &#34;box&#34;,</p>
-<p>              &#34;layout&#34;: &#34;vertical&#34;,</p>
-<p>              &#34;spacing&#34;: &#34;sm&#34;,</p>
-<p>              &#34;contents&#34;: [</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;button&#34;,</p>
-<p>                  &#34;flex&#34;: 2,</p>
-<p>                  &#34;style&#34;: &#34;primary&#34;,</p>
-<p>                  &#34;color&#34;: &#34;#aaaaaa&#34;,</p>
-<p>                  &#34;action&#34;: {</p>
-<p>                    &#34;type&#34;: &#34;uri&#34;,</p>
-<p>                    &#34;label&#34;: &#34;Add to Cart&#34;,</p>
-<p>                    &#34;uri&#34;: &#34;https://linecorp.com&#34;</p>
-<p>                  }</p>
-<p>                },</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;button&#34;,</p>
-<p>                  &#34;action&#34;: {</p>
-<p>                    &#34;type&#34;: &#34;uri&#34;,</p>
-<p>                    &#34;label&#34;: &#34;Add to wish list&#34;,</p>
-<p>                    &#34;uri&#34;: &#34;https://linecorp.com&#34;</p>
-<p>                  }</p>
-<p>                }</p>
-<p>              ]</p>
-<p>            }</p>
-<p>          },</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;bubble&#34;,</p>
-<p>            &#34;body&#34;: {</p>
-<p>              &#34;type&#34;: &#34;box&#34;,</p>
-<p>              &#34;layout&#34;: &#34;vertical&#34;,</p>
-<p>              &#34;spacing&#34;: &#34;sm&#34;,</p>
-<p>              &#34;contents&#34;: [</p>
-<p>                {</p>
-<p>                  &#34;type&#34;: &#34;button&#34;,</p>
-<p>                  &#34;flex&#34;: 1,</p>
-<p>                  &#34;gravity&#34;: &#34;center&#34;,</p>
-<p>                  &#34;action&#34;: {</p>
-<p>                    &#34;type&#34;: &#34;uri&#34;,</p>
-<p>                    &#34;label&#34;: &#34;See more&#34;,</p>
-<p>                    &#34;uri&#34;: &#34;https://linecorp.com&#34;</p>
-<p>                  }</p>
-<p>                }</p>
-<p>              ]</p>
-<p>            }</p>
-<p>          }</p>
-<p>        ]</p>
-<p>      }</p>
-<p>    }</p>
-<p>  ]</p>
-<p>}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/c4b8a238071da9ad.png"></p>
+<pre><code>{
+  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
+  &#34;messages&#34;: [
+    {
+      &#34;type&#34;: &#34;flex&#34;,
+      &#34;altText&#34;: &#34;item list&#34;,
+      &#34;contents&#34;: {
+        &#34;type&#34;: &#34;carousel&#34;,
+        &#34;contents&#34;: [
+          {
+            &#34;type&#34;: &#34;bubble&#34;,
+            &#34;hero&#34;: {
+              &#34;type&#34;: &#34;image&#34;,
+              &#34;size&#34;: &#34;full&#34;,
+              &#34;aspectRatio&#34;: &#34;20:13&#34;,
+              &#34;aspectMode&#34;: &#34;cover&#34;,
+              &#34;url&#34;: &#34;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png&#34;
+            },
+            &#34;body&#34;: {
+              &#34;type&#34;: &#34;box&#34;,
+              &#34;layout&#34;: &#34;vertical&#34;,
+              &#34;spacing&#34;: &#34;sm&#34;,
+              &#34;contents&#34;: [
+                {
+                  &#34;type&#34;: &#34;text&#34;,
+                  &#34;text&#34;: &#34;Arm Chair, White&#34;,
+                  &#34;wrap&#34;: true,
+                  &#34;weight&#34;: &#34;bold&#34;,
+                  &#34;size&#34;: &#34;xl&#34;
+                },
+                {
+                  &#34;type&#34;: &#34;box&#34;,
+                  &#34;layout&#34;: &#34;baseline&#34;,
+                  &#34;contents&#34;: [
+                    {
+                      &#34;type&#34;: &#34;text&#34;,
+                      &#34;text&#34;: &#34;$49&#34;,
+                      &#34;wrap&#34;: true,
+                      &#34;weight&#34;: &#34;bold&#34;,
+                      &#34;size&#34;: &#34;xl&#34;,
+                      &#34;flex&#34;: 0
+                    },
+                    {
+                      &#34;type&#34;: &#34;text&#34;,
+                      &#34;text&#34;: &#34;.99&#34;,
+                      &#34;wrap&#34;: true,
+                      &#34;weight&#34;: &#34;bold&#34;,
+                      &#34;size&#34;: &#34;sm&#34;,
+                      &#34;flex&#34;: 0
+                    }
+                  ]
+                }
+              ]
+            },
+            &#34;footer&#34;: {
+              &#34;type&#34;: &#34;box&#34;,
+              &#34;layout&#34;: &#34;vertical&#34;,
+              &#34;spacing&#34;: &#34;sm&#34;,
+              &#34;contents&#34;: [
+                {
+                  &#34;type&#34;: &#34;button&#34;,
+                  &#34;style&#34;: &#34;primary&#34;,
+                  &#34;action&#34;: {
+                    &#34;type&#34;: &#34;uri&#34;,
+                    &#34;label&#34;: &#34;Add to Cart&#34;,
+                    &#34;uri&#34;: &#34;https://linecorp.com&#34;
+                  }
+                },
+                {
+                  &#34;type&#34;: &#34;button&#34;,
+                  &#34;action&#34;: {
+                    &#34;type&#34;: &#34;uri&#34;,
+                    &#34;label&#34;: &#34;Add to wishlist&#34;,
+                    &#34;uri&#34;: &#34;https://linecorp.com&#34;
+                  }
+                }
+              ]
+            }
+          },
+          {
+            &#34;type&#34;: &#34;bubble&#34;,
+            &#34;hero&#34;: {
+              &#34;type&#34;: &#34;image&#34;,
+              &#34;size&#34;: &#34;full&#34;,
+              &#34;aspectRatio&#34;: &#34;20:13&#34;,
+              &#34;aspectMode&#34;: &#34;cover&#34;,
+              &#34;url&#34;: &#34;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png&#34;
+            },
+            &#34;body&#34;: {
+              &#34;type&#34;: &#34;box&#34;,
+              &#34;layout&#34;: &#34;vertical&#34;,
+              &#34;spacing&#34;: &#34;sm&#34;,
+              &#34;contents&#34;: [
+                {
+                  &#34;type&#34;: &#34;text&#34;,
+                  &#34;text&#34;: &#34;Metal Desk Lamp&#34;,
+                  &#34;wrap&#34;: true,
+                  &#34;weight&#34;: &#34;bold&#34;,
+                  &#34;size&#34;: &#34;xl&#34;
+                },
+                {
+                  &#34;type&#34;: &#34;box&#34;,
+                  &#34;layout&#34;: &#34;baseline&#34;,
+                  &#34;flex&#34;: 1,
+                  &#34;contents&#34;: [
+                    {
+                      &#34;type&#34;: &#34;text&#34;,
+                      &#34;text&#34;: &#34;$11&#34;,
+                      &#34;wrap&#34;: true,
+                      &#34;weight&#34;: &#34;bold&#34;,
+                      &#34;size&#34;: &#34;xl&#34;,
+                      &#34;flex&#34;: 0
+                    },
+                    {
+                      &#34;type&#34;: &#34;text&#34;,
+                      &#34;text&#34;: &#34;.99&#34;,
+                      &#34;wrap&#34;: true,
+                      &#34;weight&#34;: &#34;bold&#34;,
+                      &#34;size&#34;: &#34;sm&#34;,
+                      &#34;flex&#34;: 0
+                    }
+                  ]
+                },
+                {
+                  &#34;type&#34;: &#34;text&#34;,
+                  &#34;text&#34;: &#34;Temporarily out of stock&#34;,
+                  &#34;wrap&#34;: true,
+                  &#34;size&#34;: &#34;xxs&#34;,
+                  &#34;margin&#34;: &#34;md&#34;,
+                  &#34;color&#34;: &#34;#ff5551&#34;,
+                  &#34;flex&#34;: 0
+                }
+              ]
+            },
+            &#34;footer&#34;: {
+              &#34;type&#34;: &#34;box&#34;,
+              &#34;layout&#34;: &#34;vertical&#34;,
+              &#34;spacing&#34;: &#34;sm&#34;,
+              &#34;contents&#34;: [
+                {
+                  &#34;type&#34;: &#34;button&#34;,
+                  &#34;flex&#34;: 2,
+                  &#34;style&#34;: &#34;primary&#34;,
+                  &#34;color&#34;: &#34;#aaaaaa&#34;,
+                  &#34;action&#34;: {
+                    &#34;type&#34;: &#34;uri&#34;,
+                    &#34;label&#34;: &#34;Add to Cart&#34;,
+                    &#34;uri&#34;: &#34;https://linecorp.com&#34;
+                  }
+                },
+                {
+                  &#34;type&#34;: &#34;button&#34;,
+                  &#34;action&#34;: {
+                    &#34;type&#34;: &#34;uri&#34;,
+                    &#34;label&#34;: &#34;Add to wish list&#34;,
+                    &#34;uri&#34;: &#34;https://linecorp.com&#34;
+                  }
+                }
+              ]
+            }
+          },
+          {
+            &#34;type&#34;: &#34;bubble&#34;,
+            &#34;body&#34;: {
+              &#34;type&#34;: &#34;box&#34;,
+              &#34;layout&#34;: &#34;vertical&#34;,
+              &#34;spacing&#34;: &#34;sm&#34;,
+              &#34;contents&#34;: [
+                {
+                  &#34;type&#34;: &#34;button&#34;,
+                  &#34;flex&#34;: 1,
+                  &#34;gravity&#34;: &#34;center&#34;,
+                  &#34;action&#34;: {
+                    &#34;type&#34;: &#34;uri&#34;,
+                    &#34;label&#34;: &#34;See more&#34;,
+                    &#34;uri&#34;: &#34;https://linecorp.com&#34;
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/d352f91fb9d1ce7c.png"></p>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
 <p>flexの隣にケース２を追加し、「quick」と入力する。</p>
-<p>flexと同じように「文字列変数に追加」アクションを追加し、下記を設定します。</p>
-<p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
-<p>  &#34;messages&#34;: [</p>
-<p>    {</p>
-<p>      &#34;text&#34;: &#34;ステッカー欲しいですか❓YesかNoで答えてください, もしくは素敵な写真送って❗️&#34;,</p>
-<p>      &#34;quickReply&#34;: {</p>
-<p>        &#34;items&#34;: [</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;action&#34;,</p>
-<p>            &#34;action&#34;: {</p>
-<p>              &#34;type&#34;: &#34;postback&#34;,</p>
-<p>              &#34;label&#34;: &#34;Yes&#34;,</p>
-<p>              &#34;data&#34;: &#34;sticker&#34;,</p>
-<p>              &#34;displayText&#34;: &#34;ステッカーください❗️&#34;</p>
-<p>            }</p>
-<p>          },</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;action&#34;,</p>
-<p>            &#34;action&#34;: {</p>
-<p>              &#34;type&#34;: &#34;message&#34;,</p>
-<p>              &#34;label&#34;: &#34;No&#34;,</p>
-<p>              &#34;text&#34;: &#34;不要。&#34;</p>
-<p>            }</p>
-<p>          },</p>
-<p>          {</p>
-<p>            &#34;type&#34;: &#34;action&#34;,</p>
-<p>            &#34;action&#34;: {</p>
-<p>              &#34;type&#34;: &#34;camera&#34;,</p>
-<p>              &#34;label&#34;: &#34;camera&#34;</p>
-<p>            }</p>
-<p>          }</p>
-<p>        ]</p>
-<p>      },</p>
-<p>      &#34;type&#34;: &#34;text&#34;</p>
-<p>    }</p>
-<p>  ]</p>
-<p>}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/905cc62621d4b064.png"></p>
-<p>上部にあるケース２「postback」に移動し、「スイッチ」と「文字列変数に追加」のアクションを追加する。</p>
-<p>「スイッチ」のオンに動的コンテンツから「data」、ケースに「sticker」を入力し、「文字列変数に追加」に下記を設定します。</p>
+<p>flexと同じように「変数の設定」アクションを追加し、下記を設定します。</p>
+<pre><code>{
+  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
+  &#34;messages&#34;: [
+    {
+      &#34;text&#34;: &#34;ステッカー欲しいですか❓YesかNoで答えてください, もしくは素敵な写真送って❗️&#34;,
+      &#34;quickReply&#34;: {
+        &#34;items&#34;: [
+          {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+              &#34;type&#34;: &#34;postback&#34;,
+              &#34;label&#34;: &#34;Yes&#34;,
+              &#34;data&#34;: &#34;sticker&#34;,
+              &#34;displayText&#34;: &#34;ステッカーください❗️&#34;
+            }
+          },
+          {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+              &#34;type&#34;: &#34;message&#34;,
+              &#34;label&#34;: &#34;No&#34;,
+              &#34;text&#34;: &#34;不要。&#34;
+            }
+          },
+          {
+            &#34;type&#34;: &#34;action&#34;,
+            &#34;action&#34;: {
+              &#34;type&#34;: &#34;camera&#34;,
+              &#34;label&#34;: &#34;camera&#34;
+            }
+          }
+        ]
+      },
+      &#34;type&#34;: &#34;text&#34;
+    }
+  ]
+}
+</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/e0971e3c2efe0de0.png"></p>
+<p>上部にあるケース２「postback」に移動し、「スイッチ」と「変数の設定」のアクションを追加する。</p>
+<p>「スイッチ」のオンに「@{items(&#39;Apply_to_each&#39;)?[&#39;postback&#39;]?[&#39;data&#39;]}」、ケースに「sticker」を入力し、「変数の設定」に下記を設定します。</p>
 <p>保存します。</p>
 <p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
+<p>  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,</p>
 <p>  &#34;messages&#34;: [</p>
 <p>    {</p>
 <p>      &#34;type&#34;: &#34;sticker&#34;,</p>
@@ -538,7 +571,7 @@
 <p>    }</p>
 <p>  ]</p>
 <p>}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/dfe7cbcdd6726c6f.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/c5dccca5322e5393.png"></p>
 <p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
 <p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
 <aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
@@ -546,21 +579,21 @@
 <p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
 </aside>
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
-<p>ケース「message」側に戻り、ケース「text」の隣にケース２「location」を追加し、文字列変数に追加アクションに下記を設定します。</p>
+<p>ケース「message」側に戻り、ケース「text」の隣にケース２「location」を追加し、変数の設定アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
-<p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
-<p>  &#34;messages&#34;: [</p>
-<p>    {</p>
-<p>      &#34;type&#34;: &#34;location&#34;,</p>
-<p>      &#34;title&#34;: &#34;現在地&#34;,</p>
-<p>      &#34;address&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;address&#39;]},</p>
-<p>      &#34;latitude&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;latitude&#39;]},</p>
-<p>      &#34;longitude&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;longitude&#39;]}</p>
-<p>    }</p>
-<p>  ]</p>
-<p>}</p>
-<p class="image-container"><img style="width: 601.70px" src="img/fec77a8800826f85.png"></p>
+<pre><code>{
+  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
+  &#34;messages&#34;: [
+    {
+      &#34;type&#34;: &#34;location&#34;,
+      &#34;title&#34;: &#34;現在地&#34;,
+      &#34;address&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;address&#39;]}&#34;,
+      &#34;latitude&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;latitude&#39;]}&#34;,
+      &#34;longitude&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;longitude&#39;]}&#34;
+    }
+  ]
+}</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/d31919253a5865a3.png"></p>
 <p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
 <p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
 <h2 is-upgraded>画像メッセージを扱う</h2>
@@ -569,8 +602,11 @@
 <p>下記のように設定し保存します。</p>
 <p>・方法 → GET</p>
 <p>・URI → https://api-data.line.me/v2/bot/message/@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;id&#39;]}/content</p>
-<p>・ヘッダー → Authorization ： 動的コンテンツの「access token」</p>
-<p class="image-container"><img style="width: 601.70px" src="img/93cb0eabeeec3187.png"></p>
+<p>・ヘッダー → Authorization ： Bearer 動的コンテンツの「access token」</p>
+<aside class="special"><p><strong>Note:</strong> LINE公式ドキュメントを参考</p>
+<p>https://developers.line.biz/ja/reference/messaging-api/#get-content</p>
+</aside>
+<p class="image-container"><img style="width: 601.70px" src="img/2ef7e0133165d17f.png"></p>
 <p>Azureアカウントに接続し、ストレージアカウントを作成します。</p>
 <p><a href="https://portal.azure.com/#create/Microsoft.StorageAccount-ARM" target="_blank">https://portal.azure.com/#create/Microsoft.StorageAccount-ARM</a></p>
 <p class="image-container"><img style="width: 601.70px" src="img/8ad1ff242422c03a.png"></p>
@@ -588,22 +624,22 @@
 <p class="image-container"><img style="width: 601.70px" src="img/736ab61f5a18040e.png"><img style="width: 601.70px" src="img/705fc23fa3b3573a.png"></p>
 <p>ストレージアカウント名は「カスタム値の入力」を選択してから、Azureで作成したアカウント名を入力します。</p>
 <p>フォルダパスは右にあるフォルダマークを押して選択します。</p>
-<p>・BLOB名：動的コンテンツの「id」</p>
-<p>・BLOBコンテンツ：動的コンテンツの「本文」</p>
+<p>・BLOB名：@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;id&#39;]}</p>
+<p>・BLOBコンテンツ：@{body(&#39;HTTP_2&#39;)}</p>
 <p class="image-container"><img style="width: 601.70px" src="img/378bdc505c6c4a36.png"></p>
-<p>「文字列変数に追加」アクションを追加し、下記を入力します。</p>
+<p>「変数の設定」アクションを追加し、下記を入力します。</p>
 <p>{ストレージアカウント名}に、Azureで作成したアカウント名に置き換えます。</p>
 <p>保存します。</p>
-<p>{</p>
-<p>  &#34;replyToken&#34;: @{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]},</p>
-<p>  &#34;messages&#34;: [</p>
-<p>    {</p>
-<p>      &#34;type&#34;: &#34;image&#34;,</p>
-<p>      &#34;originalContentUrl&#34;: &#34;https://{ストレージアカウント名}.blob.core.windows.net@{outputs(&#39;BLOB_を作成する_(V2)&#39;)?[&#39;body/Path&#39;]}&#34;,</p>
-<p>      &#34;previewImageUrl&#34;: &#34;https://{ストレージアカウント名}.blob.core.windows.net@{outputs(&#39;BLOB_を作成する_(V2)&#39;)?[&#39;body/Path&#39;]}&#34;</p>
-<p>    }</p>
-<p>  ]</p>
-<p>}</p>
+<pre><code>{
+  &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
+  &#34;messages&#34;: [
+    {
+      &#34;type&#34;: &#34;image&#34;,
+      &#34;originalContentUrl&#34;: &#34;https://{ストレージアカウント名}.blob.core.windows.net@{outputs(&#39;BLOB_を作成する_(V2)&#39;)?[&#39;body/Path&#39;]}&#34;,
+      &#34;previewImageUrl&#34;: &#34;https://{ストレージアカウント名}.blob.core.windows.net@{outputs(&#39;BLOB_を作成する_(V2)&#39;)?[&#39;body/Path&#39;]}&#34;
+    }
+  ]
+}</code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/480aa704a1cf578c.png"></p>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
 <p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
