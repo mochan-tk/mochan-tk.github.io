@@ -197,36 +197,29 @@
 <p>名前：access token</p>
 <p>値：{LINE側でメモしたアクセストークン}</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4823bef5b4d2ea4d.png"></p>
-<p>「Apply to each」と検索し、「組み込み」タブから「Apply to each」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/4d0d2db70eb61937.png"></p>
-<p>以前の手順から出力を選択に「@{triggerBody()?[&#39;events&#39;]}」を入力します。アクションの追加をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/8aee6e9278850ac6.png"></p>
-<p>「スイッチ」と検索し、スイッチをクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/7ec7d2a3511604b7.png"></p>
-<p>スイッチのオンに、「@{items(&#39;Apply_to_each&#39;)?[&#39;type&#39;]}」を入力します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/ad1c976c0284d5c1.png"></p>
-<p>ケースに「message」を入力し、「＋」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/fa321f64d1bc666e.png"></p>
-<p>次に「postback」を入力し、「message」側の「アクションの追加」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/dd975f63b26c59b1.png"></p>
-<p>同じように、スイッチを追加し、オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;type&#39;]}」、ケースには「text」を入力します。つづいてアクションの追加をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/1f467f1fc87c8276.png"></p>
-<p>ケース「text」に「スイッチ」アクションを追加し、オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;text&#39;]}」、ケースに「flex」を入力し、既定の方に「アクションを追加」をクリックし、「変数の設定」で検索し、変数の設定を選択します。</p>
-<p>下記のように設定しましょう。</p>
+<p>「変数の設定」と検索し、「変数の設定」をクリックします。</p>
+<p class="image-container"><img style="width: 489.00px" src="img/febe0813021a6145.png"></p>
+<p>下記のように設定し、新しいステップをクリックします。</p>
+<p>名前：msg</p>
+<p>値：</p>
 <pre><code>{
   &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
   &#34;messages&#34;: [
     {
-      &#34;text&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;text&#39;]}&#34;,
+      &#34;text&#34;: &#34;&#34;,
       &#34;type&#34;: &#34;text&#34;
     }
   ]
 }</code></pre>
+<p>赤枠にカーソルを合わせ、動的コンテンツから「text」を選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/336b9c3b2e70d909.png"></p>
+<p>すると、自動的に「Apply to each」が外枠に組み込まれます。</p>
+<p>今後、おうむ返し以外のさまざまなメッセージ形式を扱う時に条件分岐などに使用します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/becd53bab95a2d6d.png"></p>
 <aside class="special"><p><strong>Note:</strong></p>
 <p>下記のjsonスキーマの公式ドキュメント参考</p>
 <p>https://developers.line.biz/ja/reference/messaging-api/#send-reply-message</p>
 </aside>
-<p class="image-container"><img style="width: 601.70px" src="img/2c4a5f64827192e3.png"></p>
 <p>一番下にある「新しいステップ」をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/7d60070ed855791b.png"></p>
 <p>「条件」と検索し、条件をクリックします。</p>
@@ -384,8 +377,19 @@
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
 </ul>
 <h2 is-upgraded>Flex Messageを扱う</h2>
-<p>おうむ返しのフローに戻り、Apply_to_each → message → text → ケース「flex」に「変数の設定」アクションを追加し、下記を設定します。</p>
-<p>保存します。</p>
+<p>おうむ返しのフローに戻り、「Apply_to_each」の中にあるアクション追加をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/30d614d08b0a86cb.png"></p>
+<p>「スイッチ」と検索し、スイッチをクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b6316bd11dec4a30.png"></p>
+<p>スイッチのオンに、「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;][&#39;text&#39;]}」を入力します。</p>
+<p>ケースに「flex」を入力し、規定の中に「変数の設定」をドラックアンドドロップします。</p>
+<p>この例では、「flex」と入力したら、「flex」のケース側へ、それ以外は「規定」側へと処理します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/851e88402f8fe4b2.png"></p>
+<p>「flex」にアクションを追加し、「変数の設定」と検索し、「変数の設定」をクリックします。</p>
+<p class="image-container"><img style="width: 489.00px" src="img/febe0813021a6145.png"></p>
+<p>下記のように設定し、保存します。</p>
+<p>名前：msg</p>
+<p>値：</p>
 <pre><code>{
   &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
   &#34;messages&#34;: [
@@ -573,7 +577,7 @@
   ]
 }
 </code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/d352f91fb9d1ce7c.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/3aae82117b6d6cf2.png"></p>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
@@ -617,9 +621,13 @@
   ]
 }
 </code></pre>
-<p class="image-container"><img style="width: 601.70px" src="img/e0971e3c2efe0de0.png"></p>
-<p>上部にあるケース２「postback」に移動し、「スイッチ」と「変数の設定」のアクションを追加する。</p>
-<p>「スイッチ」のオンに「@{items(&#39;Apply_to_each&#39;)?[&#39;postback&#39;]?[&#39;data&#39;]}」、ケースに「sticker」を入力し、「変数の設定」に下記を設定します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/2405ef6194e5fed5.png"></p>
+<p>「Apply_to_each」の下にあるアクションの追加をクリックし、スイッチアクションを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/cbcc354bf20b2f5e.png"></p>
+<p>オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;type&#39;]}」、ケースに「message」、ケース２に「postback」を入力します。</p>
+<p>message側にflexやquickの設定をした「スイッチ」をドラックアンドドロップで移動します。</p>
+<p>ケース２「postback」に、「スイッチ」アクションを追加する。</p>
+<p>「スイッチ」のオンに「@{items(&#39;Apply_to_each&#39;)?[&#39;postback&#39;]?[&#39;data&#39;]}」、ケースに「sticker」を入力し、「変数の設定」アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
 <pre><code>{
   &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
@@ -639,7 +647,11 @@
 <p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
 </aside>
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
-<p>ケース「message」側に戻り、ケース「text」の隣にケース２「location」を追加し、変数の設定アクションを追加し、下記を設定します。</p>
+<p>ケース「message」側で「スイッチ」アクションを追加します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/857626ada2198c2c.png"></p>
+<p>オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;type&#39;]}」ケースに「text」、隣にケース２「location」を入力します。</p>
+<p>text側にflexやquickの設定をした「スイッチ」をドラッグアンドドロップで移動します。</p>
+<p>location側に変数の設定アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
 <pre><code>{
   &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
