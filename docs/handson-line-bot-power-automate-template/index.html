@@ -244,7 +244,7 @@
 <p class="image-container"><img style="width: 601.70px" src="img/24ccf54f4cc7bd9c.png"></p>
 <p>LINE側のMessaging APIのWebhook URLに保存し、Webhookの利用をオンにします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/23bc8dbec712031e.png"></p>
-<p>ここでおうむ返しの動作確認が可能</p>
+<p>ここでおうむ返しの動作確認ができます。</p>
 
 
       </google-codelab-step>
@@ -632,10 +632,11 @@
 }
 </code></pre>
 <p class="image-container"><img style="width: 601.70px" src="img/2405ef6194e5fed5.png"></p>
-<p>「Apply_to_each」の下にあるアクションの追加をクリックし、スイッチアクションを追加します。</p>
+<p>「Apply_to_each」の下部にあるアクションの追加をクリックし、スイッチアクションを追加します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/cbcc354bf20b2f5e.png"></p>
 <p>オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;type&#39;]}」、ケースに「message」、ケース２に「postback」を入力します。</p>
 <p>message側にflexやquickの設定をした「スイッチ」をドラックアンドドロップで移動します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7f6b8c906262b8a7.png"></p>
 <p>ケース２「postback」に、「スイッチ」アクションを追加する。</p>
 <p>「スイッチ」のオンに「@{items(&#39;Apply_to_each&#39;)?[&#39;postback&#39;]?[&#39;data&#39;]}」、ケースに「sticker」を入力し、「変数の設定」アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
@@ -661,6 +662,7 @@
 <p class="image-container"><img style="width: 601.70px" src="img/857626ada2198c2c.png"></p>
 <p>オンに「@{items(&#39;Apply_to_each&#39;)?[&#39;message&#39;]?[&#39;type&#39;]}」ケースに「text」、隣にケース２「location」を入力します。</p>
 <p>text側にflexやquickの設定をした「スイッチ」をドラッグアンドドロップで移動します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/233783bdc0f6b174.png"></p>
 <p>location側に変数の設定アクションを追加し、下記を設定します。</p>
 <p>保存します。</p>
 <pre><code>{
@@ -698,8 +700,7 @@
 <p>Azureアカウントに接続し、ストレージアカウントを作成します。</p>
 <p><a href="https://portal.azure.com/#create/Microsoft.StorageAccount-ARM" target="_blank">https://portal.azure.com/#create/Microsoft.StorageAccount-ARM</a></p>
 <p class="image-container"><img style="width: 601.70px" src="img/8ad1ff242422c03a.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/1b07234cc68390d2.png"></p>
-<p>コンテナを作成します。</p>
+<p><img style="width: 601.70px" src="img/1b07234cc68390d2.png">「images」でコンテナを作成します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/d2319d9d7ae4ec2c.png"></p>
 <p>送った画像を保存するために下記のロールを追加します。</p>
 <p>・ストレージ BLOB データ共同作成者</p>
