@@ -221,7 +221,7 @@
 <p>https://developers.line.biz/ja/reference/messaging-api/#send-reply-message</p>
 </aside>
 <p>一番下にある「新しいステップ」をクリックします。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/7d60070ed855791b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/ad756c1bd7f03191.png"></p>
 <p>「条件」と検索し、条件をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/618f192d4a2fe070.png"></p>
 <p>以下を設定します。</p>
@@ -236,7 +236,7 @@
 <p>・方法 → POST</p>
 <p>・URI → https://api.line.me/v2/bot/message/reply</p>
 <p>・ヘッダー → Content-Type ： application/json</p>
-<p>                 Authorization ： Bearer 動的コンテンツから「access token」</p>
+<p>                 Authorization ： Bearer {動的コンテンツから「access token」}</p>
 <p>・本文 → 動的コンテンツから「msg」</p>
 <p class="image-container"><img style="width: 601.70px" src="img/a8316d850bceb1eb.png"></p>
 <p>上部にある保存ボタンをクリックします。</p>
@@ -251,9 +251,12 @@
     
       <google-codelab-step label="リッチメニューを使う" duration="10">
         <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
-<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
-<p class="image-container"><img style="width: 601.70px" src="img/d2dd02d6f54c87bb.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
+<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「ホーム」→「リッチメニュー」→「作成」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/280641be46ea1364.png"></p>
+<p>「基本設定」の項目を入力し、その後テンプレートの選択を行います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9f23698d2d13e200.png"></p>
+<p>ここでは４つのフレームに別れたテンプレートを選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7183d8a321ec26af.png"></p>
 <p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
@@ -272,7 +275,9 @@
 </td><td colspan="1" rowspan="1"><p>Quick Reply</p>
 </td></tr>
 </table>
-<p class="image-container"><img style="width: 601.70px" src="img/a8cfc65442c1888b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/9f2c970e2fabcaa4.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/c535c967fd01cc2f.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/9fd0f3233b892d4f.png"></p>
 <p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
@@ -301,9 +306,9 @@
 </td><td colspan="1" rowspan="1"><p>なし</p>
 </td></tr>
 </table>
-<p class="image-container"><img style="width: 601.70px" src="img/be1bbc3ce048717c.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/575bb3c9f37956c3.png"></p>
 <p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/48b9095ee7cd3893.png"></p>
+<p class="image-container"><img style="width: 455.77px" src="img/422d6d7d52fa4927.png"></p>
 <aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
 </aside>
 
@@ -341,8 +346,13 @@
 <p class="image-container"><img style="width: 601.70px" src="img/55f1c4065a4d9f99.png"></p>
 <p>「編集」画面へ移動し、アクセストークンを変更します。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/50663168fe047695.png"></p>
-<p>「保存」をし、「実行」します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/9c80a571d358a27f.png"></p>
+<p>画面上部で「保存」をし、前の画面に戻り「実行」します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/536f2c48327e1074.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/2df849200f534a0e.png"></p>
+<p>処理の確認をする際は実行履歴から確認できます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6d0626e75e16f631.png"></p>
+<p>リッチメニューのエラーは下記を確認してください。</p>
+<p><a href="https://developers.line.biz/ja/reference/messaging-api/#create-rich-menu-alias-error-response" target="_blank">https://developers.line.biz/ja/reference/messaging-api/#create-rich-menu-alias-error-response</a></p>
 <p>トーク画面から一旦離れ、確認します。</p>
 <p class="image-container"><img style="width: 290.94px" src="img/961950f8deaa4f81.png"><img style="width: 290.50px" src="img/28e11dc96011afe3.png"></p>
 <h2 is-upgraded>[補足]エクスポートの方法</h2>
@@ -377,7 +387,7 @@
 <li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
 </ul>
 <h2 is-upgraded>Flex Messageを扱う</h2>
-<p>おうむ返しのフローに戻り、「Apply_to_each」の中にあるアクション追加をクリックします。</p>
+<p>マイフローから、おうむ返しのフローに戻り、「Apply_to_each」の中にあるアクション追加をクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/30d614d08b0a86cb.png"></p>
 <p>「スイッチ」と検索し、スイッチをクリックします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/b6316bd11dec4a30.png"></p>
