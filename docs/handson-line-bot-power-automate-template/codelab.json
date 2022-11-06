@@ -1,7 +1,7 @@
 {
   "environment": "web",
   "format": "html",
-  "prefix": "https://storage.googleapis.com",
+  "prefix": "https://mochan-tk.github.io",
   "updated": "2022-10-31T00:24:47Z",
   "id": "handson-line-bot-power-automate-template",
   "duration": 50,
