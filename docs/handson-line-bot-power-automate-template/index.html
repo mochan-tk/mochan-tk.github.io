@@ -197,25 +197,25 @@
 <p>名前：access token</p>
 <p>値：{LINE側でメモしたアクセストークン}</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4823bef5b4d2ea4d.png"></p>
+<p>「コントロール」と検索し、「Apply to each」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/339d7d937a9e2daa.png"></p>
+<p>以前の手順から出力を選択に「@{triggerBody()?[&#39;events&#39;]}」を入力し、アクションを追加します。</p>
 <p>「変数の設定」と検索し、「変数の設定」をクリックします。</p>
-<p class="image-container"><img style="width: 489.00px" src="img/febe0813021a6145.png"></p>
-<p>下記のように設定し、新しいステップをクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d7a90d96f273313d.png"></p>
+<p>下記のように設定します。</p>
 <p>名前：msg</p>
 <p>値：</p>
 <pre><code>{
   &#34;replyToken&#34;: &#34;@{items(&#39;Apply_to_each&#39;)?[&#39;replyToken&#39;]}&#34;,
   &#34;messages&#34;: [
     {
-      &#34;text&#34;: &#34;&#34;,
+      &#34;text&#34;: &#34;@{replace(replace(triggerBody()?[&#39;events&#39;][0][&#39;message&#39;][&#39;text&#39;],decodeUriComponent(&#39;%0D&#39;),&#39;\n&#39;),decodeUriComponent(&#39;%0A&#39;),&#39;\n&#39;)}&#34;,
       &#34;type&#34;: &#34;text&#34;
     }
   ]
-}</code></pre>
-<p>赤枠にカーソルを合わせ、動的コンテンツから「text」を選択します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/336b9c3b2e70d909.png"></p>
-<p>すると、自動的に「Apply to each」が外枠に組み込まれます。</p>
-<p>今後、おうむ返し以外のさまざまなメッセージ形式を扱う時に条件分岐などに使用します。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/becd53bab95a2d6d.png"></p>
+}
+</code></pre>
+<p class="image-container"><img style="width: 601.70px" src="img/e9b99832807e9584.png"></p>
 <aside class="special"><p><strong>Note:</strong></p>
 <p>下記のjsonスキーマの公式ドキュメント参考</p>
 <p>https://developers.line.biz/ja/reference/messaging-api/#send-reply-message</p>
