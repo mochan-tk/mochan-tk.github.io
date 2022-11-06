@@ -3,7 +3,8 @@
 https://github.com/googlecodelabs/tools/tree/main/claat
 
 ### run
-claat export -ga "" <code>
+#claat export -ga "" <code>
+claat export -prefix https://mochan-tk.github.io -ga "" <code>
 
 
 ## GitBook
