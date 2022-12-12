@@ -1,0 +1,313 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mochan-tk.github.io/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="handson-line-bot-local-template"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="5">
+        <h2 is-upgraded>概要</h2>
+<p>LINE Botを作りつつ、Messaging API(および周辺の技術)の基本的な使い方を学んでいただければと思います！</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>LINEがインストール済みのスマホ</li>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使っていただければと！）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://github.com/join?source=header" target="_blank">GitHubアカウント</a>作成</li>
+<li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
+</ul>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Node.js</li>
+<li>Gitpod(月50時間無料)</li>
+<li>GitHub</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="10">
+        <h2 is-upgraded>チャネルの作成スタート</h2>
+<p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/389235956c37eff6.png"></p>
+<p>「LINEアカウントでログイン」を押してください。</p>
+<p class="image-container"><img style="width: 421.15px" src="img/d5d421a6b299e62b.png"></p>
+<p>LINEのログインを求められるのでログインしてください。</p>
+<p class="image-container"><img style="width: 461.50px" src="img/53764d1928b87a53.png"></p>
+<h2 is-upgraded>チャネルの種類</h2>
+<p>Messaging APIになっているか確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/df3af770985c3f97.png"></p>
+<h2 is-upgraded>プロバイダ</h2>
+<p>既にプロバイダーを作っている場合 → 利用するプロバイダーを選択しましょう。</p>
+<p><img style="width: 601.70px" src="img/d5302f954b527b82.png"><br>初めて → 新規プロバイダー作成を選択しプロバイダー名を入力しましょう。</p>
+<p>（LINEという文字は含められません。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ed9832698ea66cc2.png"></p>
+<h2 is-upgraded>会社・事業者の所在国・地域</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/57aa97698a2fec50.png"></p>
+<h2 is-upgraded>チャネルアイコン</h2>
+<p>チャネルアイコンを登録しましょう。（今回は必須ではありません）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b25e887321903ca7.png"></p>
+<h2 is-upgraded>チャネル名、チャネル説明</h2>
+<p>下記を入力しましょう。</p>
+<p>チャネル名：「HandsonBot」</p>
+<p>チャネル説明：「HandsonBotです。」</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f4ec1d14f0d71421.png"></p>
+<h2 is-upgraded>大業種、小業種</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/ed9b424f40f943e3.png"></p>
+<h2 is-upgraded>メールアドレス、プライバシーポリシーURL、サービス利用規約URL</h2>
+<p>メールアドレスを確認しましょう。</p>
+<p>プライバシーポリシーURLとサービス利用規約URLは入力しなくても大丈夫です。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4912ddf28b5920c5.png"></p>
+<h2 is-upgraded>作成ボタン</h2>
+<p>下記２点の利用規約にチェックをして「作成」ボタンを押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1b112e894430dc9f.png"></p>
+<p>「OK」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6151acd3510ea8dd.png"></p>
+<p>「同意する」を押しましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e87adc9a93775ef.png"></p>
+<h2 is-upgraded>LINE公式アカウント(LINE Bot)と友だちになる</h2>
+<p>QRコードで友だち追加</p>
+<p>「Messaging API設定」タブに移動し、QRコードを読み取って、友だち追加をしましょう。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1868e4298aafce8.png"></p>
+<h2 is-upgraded>チャネルシークレット、アクセストークンの取得</h2>
+<p>「チャネル基本設定」タブからチャネルシークレットを、「Messaging API設定」タブからアクセスキーをそれぞれ取得します。</p>
+<ul>
+<li>チャネルシークレット</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/f3eb6548a6c5e0c6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/aeece43ae5e06e73.png"></p>
+<ul>
+<li>アクセストークン</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/3ea1abd939970269.png"></p>
+<aside class="special"><p><strong>Note:</strong></p>
+<p>・チャネルシークレット：Botサーバで受信したリクエストが不正なものでないかのチェックで使用される(LINE以外のサーバーからリクエストが送られていないかの確認)</p>
+<p>・ アクセストークン：LINEのAPI(機能)を実行する際に、認可が通り利用権限があることを証明するトークン</p>
+</aside>
+<h2 is-upgraded>応答モードをOFFにする</h2>
+<p>LINE Official Account Manager 画面にアクセスして、Botの「応答モード」設定をOFFにします。（デフォルトの設定はONになっており、メッセージを送るたびにデフォルトのメッセージが返ってきてしまうため）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/eaa773a4f9e436e6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/24dfe305142dad62.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Webhookの設定作業" duration="15">
+        <h2 is-upgraded>GitHubリポジトリのFork</h2>
+<p><a href="https://github.com/mochan-tk/Handson-LINE-Bot-template-tmp" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-template-tmp</a> にアクセス。</p>
+<p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a7ca18131cbde8b1.png"></p>
+<h2 is-upgraded>Gitpod起動</h2>
+<p>下記のいずれかの方法でGitpodを起動してください。</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki" target="_blank">Chromeの拡張機能</a>を入れてGitHubリポジトリ上のGitpodボタンを押してGitpodを起動する</li>
+</ul>
+<p class="image-container"><img style="width: 586.50px" src="img/aa1966c691c5e015.png"></p>
+<ul>
+<li>GitpodのURLを先頭につけてGitpodを起動する</li>
+</ul>
+<p><a href="https://gitpod.io#https://github.com/" target="_blank">https://<strong>gitpod</strong>.io#https://github.com/</a><strong>&lt;ご自分のアカウント名&gt;</strong>/Handson-LINE-Bot-template-tmp</p>
+<p class="image-container"><img style="width: 601.70px" src="img/678d95baff67048b.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/11a0b7c34ec2dcc8.png"></p>
+<aside class="warning"><p><strong>注意:</strong> 起動には10分ほどかかります。</p>
+</aside>
+<h2 is-upgraded>envファイルの作成と設定</h2>
+<p>LINEで取得したチャネルシークレット、アクセストークンを設定します。</p>
+<ul>
+<li>CHANNEL_ACCESS_TOKEN</li>
+<li>CHANNEL_SECRET</li>
+</ul>
+<p>Gitpodを起動しているURLをコピーして、「https://」と「githubアカウント名」の間に「3000-」を、最後に「/」を追加します。</p>
+<ul>
+<li>BASE_URL</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/c8cc8981868e6c15.png"></p>
+<h2 is-upgraded>Botサーバーの用意</h2>
+<p>Gitpodのターミナル上で下記のコマンドを実行していってください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/bd1dfb878dff9a2c.png"></p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>npm install
+npm run start</code></pre>
+<h2 is-upgraded>Webhookの設定</h2>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから.env ファイルのBASE_URLを設定します（最後に「webhook」を追加します）。これでLINEのBotを動かす準備は全て整いました！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/2852f9eafff52cb8.png"></p>
+<h2 is-upgraded>動作確認</h2>
+<p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います！</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4fc05c2c8f632668.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リッチメニューを使う" duration="10">
+        <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
+<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「表示設定」の項目を入力し、その後テンプレートの選択を行います。（ここでは４つのフレームに別れたテンプレートを選択します。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/d2dd02d6f54c87bb.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/523878844c89a87f.png"></p>
+<p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力するテキスト</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左上</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右上</p>
+</td><td colspan="1" rowspan="1"><p>位置情報</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左下</p>
+</td><td colspan="1" rowspan="1"><p>Flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右下</p>
+</td><td colspan="1" rowspan="1"><p>Quick Reply</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/a8cfc65442c1888b.png"></p>
+<p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>タイプ</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力欄</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>ラベル</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>A</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/camera/</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>B</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/location/</p>
+</td><td colspan="1" rowspan="1"><p>location</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>D</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>quick</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/be1bbc3ce048717c.png"></p>
+<p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/48b9095ee7cd3893.png"></p>
+<aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
+</aside>
+<h2 is-upgraded>（参考）Messaging APIでのリッチメニューを作成</h2>
+<p>リッチメニューはMessaging APIでも作成でき、さらに柔軟な対応が可能です。今回のハンズオンの後半（『リッチメニュー応用』）で扱っていきます。</p>
+<p>下記に参考情報も記載いたします。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/try-rich-menu/" target="_blank">リッチメニュープレイグラウンドでリッチメニューを試す</a></li>
+<li><a href="http://youtube.com/watch?v=_sbzsK-3gYg" target="_blank">（YouTube）LIFFもいいけどリッチメニューを触ってみよう！ / 内西 功一 / LINE Developers Community REV UP 2021</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="URLスキームを使う" duration="5">
+        <p>URLスキームを使うとカメラや位置情報などが起動できたりします、いくつか用意されていますので試していきましょう。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/</a></li>
+</ul>
+<h2 is-upgraded>カメラの起動</h2>
+<p>リッチメニュー左上の「camera」をタップしてください。カメラが起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/f13286f87be6ecd9.gif"></p>
+<h2 is-upgraded>位置情報の起動</h2>
+<p>リッチメニュー右上の「位置情報」をタップしてください。位置情報が起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/c77d3984c67a9dc4.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="様々なメッセージ形式を扱う" duration="10">
+        <p>LINEでは様々なメッセージ形式を扱うことができます。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
+</ul>
+<p>今回のコードも見ていただくと理解がグッと進みます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L60</a></li>
+</ul>
+<h2 is-upgraded>画像メッセージを扱う</h2>
+<p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L119" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L119</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
+<aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>位置情報メッセージを扱う</h2>
+<p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L144" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L144</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
+<h2 is-upgraded>音声メッセージを扱う</h2>
+<p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L131" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L131</a></li>
+</ul>
+<p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
+<aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>Flex Messageを扱う</h2>
+<p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L76" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L76</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
+<h2 is-upgraded>Quick Replyを扱う</h2>
+<p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L83" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L83</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
+<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
+<p>詳しくは下記を参照ください。</p>
+<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://mochan-tk.github.io/claat-public/native-shim.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/custom-elements.min.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/prettify.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

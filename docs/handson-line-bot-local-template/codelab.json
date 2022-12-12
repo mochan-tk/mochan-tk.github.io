@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://mochan-tk.github.io",
+  "updated": "2022-12-12T12:12:50Z",
+  "id": "handson-line-bot-local-template",
+  "duration": 55,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "LINEハンズオン、Messaging APIを主に扱います。",
+  "source": "1wk9Y0GTN6RFUMy3rOtKcUoJ2V5Lke1zZIvkOp9wz_Qg",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-local-template"
+}
