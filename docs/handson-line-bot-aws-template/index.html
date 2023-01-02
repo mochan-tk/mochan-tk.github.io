@@ -38,7 +38,7 @@
 <h2 is-upgraded>事前準備</h2>
 <ul>
 <li><a href="https://github.com/join?source=header" target="_blank">GitHubアカウント</a>作成</li>
-<li><a href="https://portal.aws.amazon.com/billing/signup#/start/email" target="_blank">AWSアカウント</a>作成</li>
+<li><a href="https://portal.aws.amazon.com/billing/signup#/start/email" target="_blank">Amazon Web Servicesアカウント</a>作成</li>
 <li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
 </ul>
 <h2 is-upgraded>使用するサービス・ツール</h2>
@@ -50,7 +50,7 @@
 <h2 is-upgraded>構成図</h2>
 <p>未完成</p>
 <h2 is-upgraded>注意事項</h2>
-<p>若干、Microsoft Azureの課金が発生する可能性があります。それ以外は課金など発生しません。</p>
+<p>若干、Amazon Web Servicesの課金が発生する可能性があります。それ以外は課金など発生しません。</p>
 
 
       </google-codelab-step>
@@ -117,7 +117,7 @@
 <h2 is-upgraded>応答モードをOFFにする</h2>
 <p>LINE Official Account Manager 画面にアクセスして、Botの「応答モード」設定をOFFにします。（デフォルトの設定はONになっており、メッセージを送るたびにデフォルトのメッセージが返ってきてしまうため）</p>
 <p class="image-container"><img style="width: 601.70px" src="img/eaa773a4f9e436e6.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/cca4975a0dc9c60a.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/717aa226af841e8e.png"></p>
 
 
       </google-codelab-step>
@@ -251,6 +251,171 @@ cdk deploy \
 
       </google-codelab-step>
     
+      <google-codelab-step label="（応用編）リッチメニューを使う" duration="0">
+        <p>下記を参考にコマンドくを実行し、複数のリッチメニューを切り替えます。</p>
+<p><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#switching-between-multiple-rich-menus" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#switching-between-multiple-rich-menus</a></p>
+<ul>
+<li>リッチメニューA（richmenu-a）を作成する</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu \
+-H &#39;Authorization: Bearer ${MSG_CHANNEL_ACCESS_TOKEN}&#39; \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+‘{
+  &#34;size&#34;: {
+    &#34;width&#34;: 2500,
+    &#34;height&#34;: 1686
+  },
+  &#34;selected&#34;: false,
+  &#34;name&#34;: &#34;Hands On Menu A&#34;,
+  &#34;chatBarText&#34;: &#34;Tap to open&#34;,
+  &#34;areas&#34;: [
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 0,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 50
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;richmenuswitch&#34;,
+        &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-b&#34;,
+        &#34;data&#34;: &#34;richmenu-changed-to-b&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/camera/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/location/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;flex&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;quick&#34;
+      }
+    }
+  ]
+}&#39;</code></pre>
+<ul>
+<li>リッチメニューB（richmenu-b）を作成する</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu \
+-H &#39;Authorization: Bearer ${MSG_CHANNEL_ACCESS_TOKEN}&#39; \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+‘{
+  &#34;size&#34;: {
+    &#34;width&#34;: 2500,
+    &#34;height&#34;: 1686
+  },
+  &#34;selected&#34;: false,
+  &#34;name&#34;: &#34;Hands On Menu B&#34;,
+  &#34;chatBarText&#34;: &#34;Tap to open&#34;,
+  &#34;areas&#34;: [
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 0,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 50
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;richmenuswitch&#34;,
+        &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-aaaa&#34;,
+        &#34;data&#34;: &#34;richmenu-changed-to-a&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/camera/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/location/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;flex&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;quick&#34;
+      }
+    }
+  ]
+}&#39;</code></pre>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="URLスキームを使う" duration="5">
         <p>URLスキームを使うとカメラや位置情報などが起動できたりします、いくつか用意されていますので試していきましょう。</p>
 <ul>
@@ -273,12 +438,12 @@ cdk deploy \
 </ul>
 <p>今回のコードも見ていただくと理解がグッと進みます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L60</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L71" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L71</a></li>
 </ul>
 <h2 is-upgraded>画像メッセージを扱う</h2>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L119" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L119</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L131" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L131</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
 <aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -286,13 +451,13 @@ cdk deploy \
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
 <p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L144" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L144</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L179" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L179</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
 <h2 is-upgraded>音声メッセージを扱う</h2>
 <p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L131" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L131</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L155" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L155</a></li>
 </ul>
 <p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
 <aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -300,13 +465,13 @@ cdk deploy \
 <h2 is-upgraded>Flex Messageを扱う</h2>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L76" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L76</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L89" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L89</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
 <p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L83" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-template/blob/master/deployPrj01/LineHttpTriggeredFunction/index.js#L83</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L96" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L96</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
 <aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
@@ -320,6 +485,10 @@ cdk deploy \
       <google-codelab-step label="リソースの削除" duration="5">
         <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAWSのリソースを削除してください。</p>
 <pre><code>cdk destroy</code></pre>
+<p>yを入力します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ebde05694225dad7.png"></p>
+<p>リソースの削除ができました。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c33e235c9639affc.png"></p>
 
 
       </google-codelab-step>
