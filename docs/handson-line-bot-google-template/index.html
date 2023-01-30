@@ -164,15 +164,14 @@
 <ul>
 <li>実行するコマンド</li>
 </ul>
-<pre>$ git clone https://github.com/line/line-bot-sdk-nodejs.git
-$ cp -r ~/line-bot-sdk-nodejs/examples/echo-bot/ ~/handson-line-bot-gcp-01
-$ cd handson-line-bot-gcp-01</pre>
+<pre>$ git clone https://github.com/mochan-tk/Handson-LINE-Bot-Google-Cloud.git
+$ cd Handson-LINE-Bot-Google-Cloud</pre>
 <pre><code></code></pre>
 <h2 is-upgraded>Cloud Shellのエディタでファイル編集</h2>
 <ul>
 <li>Cloud Shell ターミナルの「エディタを開く」をクリック</li>
 <li>エディタの上を引っ張り上げると、面積を広げることができる</li>
-<li>左ペインの 「handson-line-bot-gcp-01」 &gt; 「Package.json」 を開いて編集</li>
+<li>左ペインの 「Handson-LINE-Bot-Google-Cloud」 &gt; 「Package.json」 を開いて編集</li>
 </ul>
 <pre>&#34;name&#34;: &#34;echo-bot&#34;,</pre>
 <p>↓</p>
@@ -183,7 +182,7 @@ $ cd handson-line-bot-gcp-01</pre>
 <p class="image-container"><img style="width: 601.70px" src="img/c338e91634014b42.png"></p>
 <h2 is-upgraded>Dockerfileを書く</h2>
 <ul>
-<li>「handson-line-bot-gcp-01」フォルダ右クリック &gt; メニュー一番上の New FIle をクリックし、&#34;Dockerfile&#34;(拡張子無し)という名前のファイルを作る</li>
+<li>「Handson-LINE-Bot-Google-Cloud」フォルダ右クリック &gt; メニュー一番上の New FIle をクリックし、&#34;Dockerfile&#34;(拡張子無し)という名前のファイルを作る</li>
 <li>以下を記入</li>
 </ul>
 <pre>FROM node:12
@@ -216,15 +215,16 @@ CMD [ &#34;npm&#34;, &#34;start&#34; ]</pre>
 <ul>
 <li>Cloud Shell ターミナルで以下を実行</li>
 </ul>
-<pre>$ cd ~/handson-line-bot-gcp-01
-$ BUCKET_NAME=20230129kawamoto-image-bucket
+<pre>$ cd ~/Handson-LINE-Bot-Google-Cloud
+## xxxxのところはお名前などを入れてバケット名が一意な名前になるようにしてください
+$ BUCKET_NAME=20230204xxxx-image-bucket
 $ gsutil mb -b on -l asia-northeast1 gs://${BUCKET_NAME}
 $ gsutil iam ch allUsers:objectViewer gs://${BUCKET_NAME}</pre>
 <h2 is-upgraded>コンテナをビルドし、Container Registoryへ格納</h2>
 <ul>
 <li>Cloud Shell ターミナルで以下を実行</li>
 </ul>
-<pre>$ cd ~/handson-line-bot-gcp-01
+<pre>$ cd ~/Handson-LINE-Bot-Google-Cloud
 $ gcloud builds submit \
   --tag gcr.io/$GOOGLE_CLOUD_PROJECT/handson-line-bot-gcp-01</pre>
 <ul>
@@ -649,7 +649,11 @@ Service URL: https://line-bot-gcp-01-hogehogehoge-uc.a.run.app ←これをコ�
       </google-codelab-step>
     
       <google-codelab-step label="リソースの削除" duration="5">
-        <h2 is-upgraded>Container Registory : コンテナを消す</h2>
+        <h2 is-upgraded>Cloud Strage : バケットを削除する</h2>
+<ul>
+<li>左上のナビゲーションバー  &gt; Cloud Strage &gt; 作成したバケット名にチェックを入れて「削除」</li>
+</ul>
+<h2 is-upgraded>Container Registory : コンテナを消す</h2>
 <ul>
 <li>左上の..Container Registory &gt; イメージ &gt; handson-line-bot-gcp-01 &gt; コンテナにチェックを入れて 「削除」</li>
 </ul>
