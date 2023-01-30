@@ -211,6 +211,15 @@ CMD [ &#34;npm&#34;, &#34;start&#34; ]</pre>
 <li>Cloud Shellのターミナルに戻り、 「Enter authorization code: 」 のプロンプトに、上でゲットしたverification code をペーストして、エンター</li>
 <li>「You are now logged in as〜」と表示されればOK</li>
 </ul>
+<h2 is-upgraded>Cloud Strage作成</h2>
+<p>画像のメッセージ形式を扱うためストレージサービスを使います。準備としてバケットの作成をしておきます。</p>
+<ul>
+<li>Cloud Shell ターミナルで以下を実行</li>
+</ul>
+<pre>$ cd ~/handson-line-bot-gcp-01
+$ BUCKET_NAME=20230129kawamoto-image-bucket
+$ gsutil mb -b on -l asia-northeast1 gs://${BUCKET_NAME}
+$ gsutil iam ch allUsers:objectViewer gs://${BUCKET_NAME}</pre>
 <h2 is-upgraded>コンテナをビルドし、Container Registoryへ格納</h2>
 <ul>
 <li>Cloud Shell ターミナルで以下を実行</li>
@@ -241,6 +250,7 @@ $ gcloud run deploy handson-line-bot-gcp-01 \
   --image gcr.io/$GOOGLE_CLOUD_PROJECT/handson-line-bot-gcp-01 \
   --set-env-vars &#34;CHANNEL_ACCESS_TOKEN=$CHANNEL_ACCESS_TOKEN&#34;  \
   --set-env-vars &#34;CHANNEL_SECRET=$CHANNEL_SECRET&#34;  \
+  --set-env-vars &#34;BUCKET_NAME=$BUCKET_NAME&#34;  \
   --platform managed   \
   --region asia-northeast1 \
   --allow-unauthenticated  \
