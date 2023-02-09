@@ -46,10 +46,10 @@
 <ul>
 <li>Node.js</li>
 <li>GitHub Codespaces</li>
-<li>Microsoft Azure Functions, Storage, Cosmos DB, Bicep</li>
+<li>Microsoft Azure Container Apps,  Container Registry, Storage, Cosmos DB, Bicep</li>
 </ul>
 <h2 is-upgraded>構成図</h2>
-<p class="image-container"><img style="width: 601.70px" src="img/94ded6535d3dec68.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/bc1e5d6dda90e577.png"></p>
 <h2 is-upgraded>注意事項</h2>
 <p>若干、Amazon Web Servicesの課金が発生する可能性があります。それ以外は課金など発生しません。</p>
 
@@ -564,12 +564,12 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 </ul>
 <p>今回のコードも見ていただくと理解がグッと進みます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L71" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L71</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L42" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L42</a></li>
 </ul>
 <h2 is-upgraded>画像メッセージを扱う</h2>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L131" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L131</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L103" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L103</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
 <aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -577,13 +577,13 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
 <p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L179" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L179</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L134" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L134</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
 <h2 is-upgraded>音声メッセージを扱う</h2>
 <p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L155" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L155</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L118" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L118</a></li>
 </ul>
 <p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
 <aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -591,13 +591,13 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
 <h2 is-upgraded>Flex Messageを扱う</h2>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L89" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L89</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L60</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
 <p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L96" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-AWS/blob/main/app/index.js#L96</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L67" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L67</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
 <aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>

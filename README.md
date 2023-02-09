@@ -29,6 +29,7 @@ gitbook build ./GitBook docs/gitbook-test
 - https://mochan-tk.github.io/handson-line-bot-aws-template/#0
 - https://mochan-tk.github.io/handson-line-bot-google-template/#0
 - https://mochan-tk.github.io/handson-line-bot-local-template/#0  
+- https://mochan-tk.github.io/handson-line-bot-azure-github/#0 
 - https://mochan-tk.github.io/handson-line-bot-azure-template/#0  
 - https://mochan-tk.github.io/azure-bot-framework-composer-QnA/
 - https://mochan-tk.github.io/handson-liff-azure-template/
