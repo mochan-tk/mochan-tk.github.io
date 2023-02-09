@@ -609,21 +609,8 @@ func azure functionapp publish &lt;functionAppName&gt; --build remote
       </google-codelab-step>
     
       <google-codelab-step label="リソースの削除" duration="5">
-        <h2 is-upgraded>Cloud Strage : バケットを削除する</h2>
-<ul>
-<li>左上のナビゲーションバー  &gt; Cloud Strage &gt; 作成したバケット名にチェックを入れて「削除」</li>
-</ul>
-<h2 is-upgraded>Container Registory : コンテナを消す</h2>
-<ul>
-<li>左上の..Container Registory &gt; イメージ &gt; handson-line-bot-gcp-01 &gt; コンテナにチェックを入れて 「削除」</li>
-</ul>
-<h2 is-upgraded>Cloud Run: アプリを消す</h2>
-<ul>
-<li>左上のナビゲーションバー &gt; Cloud Run &gt; handson-line-bot-gcp-01 にチェックを入れて「削除」</li>
-</ul>
-<aside class="special"><p><strong>Note: </strong></p>
-<p>参考文献 https://github.com/line/line-bot-sdk-nodejs https://developers.line.biz/ja/docs/messaging-api/getting-started/ https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-nodejs-service?hl=ja</p>
-</aside>
+        <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
+<pre><code>az group delete --name ${group_name}</code></pre>
 
 
       </google-codelab-step>
