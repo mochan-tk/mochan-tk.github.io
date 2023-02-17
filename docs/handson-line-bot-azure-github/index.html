@@ -226,24 +226,6 @@ az deployment group show \
 <aside class="special"><p><strong>Note:</strong> ここまでのコマンド実行で今回必要なAzureの構成が作成されます。構成はmain.bicepファイルで管理しています。</p>
 <p>VS CodeにはBicepの拡張機能があるので、VS Codeを使うとBicepを使うのが非常に楽になります。</p>
 </aside>
-<h2 is-upgraded>アプリケーションコードのデプロイ</h2>
-<p>Gitpodのターミナル上で下記のコマンドを実行していってください。ここまでの手順で作成されているAzure Functionsにアプリケーションのコードがデプロイされます。</p>
-<ul>
-<li>実行するコマンド</li>
-</ul>
-<pre><code>cd /workspace/Handson-LINE-Bot-Azure-template/deployPrj01/
-
-## 下記実行で、作成したAzure Functionsの名前を取得
-az deployment group show \
- -g ${group_name} \
- -n deployPrj01 \
- --query properties.outputs.functionAppName.value
-
-## &lt;functionAppName&gt;の部分を、上記で取得したAzure Functionsの名前に置き換える
-func azure functionapp publish &lt;functionAppName&gt; --build remote
-</code></pre>
-<p>上記、実行後は下記のようにURLが払い出されるのでメモしておきます。（Webhookの設定で使います）</p>
-<p class="image-container"><img style="width: 601.70px" src="img/6aacfa13ee1662d1.png"></p>
 <h2 is-upgraded>Webhookの設定</h2>
 <p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したAzure FunctionsのURLを設定します。これでLINEのBotを動かす準備は全て整いました！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
