@@ -202,14 +202,14 @@ az deployment group show \
 containerRegistryName=&lt;上記で取得したACRの名前&gt;
 secret=&lt;your secret&gt;
 access=&lt;your access token&gt;
-## ココでramdomな値を取得 &gt; https://1password.com/jp/password-generator/
-ramdom=&lt;ramdom value&gt;
+## ココでrandomな値を取得 &gt; https://1password.com/jp/password-generator/
+random=&lt;random value&gt;
 
 ## secretとaccessはLINE Developersのチャネル設定でメモした値を入れる
 az deployment group create --name deployPrj01 --template-file main.bicep \
  --parameters containerVer=${containerVer} \
  --parameters containerRegistryName=${containerRegistryName} \
- --parameters ramdom=${ramdom} \
+ --parameters random=${random} \
  --parameters secret=${secret} \
  --parameters access=${access}
 
