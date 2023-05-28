@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://mochan-tk.github.io",
+  "updated": "2023-05-28T00:38:27Z",
+  "id": "handson-line-bot-azure-github-aoai",
+  "duration": 60,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "Azure OpenAI with LINEハンズオン。",
+  "source": "1zSxpzKlsm0xv7hok1gm8v96f1oiS6NqzOMhIFuUXosE",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-azure-github-aoai"
+}
