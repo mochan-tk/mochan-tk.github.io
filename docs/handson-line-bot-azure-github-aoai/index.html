@@ -59,7 +59,7 @@
     
       <google-codelab-step label="Azure OpenAI Studio のプレイグラウンドを利用する" duration="10">
         <h2 is-upgraded>アシスタントのセットアップとチャットセッションの動作確認</h2>
-<aside class="warning"><p><strong>注意</strong>：Azure OpenAI を使う時だけブラウザをシークレットモードで開いてください。他の作業は普通のモードで大丈夫です。（Azure OpenAI は運営側で用意したアカウントを使っていただくため、アカウントのログインが被らないようにするための措置です）</p>
+<aside class="warning"><p><strong>注意</strong>：Azure OpenAI を使う時だけブラウザをシークレットモードで開き運営側から共有されたアカウントでサインインしてください。他の作業は普通のモードでブラウザを開いていただいて大丈夫です、また他の作業は基本ご自分のAzureアカウントでサインインしてください。（Azure OpenAI は運営側で用意したアカウントを使っていただくため、アカウントのログインが被らないようにするための措置です）</p>
 </aside>
 <p><a href="https://oai.azure.com/" target="_blank">Azure OpenAI Studio上に移動</a>します。サインインを求められるので<strong>運営から共有した情報</strong>でサインインをお願いいたします。</p>
 <p class="image-container"><img style="width: 601.70px" src="img/8bb8e8ab046db6dc.png"></p>
@@ -189,6 +189,8 @@ python app.py</code></pre>
     
       <google-codelab-step label="Webhookの設定作業（いよいよ本番）" duration="15">
         <h2 is-upgraded>ACR（Azure Container Registry）の用意</h2>
+<aside class="warning"><p><strong>注意</strong>：ここから先の作業はご自分のAzureアカウントでサインインするようにしてください。</p>
+</aside>
 <p>ターミナル上で下記のコマンドを実行していってください。</p>
 <ul>
 <li>実行するコマンド</li>
