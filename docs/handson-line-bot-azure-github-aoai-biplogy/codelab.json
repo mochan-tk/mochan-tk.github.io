@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://mochan-tk.github.io",
+  "updated": "2023-06-16T15:27:51Z",
+  "id": "handson-line-bot-azure-github-aoai-biplogy",
+  "duration": 50,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "Biplogy様ハッカソン用 Azure OpenAI with LINEハンズオン。",
+  "source": "1HYisVMH2sCuCw0OG6w6SkP4p80YmCalWlky0XGJo6ac",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-azure-github-aoai-biplogy"
+}
