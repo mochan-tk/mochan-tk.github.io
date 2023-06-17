@@ -126,7 +126,7 @@
     
       <google-codelab-step label="Webhookの設定作業（まずはお試しおうむ返しBot）" duration="15">
         <h2 is-upgraded>GitHub リポジトリのFork</h2>
-<p><a href="https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v2" target="_blank">https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v2</a> にアクセス。</p>
+<p><a href="https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v2" target="_blank">https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v3</a> にアクセス。</p>
 <p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
 <h2 is-upgraded><img style="width: 601.70px" src="img/91b538e9a5e92ddb.png"></h2>
 <p>Ownerを自分のアカウントに選択し、「Create fork」ボタンを押してforkしてください。</p>
@@ -186,7 +186,7 @@ python app_stg.py
 <ul>
 <li>実行するコマンド</li>
 </ul>
-<pre><code>cd /workspaces/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v2
+<pre><code>cd /workspaces/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v3
 
 az login --use-device-code
 
@@ -206,7 +206,7 @@ az group create --name ${group_name} --location japaneast
 az configure --defaults group=${group_name}
 
 containerVer=v1
-gitRepository=https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v2.git
+gitRepository=https://github.com/mochan-tk/AzureOpenAI-GPT4-LINE-Bot-on-Azure-v3.git
 
 az deployment group create --name deployAcr01 --template-file containerRegistry.bicep \
  --parameters containerVer=${containerVer} \
