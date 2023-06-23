@@ -216,7 +216,7 @@ az deployment group create --name deployPrj01 --template-file main.bicep \
 
 ## エンドポイントURLの取得
 az deployment group show \
- -g ${group_name} \
+ -g ${groupName} \
  -n deployPrj01 \
  --query properties.outputs.acaUrl.value
 </code></pre>
