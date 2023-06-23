@@ -196,7 +196,7 @@ az deployment group create --name deployAcr01 --template-file containerRegistry.
 </ul>
 <pre><code>## ACRの名前取得
 az deployment group show \
- -g ${group_name} \
+ -g ${groupName} \
  -n deployAcr01 \
  --query properties.outputs.acrName.value
 
