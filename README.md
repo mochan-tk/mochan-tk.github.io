@@ -30,6 +30,7 @@ gitbook build ./GitBook docs/gitbook-test
 - https://mochan-tk.github.io/handson-line-bot-google-template/#0
 - https://mochan-tk.github.io/handson-line-bot-local-template/#0  
 - https://mochan-tk.github.io/handson-line-bot-azure-github/#0 
+- https://mochan-tk.github.io/handson-line-bot-azure-github-v2/#0 
 - https://mochan-tk.github.io/handson-line-bot-azure-github-aoai/#0 
 - https://mochan-tk.github.io/handson-line-bot-azure-github-aoai-biplogy/#0 
 - https://mochan-tk.github.io/handson-line-bot-azure-template/#0  
