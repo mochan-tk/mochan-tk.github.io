@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://mochan-tk.github.io",
+  "updated": "2023-06-23T12:24:18Z",
+  "id": "handson-line-bot-azure-github-v2",
+  "duration": 75,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "LINEハンズオン、Messaging APIを主に扱います。",
+  "source": "1IGn6KQG5yC_ddFikFDWptIOCcpMm82JCCgk1R1z_tTE",
+  "theme": "line",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "line"
+  ],
+  "tags": [],
+  "url": "handson-line-bot-azure-github-v2"
+}
