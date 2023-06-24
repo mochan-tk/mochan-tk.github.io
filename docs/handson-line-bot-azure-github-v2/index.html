@@ -59,7 +59,7 @@
       <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="10">
         <h2 is-upgraded>チャネルの作成スタート</h2>
 <p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押して進めていきましょう。</p>
-<p class="image-container"><img style="width: 601.70px" src="img/389235956c37eff6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/a5c5a231b4503167.png"></p>
 <p>「LINEアカウントでログイン」を押してください。</p>
 <p class="image-container"><img style="width: 421.15px" src="img/d5d421a6b299e62b.png"></p>
 <p>LINEのログインを求められるのでログインしてください。</p>
@@ -148,7 +148,7 @@ export CHANNEL_ACCESS_TOKEN=&lt;your access token&gt;
 export CHANNEL_SECRET=&lt;your secret key&gt;
 export BASE_URL=&lt;Port Foward設定で取得したURL&gt;
 
-npm run start</code></pre>
+node index.js</code></pre>
 <h2 is-upgraded>Webhookの設定</h2>
 <p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したURL + 「/callback」を設定します。これでLINEのBotを動かす準備は全て整いました！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
@@ -167,7 +167,8 @@ npm run start</code></pre>
 <ul>
 <li>実行するコマンド</li>
 </ul>
-<pre><code>az login --use-device-code
+<pre><code>cd /workspaces/Handson-LINE-Bot-Azure-GitHub-v4
+az login --use-device-code
 
 ## 下記を実行でAzureのサブスクリプションIDを取得
 az account list \
@@ -228,9 +229,9 @@ az deployment group show \
 <p>VS CodeにはBicepの拡張機能があるので、VS Codeを使うとBicepを使うのが非常に楽になります。</p>
 </aside>
 <h2 is-upgraded>Webhookの設定</h2>
-<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したAzure FunctionsのURLを設定します。これでLINEのBotを動かす準備は全て整いました！</p>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したURLを設定します。これでLINEのBotを動かす準備は全て整いました！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
-<p class="image-container"><img style="width: 601.70px" src="img/4e58c63dac8d364f.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/bccf831d4fcc9ef.png"></p>
 <h2 is-upgraded>動作確認</h2>
 <p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います！</p>
 <p class="image-container"><img style="width: 601.70px" src="img/4fc05c2c8f632668.png"></p>
@@ -318,7 +319,9 @@ az deployment group show \
 <ul>
 <li>リッチメニューA（richmenu-a）を作成する</li>
 </ul>
-<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu \
+<pre><code>export MSG_CHANNEL_ACCESS_TOKEN=&lt;your access token&gt;
+
+curl -v -X POST https://api.line.me/v2/bot/richmenu \
 -H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
 -H &#39;Content-Type: application/json&#39; \
 -d \
@@ -397,7 +400,7 @@ az deployment group show \
 <ul>
 <li>返ってきたリッチメニューIDをコピーし、下記コマンドを実行します。</li>
 </ul>
-<p class="image-container"><img style="width: 601.70px" src="img/254ecd0384595628.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/199b9e9603cb9196.png"></p>
 <pre><code>RICHMENU_ID_A=&lt; リッチメニューID &gt;</code></pre>
 <ul>
 <li>リッチメニューAに画像をアップロードする</li>
@@ -488,7 +491,7 @@ az deployment group show \
 <ul>
 <li>返ってきたリッチメニューIDをコピーし、下記コマンドを実行します。</li>
 </ul>
-<p class="image-container"><img style="width: 601.70px" src="img/254ecd0384595628.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/41a96f757078674c.png"></p>
 <pre><code>RICHMENU_ID_B=&lt; リッチメニューID &gt;</code></pre>
 <ul>
 <li>リッチメニューBに画像をアップロードする</li>
@@ -501,7 +504,13 @@ az deployment group show \
 <li>リッチメニューAをデフォルトのリッチメニューにする</li>
 </ul>
 <pre><code>curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/${RICHMENU_ID_A} \
--H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN}</code></pre>
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN}
+
+## 上記のコマンドがエラーになったら下記を試す
+curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/${RICHMENU_ID_A} \
+-H &#34;Authorization: Bearer ${MSG_CHANNEL_ACCESS_TOKEN}&#34; \
+-H &#34;Content-Length: 0&#34;
+</code></pre>
 <ul>
 <li>リッチメニューエイリアスAを作成する</li>
 </ul>
@@ -554,12 +563,12 @@ az deployment group show \
 </ul>
 <p>今回のコードも見ていただくと理解がグッと進みます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L42" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L42</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L42" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L42</a></li>
 </ul>
 <h2 is-upgraded>画像メッセージを扱う</h2>
 <p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L103" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L103</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L103" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L103</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
 <aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -567,13 +576,13 @@ az deployment group show \
 <h2 is-upgraded>位置情報メッセージを扱う</h2>
 <p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってくると思います。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L134" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L134</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L134" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L134</a></li>
 </ul>
 <p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
 <h2 is-upgraded>音声メッセージを扱う</h2>
 <p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L118" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L118</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L118" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L118</a></li>
 </ul>
 <p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
 <aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
@@ -581,13 +590,13 @@ az deployment group show \
 <h2 is-upgraded>Flex Messageを扱う</h2>
 <p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとちょっとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L60</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L60</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
 <h2 is-upgraded>Quick Replyを扱う</h2>
 <p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
 <ul>
-<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L67" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub/blob/main/local/index.js#L67</a></li>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L67" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v4/blob/main/local/index_completed.js#L67</a></li>
 </ul>
 <p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
 <aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
