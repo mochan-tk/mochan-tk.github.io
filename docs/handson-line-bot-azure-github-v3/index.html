@@ -1,0 +1,626 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mochan-tk.github.io/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="handson-line-bot-azure-github-v3"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="5">
+        <h2 is-upgraded>概要</h2>
+<p>LINE Botを作りつつ、Messaging API(および周辺の技術)の基本的な使い方を学んでいただきます。</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>LINEがインストール済みのスマホ</li>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使ってください）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://github.com/join?source=header" target="_blank">GitHubアカウント</a>作成</li>
+<li><a href="https://azure.microsoft.com/ja-jp/free/" target="_blank">Azureアカウント</a>作成</li>
+<li>LINEアカウント作成(<a href="https://developers.line.me/console/" target="_blank">こちらのサイト</a>でログインできるかどうかを確認ください)</li>
+<li>(推奨) <a href="https://www.google.com/intl/ja/chrome/gsem/download/" target="_blank">Google Chrome</a> の最新版のインストール</li>
+</ul>
+<p> ※ Azureのアカウントは講義主催側で用意したものを提供します</p>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Node.js</li>
+<li>GitHub Codespaces</li>
+<li>Microsoft Azure Container Apps,  Container Registry, Storage, Cosmos DB, Bicep</li>
+</ul>
+<h2 is-upgraded>構成図</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/bc1e5d6dda90e577.png"></p>
+<h2 is-upgraded>注意事項</h2>
+<p>若干、クラウド(Microsoft Azure)の課金が発生する可能性があります。それ以外は課金など発生しません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="LINE DevelopersでMessaging API チャネルを作成する" duration="10">
+        <h2 is-upgraded>チャネルの作成スタート</h2>
+<p><a href="https://developers.line.me/ja/services/messaging-api/" target="_blank">https://developers.line.me/ja/services/messaging-api/</a> にアクセス。<br>「今すぐはじめよう」のボタンを押してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a5c5a231b4503167.png"></p>
+<p>「LINEアカウントでログイン」を押してください。</p>
+<p class="image-container"><img style="width: 421.15px" src="img/d5d421a6b299e62b.png"></p>
+<p>LINEのログインを求められるのでログインしてください。</p>
+<p class="image-container"><img style="width: 461.50px" src="img/53764d1928b87a53.png"></p>
+<h2 is-upgraded>チャネルの種類</h2>
+<p>Messaging APIになっているか確認します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/df3af770985c3f97.png"></p>
+<h2 is-upgraded>プロバイダ</h2>
+<p>既にプロバイダーを作っている場合 → 利用するプロバイダーを選択します。</p>
+<p><img style="width: 601.70px" src="img/d5302f954b527b82.png"><br>初めて → 新規プロバイダー作成を選択しプロバイダー名を入力します。</p>
+<p>（LINEという文字は含められません。）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/ed9832698ea66cc2.png"></p>
+<h2 is-upgraded>会社・事業者の所在国・地域</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/57aa97698a2fec50.png"></p>
+<h2 is-upgraded>チャネルアイコン</h2>
+<p>チャネルアイコンを登録します。（今回は必須ではありません）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b25e887321903ca7.png"></p>
+<h2 is-upgraded>チャネル名、チャネル説明</h2>
+<p>下記を入力します。</p>
+<p>チャネル名：「HandsonBot」</p>
+<p>チャネル説明：「HandsonBotです。」</p>
+<p class="image-container"><img style="width: 601.70px" src="img/f4ec1d14f0d71421.png"></p>
+<h2 is-upgraded>大業種、小業種</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/ed9b424f40f943e3.png"></p>
+<h2 is-upgraded>メールアドレス、プライバシーポリシーURL、サービス利用規約URL</h2>
+<p>メールアドレスを確認します。</p>
+<p>プライバシーポリシーURLとサービス利用規約URLは入力しなくても大丈夫です。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4912ddf28b5920c5.png"></p>
+<h2 is-upgraded>作成ボタン</h2>
+<p>下記２点の利用規約にチェックをして「作成」ボタンを押します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1b112e894430dc9f.png"></p>
+<p>「OK」を押します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/6151acd3510ea8dd.png"></p>
+<p>「同意する」を押します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/e87adc9a93775ef.png"></p>
+<h2 is-upgraded>LINE公式アカウント(LINE Bot)と友だちになる</h2>
+<p>QRコードで友だち追加</p>
+<p>「Messaging API設定」タブに移動し、QRコードを読み取って、友だち追加をします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1868e4298aafce8.png"></p>
+<h2 is-upgraded>チャネルシークレット、アクセストークンの取得</h2>
+<p>「チャネル基本設定」タブからチャネルシークレットを、「Messaging API設定」タブからアクセスキーをそれぞれ取得します。</p>
+<ul>
+<li>チャネルシークレット</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/f3eb6548a6c5e0c6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/aeece43ae5e06e73.png"></p>
+<ul>
+<li>アクセストークン</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/3ea1abd939970269.png"></p>
+<aside class="special"><p><strong>Note:</strong></p>
+<p>・チャネルシークレット：Botサーバで受信したリクエストが不正なものでないかのチェックで使用される(LINE以外のサーバーからリクエストが送られていないかの確認)</p>
+<p>・ アクセストークン：LINEのAPI(機能)を実行する際に、認可が通り利用権限があることを証明するトークン</p>
+</aside>
+<h2 is-upgraded>応答モードをOFFにする</h2>
+<p>LINE Official Account Manager 画面にアクセスして、Botの「応答モード」設定をOFFにします。（デフォルトの設定はONになっており、メッセージを送るたびにデフォルトのメッセージが返ってきてしまうため）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/eaa773a4f9e436e6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/717aa226af841e8e.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Webhookの設定作業（ローカル編）" duration="15">
+        <h2 is-upgraded>GitHub リポジトリのFork</h2>
+<p><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5</a> にアクセス。</p>
+<p>右上のForkボタンを押して自分のGitHubアカウントにリポジトリをコピーしてください。</p>
+<h2 is-upgraded><img style="width: 601.70px" src="img/f7ba0b70308dac53.png"></h2>
+<p>Ownerを自分のアカウントに選択し、「Create fork」ボタンを押してforkしてください。</p>
+<h2 is-upgraded><img style="width: 601.70px" src="img/426bccf1dd25d3a1.png"><br>GitHub Codespacesの起動<br>fork後、緑色のCodeボタン &gt; Create codespace on main ボタン を押して起動します</h2>
+<p class="image-container"><img style="width: 601.70px" src="img/e81b50c476cde2b7.png"></p>
+<h2 is-upgraded>Port Foward設定とURLの取得</h2>
+<p>表示範囲を ポートの表示範囲 &gt;  Publicに変更します。</p>
+<p>ローカルアドレス &gt; コピーマーク を押してURLを取得しておきます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/516a967bff2f494f.png"></p>
+<h2 is-upgraded>Botサーバーの用意</h2>
+<p>ターミナル上で下記のコマンドを実行していってください。</p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>cd local
+
+npm install
+
+export CHANNEL_ACCESS_TOKEN=&lt;your access token&gt;
+export CHANNEL_SECRET=&lt;your secret key&gt;
+export BASE_URL=&lt;Port Foward設定で取得したURL&gt;
+
+node index.js</code></pre>
+<h2 is-upgraded>Webhookの設定</h2>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したURL + 「/callback」を設定します。これでLINEのBotを動かす準備は全て整いました。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/97626cb533f3757e.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/4b8f4d3ce14c1c38.png"></p>
+<h2 is-upgraded>動作確認</h2>
+<p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a3f90492ee08e11b.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Webhookの設定作業（本番環境編）" duration="15">
+        <h2 is-upgraded>ACR（Azure Container Registry）の用意</h2>
+<p>ターミナル上で下記のコマンドを実行していってください。</p>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>cd /workspaces/Handson-LINE-Bot-Azure-GitHub-v5
+az login --use-device-code
+
+## 下記を実行でAzureのサブスクリプションIDを取得
+az account list \
+  --refresh \
+  --query &#34;[].id&#34; \
+  --output table
+
+## &lt;your subscription id&gt;の部分を、上記で取得したAzureのサブスクリプションIDに置き換える
+az account set --subscription &lt;your subscription id&gt;
+
+userName=$(az account show --query &#34;user.name&#34; -o tsv)
+groupName=&#34;20230707LineBot_${userName%%@*}&#34;
+
+az group create --name ${groupName} --location japaneast
+
+az configure --defaults group=${groupName}
+
+containerVer=v1
+
+az deployment group create --name deployAcr01 --template-file containerRegistry.bicep \
+ --parameters containerVer=${containerVer}
+</code></pre>
+<h2 is-upgraded>Botサーバーの用意</h2>
+<ul>
+<li>実行するコマンド</li>
+</ul>
+<pre><code>## ACRの名前取得
+az deployment group show \
+ -g ${groupName} \
+ -n deployAcr01 \
+ --query properties.outputs.acrName.value
+
+containerRegistryName=&lt;上記で取得したACRの名前&gt;
+secret=&lt;your secret&gt;
+access=&lt;your access token&gt;
+## ココでrandomな値を取得 &gt; https://1password.com/jp/password-generator/
+random=&lt;random value&gt;
+
+## secretとaccessはLINE Developersのチャネル設定でメモした値を入れる
+az deployment group create --name deployPrj01 --template-file main.bicep \
+ --parameters containerVer=${containerVer} \
+ --parameters containerRegistryName=${containerRegistryName} \
+ --parameters random=${random} \
+ --parameters secret=${secret} \
+ --parameters access=${access}
+
+## エンドポイントURLの取得
+az deployment group show \
+ -g ${groupName} \
+ -n deployPrj01 \
+ --query properties.outputs.acaUrl.value
+</code></pre>
+<p>上記、実行後は下記のようにURLが払い出されるのでメモしておきます。（Webhookの設定で使います）</p>
+<p class="image-container"><img style="width: 601.70px" src="img/19cd680e1999662a.png"></p>
+<p>実行後のAzureリソースは下記のような構成。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/b8a056d3031745a0.png"></p>
+<aside class="special"><p><strong>Note:</strong> ここまでのコマンド実行で今回必要なAzureの構成が作成されます。構成はmain.bicepファイルで管理しています。</p>
+<p>VS CodeにはBicepの拡張機能があるので、VS Codeを使うとBicepを使うのが非常に楽になります。</p>
+</aside>
+<h2 is-upgraded>Webhookの設定</h2>
+<p>LINE Developersのコンソール画面に戻って、「Messaging API設定」タブから上記で取得したURLを設定します。これでLINEのBotを動かす準備は全て整いました。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c0731f4e918e06da.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/bccf831d4fcc9ef.png"></p>
+<h2 is-upgraded>動作確認</h2>
+<p>さっそく動かしてみましょう。トーク画面からBotに対してメッセージを送るとオウム返しでメッセージが送られてきたと思います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/4fc05c2c8f632668.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リッチメニューを使う" duration="10">
+        <h2 is-upgraded>LINE Official Account Manager 画面でリッチメニューの設定</h2>
+<p>LINE公式アカウントの管理画面にアクセスし、<a href="https://www.linebiz.com/jp/column/technique/20180731-01/" target="_blank">リッチメニュー</a>を作成していきます。まずは「ホーム」→「リッチメニュー」→「作成」をクリックします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/280641be46ea1364.png"></p>
+<p>「基本設定」の項目を入力し、その後テンプレートの選択を行います。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/9f23698d2d13e200.png"></p>
+<p>ここでは４つのフレームに別れたテンプレートを選択します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7183d8a321ec26af.png"></p>
+<p>次にリッチメニューに使用する画像を作成します。「画像を作成」ボタンから、４つのフレームに対してそれぞれテキストを入力し、最後に右上の適用ボタンを押してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>場所</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力するテキスト</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左上</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右上</p>
+</td><td colspan="1" rowspan="1"><p>位置情報</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>左下</p>
+</td><td colspan="1" rowspan="1"><p>Flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>右下</p>
+</td><td colspan="1" rowspan="1"><p>Quick Reply</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/9f2c970e2fabcaa4.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/c535c967fd01cc2f.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/9fd0f3233b892d4f.png"></p>
+<p>次にアクションの項目を下記の情報を参考に埋めていきます。最後に保存ボタンを押すのをお忘れなく。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>番号</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>タイプ</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>入力欄</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>ラベル</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>A</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/camera/</p>
+</td><td colspan="1" rowspan="1"><p>camera</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>B</p>
+</td><td colspan="1" rowspan="1"><p>リンク</p>
+</td><td colspan="1" rowspan="1"><p>https://line.me/R/nv/location/</p>
+</td><td colspan="1" rowspan="1"><p>location</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>D</p>
+</td><td colspan="1" rowspan="1"><p>テキスト</p>
+</td><td colspan="1" rowspan="1"><p>quick</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p class="image-container"><img style="width: 601.70px" src="img/575bb3c9f37956c3.png"></p>
+<p>LINE公式アカウント(LINE Bot)上は下記のようになります。</p>
+<p class="image-container"><img style="width: 455.77px" src="img/422d6d7d52fa4927.png"></p>
+<aside class="special"><p><strong>Note:</strong> リッチメニューを使うと、このLINE公式アカウント(LINE Bot)がどんな機能を備えているかが視覚的にわかります。</p>
+</aside>
+<h2 is-upgraded>（参考）Messaging APIでのリッチメニューを作成</h2>
+<p>リッチメニューはMessaging APIでも作成でき、さらに柔軟な対応が可能です。今回のハンズオンの後半（『リッチメニュー応用』）で扱っていきます。</p>
+<p>下記に参考情報も記載いたします。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#creating-a-rich-menu-using-the-messaging-api" target="_blank">Messaging APIでリッチメニューを作成する</a></li>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/try-rich-menu/" target="_blank">リッチメニュープレイグラウンドでリッチメニューを試す</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="（応用編）リッチメニューを使う" duration="0">
+        <p>下記を参考にコマンドくを実行し、複数のリッチメニューを切り替えます。</p>
+<p><a href="https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#switching-between-multiple-rich-menus" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-rich-menus/#switching-between-multiple-rich-menus</a></p>
+<ul>
+<li>リッチメニューA（richmenu-a）を作成する</li>
+</ul>
+<pre><code>export MSG_CHANNEL_ACCESS_TOKEN=&lt;your access token&gt;
+
+curl -v -X POST https://api.line.me/v2/bot/richmenu \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+&#39;{
+  &#34;size&#34;: {
+    &#34;width&#34;: 2500,
+    &#34;height&#34;: 1686
+  },
+  &#34;selected&#34;: false,
+  &#34;name&#34;: &#34;Hands On Menu A&#34;,
+  &#34;chatBarText&#34;: &#34;Tap to open&#34;,
+  &#34;areas&#34;: [
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 0,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 50
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;richmenuswitch&#34;,
+        &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-b&#34;,
+        &#34;data&#34;: &#34;richmenu-changed-to-b&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/camera/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/location/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;flex&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;quick&#34;
+      }
+    }
+  ]
+}&#39;</code></pre>
+<ul>
+<li>返ってきたリッチメニューIDをコピーし、下記コマンドを実行します。</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/199b9e9603cb9196.png"></p>
+<pre><code>RICHMENU_ID_A=&lt; リッチメニューID &gt;</code></pre>
+<ul>
+<li>リッチメニューAに画像をアップロードする</li>
+</ul>
+<pre><code>curl -v -X POST https://api-data.line.me/v2/bot/richmenu/${RICHMENU_ID_A}/content \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#34;Content-Type: image/png&#34; \
+-T richmenu/tabA.png</code></pre>
+<ul>
+<li>リッチメニューB（richmenu-b）を作成する</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+&#39;{
+  &#34;size&#34;: {
+    &#34;width&#34;: 2500,
+    &#34;height&#34;: 1686
+  },
+  &#34;selected&#34;: false,
+  &#34;name&#34;: &#34;Hands On Menu B&#34;,
+  &#34;chatBarText&#34;: &#34;Tap to open&#34;,
+  &#34;areas&#34;: [
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 0,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 50
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;richmenuswitch&#34;,
+        &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-a&#34;,
+        &#34;data&#34;: &#34;richmenu-changed-to-a&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/camera/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 70,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 750
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;uri&#34;,
+        &#34;uri&#34;: &#34;https://line.me/R/nv/location/&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;flex&#34;
+      }
+    },
+    {
+      &#34;bounds&#34;: {
+        &#34;x&#34;: 1250,
+        &#34;y&#34;: 830,
+        &#34;width&#34;: 1250,
+        &#34;height&#34;: 800
+      },
+      &#34;action&#34;: {
+        &#34;type&#34;: &#34;message&#34;,
+        &#34;text&#34;: &#34;quick&#34;
+      }
+    }
+  ]
+}&#39;</code></pre>
+<ul>
+<li>返ってきたリッチメニューIDをコピーし、下記コマンドを実行します。</li>
+</ul>
+<p class="image-container"><img style="width: 601.70px" src="img/41a96f757078674c.png"></p>
+<pre><code>RICHMENU_ID_B=&lt; リッチメニューID &gt;</code></pre>
+<ul>
+<li>リッチメニューBに画像をアップロードする</li>
+</ul>
+<pre><code>curl -v -X POST https://api-data.line.me/v2/bot/richmenu/${RICHMENU_ID_B}/content \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#34;Content-Type: image/png&#34; \
+-T richmenu/tabB.png</code></pre>
+<ul>
+<li>リッチメニューAをデフォルトのリッチメニューにする</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/${RICHMENU_ID_A} \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN}
+
+## 上記のコマンドがエラーになったら下記を試す
+curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/${RICHMENU_ID_A} \
+-H &#34;Authorization: Bearer ${MSG_CHANNEL_ACCESS_TOKEN}&#34; \
+-H &#34;Content-Length: 0&#34;
+</code></pre>
+<ul>
+<li>リッチメニューエイリアスAを作成する</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu/alias \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+&#39;{
+    &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-a&#34;,
+    &#34;richMenuId&#34;: &#34;&#39;&#34;${RICHMENU_ID_A}&#34;&#39;&#34;
+}&#39;</code></pre>
+<ul>
+<li>リッチメニューエイリアスBを作成する</li>
+</ul>
+<pre><code>curl -v -X POST https://api.line.me/v2/bot/richmenu/alias \
+-H &#39;Authorization: Bearer &#39;${MSG_CHANNEL_ACCESS_TOKEN} \
+-H &#39;Content-Type: application/json&#39; \
+-d \
+&#39;{
+    &#34;richMenuAliasId&#34;: &#34;hands-on-richmenu-alias-b&#34;,
+    &#34;richMenuId&#34;: &#34;&#39;&#34;${RICHMENU_ID_B}&#34;&#39;&#34;
+}&#39;</code></pre>
+<p>リッチメニューのエラーは下記を確認してください。</p>
+<p><a href="https://developers.line.biz/ja/reference/messaging-api/#create-rich-menu-alias-error-response" target="_blank">https://developers.line.biz/ja/reference/messaging-api/#create-rich-menu-alias-error-response</a></p>
+<p>トーク画面から一旦離れ、確認します。</p>
+<p class="image-container"><img style="width: 290.94px" src="img/961950f8deaa4f81.png"><img style="width: 290.50px" src="img/28e11dc96011afe3.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="URLスキームを使う" duration="5">
+        <p>URLスキームを使うとカメラや位置情報などが起動できたりします、いくつか用意されていますので試していきます。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/using-line-url-scheme/</a></li>
+</ul>
+<h2 is-upgraded>カメラの起動</h2>
+<p>リッチメニュー左上の「camera」をタップしてください。カメラが起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/f13286f87be6ecd9.gif"></p>
+<h2 is-upgraded>位置情報の起動</h2>
+<p>リッチメニュー右上の「位置情報」をタップしてください。位置情報が起動します。</p>
+<p class="image-container"><img style="width: 305.00px" src="img/c77d3984c67a9dc4.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="様々なメッセージ形式を扱う" duration="10">
+        <p>LINEでは様々なメッセージ形式を扱うことができます。</p>
+<ul>
+<li><a href="https://developers.line.biz/ja/docs/messaging-api/message-types/" target="_blank">https://developers.line.biz/ja/docs/messaging-api/message-types/</a></li>
+</ul>
+<p>今回のコードも見ていただくと理解がしやすいです。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L42" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L42</a></li>
+</ul>
+<h2 is-upgraded>画像メッセージを扱う</h2>
+<p>カメラを起動して写真を撮るか既に撮った写真を選択するかで、画像をトーク画面に投稿してみてください。送った画像をそのまま返すコードを今回用意しました。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L103" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L103</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.16px" src="img/e702d58f7892288f.png"></p>
+<aside class="special"><p><strong>Note:</strong> 投稿した画像をそのまま返すにあたり、コードでは [投稿された画像をAzure Storageに格納] &gt; [Azure Storageに格納された画像のURLを取得] &gt; [画像メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>位置情報メッセージを扱う</h2>
+<p>位置情報をトーク画面に投稿してみてください。全く同じ位置情報メッセージが返ってきます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L134" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L134</a></li>
+</ul>
+<p class="image-container"><img style="width: 314.70px" src="img/296c40c60046721f.png"></p>
+<h2 is-upgraded>音声メッセージを扱う</h2>
+<p>マイクから音声を投稿してみてください。音声メッセージが返ってきます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L118" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L118</a></li>
+</ul>
+<p class="image-container"><img style="width: 312.70px" src="img/cb4fa05434519c73.png"></p>
+<aside class="special"><p><strong>Note:</strong> 音声も画像の時と同じで、 [投稿された音声をAzure Storageに格納] &gt; [Azure Storageに格納された音声のURLを取得] &gt; [音声メッセージとしてユーザに返す] という流れで実施しています。</p>
+</aside>
+<h2 is-upgraded>Flex Messageを扱う</h2>
+<p>リッチメニューの左下をタップして、「flex」というテキストメッセージを投稿します。するとリッチなUIが返ってくると思います。これがFlex Messageです。<a href="https://developers.line.biz/flex-simulator/" target="_blank">Flex Message Simulator</a> が用意されており、レイアウトを簡単にカスタマイズすることができます。（詳細は<a href="https://developers.line.biz/ja/docs/messaging-api/using-flex-message-simulator/" target="_blank">コチラ</a>を参照ください。）</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L60" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L60</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/81d3c8209c747f44.gif"></p>
+<h2 is-upgraded>Quick Replyを扱う</h2>
+<p>クイックリプライを使うとユーザは簡単に返信を行うことができます。</p>
+<ul>
+<li><a href="https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L67" target="_blank">https://github.com/mochan-tk/Handson-LINE-Bot-Azure-GitHub-v5/blob/main/local/index_completed.js#L67</a></li>
+</ul>
+<p class="image-container"><img style="width: 305.00px" src="img/c9c578aa154790e8.gif"></p>
+<aside class="special"><p><strong>Note:</strong> 今回クイックリプライには「Yes」、「No」、「camera」の選択肢を用意しました。「Yes」とするとpostbackというメッセージの送信を行うようにしています。</p>
+<p>詳しくは下記を参照ください。</p>
+<p>https://developers.line.biz/ja/docs/messaging-api/actions/#postback-action</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リソースの削除" duration="5">
+        <p>課金が気になる方は、下記のコマンドを実行してリソースグループごと作成したAzureのリソースを削除してください。</p>
+<pre><code>az group delete --name ${groupName}</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://mochan-tk.github.io/claat-public/native-shim.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/custom-elements.min.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/prettify.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
