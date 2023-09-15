@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://mochan-tk.github.io",
+  "updated": "2023-09-15T06:27:00Z",
+  "id": "handson-derta-gig-aoai",
+  "duration": 45,
+  "title": "タイトル",
+  "authors": "Takashi Kawamoto.",
+  "summary": "DERTA GIG Azure OpenAI ハンズオン。",
+  "source": "1UYzUBsTAyPhdVO9942fbLUYmXKGdrqBj973f-LGqYSg",
+  "theme": "azureopenai",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "azureopenai"
+  ],
+  "tags": [],
+  "url": "handson-derta-gig-aoai"
+}

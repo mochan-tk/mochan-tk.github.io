@@ -1,0 +1,120 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mochan-tk.github.io/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="handson-derta-gig-aoai"
+                  title="タイトル"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="10">
+        <h2 is-upgraded>概要</h2>
+<p>いま話題のChatGPTをAzure OpenAI上で学んでいきます。</p>
+<h2 is-upgraded>当日の持ち物</h2>
+<ul>
+<li>ChromeがインストールされたPC（Chromeのバージョンは最新のものを使ってください）</li>
+</ul>
+<h2 is-upgraded>事前準備</h2>
+<ul>
+<li><a href="https://azure.microsoft.com/ja-jp/free/" target="_blank">Azureアカウント</a>作成</li>
+<li>(推奨) <a href="https://www.google.com/intl/ja/chrome/gsem/download/" target="_blank">Google Chrome</a> の最新版のインストール</li>
+</ul>
+<h2 is-upgraded>使用するサービス・ツール</h2>
+<ul>
+<li>Azure OpenAI Service</li>
+</ul>
+<h2 is-upgraded>構成図</h2>
+<p>なし</p>
+<h2 is-upgraded>注意事項</h2>
+<p>若干、クラウド(Microsoft Azure)の課金が発生する可能性があります。それ以外は課金など発生しません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Azure PortalにログインとAzure OpenAI Serviceの利用" duration="5">
+        <p><a href="https://azure.microsoft.com/ja-jp/get-started/azure-portal" target="_blank">Azure Portalサインイン画面</a>にいき、サインインします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c49bf8762a63c412.png"></p>
+<p>Portalにアクセス後、検索窓で『Azure OpenAI』と入力してAzure OpenAIの画面へ<br><img style="width: 601.70px" src="img/6dd849825b21400b.png"></p>
+<p>既に用意されている『20230916DERTA』のリンクをクリック</p>
+<p class="image-container"><img style="width: 601.70px" src="img/47fec6185b1ff5ba.png"></p>
+<p>『Explore』ボタンを押して、Azure OpenAI Studio画面にアクセスします。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/10844823804b72dd.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Azure OpenAI Studio のプレイグラウンドを利用する" duration="15">
+        <h2 is-upgraded>アシスタントのセットアップとチャットセッションの動作確認</h2>
+<p>左メニューの「チャット」を選択してプレイグラウンドの画面へ移動します。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/a2628de985749e04.png"></p>
+<p>システムメッセージにてAIアシスタントのパーソナリティを事前定義します。変更したら保存ボタンを押すのを忘れないようにしましょう。</p>
+<p>次に画面真ん中のチャットセッションにて、AIアシスタントの動作を確認してみましょう。</p>
+<p>下記公式のドキュメントも参考にしてみてください。</p>
+<ul>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/cognitive-services/openai/concepts/prompt-engineering" target="_blank">プロンプト エンジニアリングの概要</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/cognitive-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions" target="_blank">プロンプト エンジニアリングの手法</a></li>
+</ul>
+<p>プレイグラウンドでChatGPTを使ってみましょう。</p>
+<p>システム用のプロンプトに下記を入力してください。</p>
+<p>＜システムメッセージ＞</p>
+<p>あなたは翻訳Botです、日本語を英語に、英語を日本語に翻訳します。</p>
+<p>＜いくつかのショットの例＞</p>
+<p>ユーザー：こんにちは</p>
+<p>アシスタント：</p>
+<p>EN: Hello.</p>
+<p>JA: こんにちは</p>
+<p class="image-container"><img style="width: 601.70px" src="img/2002556d0df412e9.png"></p>
+<p>なお、「チャットセッション」にある「コードの表示」を押すと、Playground上で入力した設定を使ってコードのサンプルを提示してくれます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add Your Dataを利用する" duration="15">
+        <p>Add your data の機能を使うと、モデルのトレーニングや微調整を必要とせずに、GPT-35-Turbo や GPT-4 などのサポートされているチャット モデルを独自のデータに基づいて実行できます</p>
+<p>詳しくは下記の公式ドキュメントの情報を参照してください。</p>
+<p>https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/use-your-data</p>
+<p>下記の流れで設定をしていきます。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/c283cb50b0eea8a7.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/4a7744ee241b5eee.png"></p>
+<p>アップするファイルは<a href="https://drive.google.com/file/d/1lhzdtlw3Qpd0B4odCpGgvPY3M0ad_zAh/view?usp=sharing" target="_blank">こちらからダウンロード</a>してください。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/1ef96b982f20e1c7.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/1c31685da8abbda6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/1a56c5cd9295853f.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img/62740e5be1a6b116.png"></p>
+<p>最新の情報をまじえて、AIとのやり取りが成立していますね。</p>
+<p class="image-container"><img style="width: 601.70px" src="img/7e489908f3ade07f.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://mochan-tk.github.io/claat-public/native-shim.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/custom-elements.min.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/prettify.js"></script>
+  <script src="https://mochan-tk.github.io/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
